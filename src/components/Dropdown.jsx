@@ -21,7 +21,7 @@ const Dropdown = (props) => {
                 {children}
                 { <FontAwesomeIcon className="ml-2 mt-0.5" size='xl' icon={open ? faCaretDown : faCaretUp} />}
             </button>
-            <div className={`bg-sandy-brown-400 absolute top-10 md:w-[230px] rounded-sm w-full ease-in-out duration-300 overflow-hidden ${open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-50'}`}>
+            <div className={`bg-zinc-100 absolute top-10 md:w-[230px] rounded-sm w-full ease-in-out duration-300 overflow-hidden shadow-inner ${open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-50'}`}>
                 <ul className="w-full">
                     {Links.map((link, key) => (
                         <li className="flex items-center hover:bg-sandy-brown-300 cursor-pointer rounded-r-sm border-l-transparent hover:border-l-sandy-brown-600 border-l-4 py-1.5 px-4 duration-500" key={key}>
