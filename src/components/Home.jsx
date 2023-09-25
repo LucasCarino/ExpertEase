@@ -1,6 +1,5 @@
 import { faAngleDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "./Button";
 
 function Home() {
   let Cards = [
@@ -65,8 +64,8 @@ function Home() {
           </button>
         </div>
       </div>
-      <div className="lg:py-8 flex justify-center" id="scrollTarget">
-        <h2 className="text-xl md:text-3xl font-[Quicksand] font-bold">
+      <div className="lg:pt-24 lg:pb-20 py-5 flex justify-center" id="scrollTarget">
+        <h2 className="text-xl md:text-4xl font-[Quicksand] font-bold" >
           ¿Por qué ExpertEase?
         </h2>
       </div>
@@ -81,9 +80,10 @@ function Home() {
           </div>
         ))}
       </div>
-      <div className="w-1/4 text-center">
+      <div className="lg:w-1/4 text-center">
         <button className="bg-charcoal-600 py-2 px-6 rounded border-2 border-charcoal-600 text-white mb-10 hover:bg-charcoal-400 hover:border-charcoal-400 duration-500">Comenzá ahora</button>
       </div>
+
     </div>
   );
 }

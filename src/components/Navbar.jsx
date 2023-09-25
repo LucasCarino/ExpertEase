@@ -8,7 +8,7 @@ import Button from './Button';
 function Navbar() {
     
     let Links = [
-        {name: "Nosotros", link: "/About"},
+        {name: "Nosotros", link: "/Nosotros"},
         {name: "Preguntas frecuentes", link: "/PreguntasFrecuentes"},
     ]
     
@@ -32,18 +32,24 @@ function Navbar() {
                         {
                             Links.map((Link, key) => (
                                 <li key={key} className='lg:ml-8 text-m lg:text-sm lg:my-0 my-7 lg:font-normal'>
-                                    {/* <a className='text-gray-500 hover:text-gray-800 duration-500' href={Link.link}>{Link.name}</a> */}
                                     <NavLink className="text-gray-500 hover:text-gray-800 duration-500" to={Link.link}>
                                         {Link.name}
-                                        {/* ExpertEase */}
                                     </NavLink>
                                 </li>
                             )
                         )}
                         <div className='flex justify-between items-center pr-8 lg:pr-0'>
                             <div className="flex gap-4 flex-grow lg:gap-0">
-                                <Button bgColor="bg-white" bgColorHover="hover:bg-zinc-100" textColor="text-sandy-brown-600" borderColor="border-sandy-brown-500" borderColorHover="hover:border-sandy-brown-500">Crear cuenta</Button>
-                                <Button bgColor="bg-charcoal-600" bgColorHover="hover:bg-charcoal-400" textColor="text-white" borderColor="border-charcoal-600" borderColorHover="hover:border-charcoal-400">Ingresar</Button>
+                                <NavLink to="/Registro" className="w-1/2 lg:w-full lg:mx-5">
+                                    <Button width="w-full" bgColor="bg-white" bgColorHover="hover:bg-zinc-100" textColor="text-sandy-brown-600" borderColor="border-sandy-brown-500" borderColorHover="hover:border-sandy-brown-500">
+                                        Crear Cuenta
+                                    </Button>
+                                </NavLink>
+                                <NavLink to="/Ingreso" className="w-1/2 lg:ml-2">
+                                    <Button width="w-full" bgColor="bg-charcoal-600" bgColorHover="hover:bg-charcoal-400" textColor="text-white" borderColor="border-charcoal-600" borderColorHover="hover:border-charcoal-400">
+                                        Ingresar
+                                    </Button>
+                                </NavLink>
                             </div>
                         </div>
                     </ul>
