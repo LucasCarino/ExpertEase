@@ -6,13 +6,13 @@ import Dropdown from './Dropdown';
 import Button from './Button';
 
 function Navbar() {
-    
+
     let Links = [
-        {name: "Nosotros", link: "/Nosotros"},
-        {name: "Preguntas frecuentes", link: "/PreguntasFrecuentes"},
+        { name: "Nosotros", link: "/Nosotros" },
+        { name: "Preguntas frecuentes", link: "/PreguntasFrecuentes" },
     ]
-    
-    let [open,setOpen] = useState(false);
+
+    let [open, setOpen] = useState(false);
 
 
     return (
@@ -24,7 +24,7 @@ function Navbar() {
                             ExpertEase
                         </NavLink>
                     </div>
-                    <div onClick={()=>setOpen(!open)} className="absolute left-8 top-5 cursor-pointer lg:hidden pt-1">
+                    <div onClick={() => setOpen(!open)} className="absolute left-8 top-5 cursor-pointer lg:hidden pt-1">
                         <FontAwesomeIcon size='xl' icon={open ? faXmark : faBars} />
                     </div>
                     <ul className={`lg:flex lg:items-center lg:pb-0 pb-7 absolute lg:static bg-white lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-8 transition-all duration-500 ease-in ${open ? 'top-16 opacity-100' : 'top-[-490px]'} lg:opacity-100 opacity-0`}>
@@ -37,7 +37,7 @@ function Navbar() {
                                     </NavLink>
                                 </li>
                             )
-                        )}
+                            )}
                         <div className='flex justify-between items-center pr-8 lg:pr-0'>
                             <div className="flex gap-4 flex-grow lg:gap-0">
                                 <NavLink to="/Registro" className="w-1/2 lg:w-full lg:mx-5">
@@ -56,8 +56,8 @@ function Navbar() {
                 </div>
             </nav>
         </div>
-                   
+
     );
-  }
-  
-  export default Navbar;
+}
+
+export default Navbar;

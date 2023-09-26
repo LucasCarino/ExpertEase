@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Nosotros from "./components/Nosotros";
 import Registro from "./components/Registro";
 import Ingreso from "./components/Ingreso";
+import Catalogo from "./components/Catalogo";
 import Footer from "./components/Footer";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/Nosotros" element={<Nosotros/>}/>
         <Route exact path="/Registro" element={<Registro/>}/>
         <Route exact path="/Ingreso" element={<Ingreso/>}/>
+        <Route exact path="/Catalogo" element={<Catalogo/>}/>
       </Routes>
       <Footer />
     </Router>
