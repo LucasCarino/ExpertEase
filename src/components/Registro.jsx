@@ -74,14 +74,14 @@ const Registro = () => {
                             }}
                         >
                             <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5">
-                                Comencemos!
+                                ¡Comencemos!
                             </h1>
                             <div>
                                 <label
                                     for="email"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                    Cual es tu nombre?
+                                    ¿Cuál es tu nombre?
                                 </label>
                                 <input
                                     type="email"
@@ -96,7 +96,7 @@ const Registro = () => {
                                     for="email"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                    Cual es tu email?
+                                    ¿Cuál es tu email?
                                 </label>
                                 <input
                                     type="email"
@@ -151,7 +151,7 @@ const Registro = () => {
                                     for="email"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                    Cual es tu nombre?
+                                    ¿Cuál es tu nombre?
                                 </label>
                                 <input
                                     type="email"
@@ -166,7 +166,7 @@ const Registro = () => {
                                     for="email"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                    Cual es tu email?
+                                    ¿Cuál es tu email?
                                 </label>
                                 <input
                                     type="email"
@@ -221,7 +221,7 @@ const Registro = () => {
                                     for="email"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                    Cual es tu nombre?
+                                    ¿Cuál es tu nombre?
                                 </label>
                                 <input
                                     type="email"
@@ -236,7 +236,7 @@ const Registro = () => {
                                     for="email"
                                     className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                    Cual es tu email?
+                                    ¿Cuál es tu email?
                                 </label>
                                 <input
                                     type="email"
