@@ -7,6 +7,7 @@ import Registro from "./components/Registro";
 import Ingreso from "./components/Ingreso";
 import Catalogo from "./components/Catalogo";
 import Footer from "./components/Footer";
+import PreguntasFrecuentes from './components/PreguntasFrecuentes';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/Registro" element={<Registro/>}/>
         <Route exact path="/Ingreso" element={<Ingreso/>}/>
         <Route exact path="/Catalogo" element={<Catalogo/>}/>
+        <Route exact path="/PreguntasFrecuentes" element={<PreguntasFrecuentes/>}/>
       </Routes>
       <Footer/>
     </Router>
