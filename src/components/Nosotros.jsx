@@ -1,6 +1,6 @@
 const Nosotros = () => {
   return (
-    <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
+    <div className="container px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
       <div className="flex flex-col lg:flex-row justify-between gap-8">
         <div className="w-full lg:w-5/12 flex flex-col justify-center">
           <h1 className="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">
@@ -23,7 +23,7 @@ const Nosotros = () => {
         <div className="w-full lg:w-8/12 ">
           <img
             className="w-full h-full"
-            src="https://img.freepik.com/free-vector/3d-cartoon-people-concept-online-meeting-virtual-conference-video-call_40876-3762.jpg?w=900&t=st=1695817940~exp=1695818540~hmac=7c0504e78e0abbf75aa3c1845b2ae2e57f9b17806633141b10eec9c72b699c68"
+            src="\assets\personas.png"
             alt="A group of People"
           />
         </div>
@@ -47,7 +47,7 @@ const Nosotros = () => {
         <div className="w-full lg:w-8/12 ">
           <img
             className="w-full h-full"
-            src="https://img.freepik.com/free-photo/3d-render-hands-giving-fist-bump-business-concept_107791-15403.jpg?w=996&t=st=1695820512~exp=1695821112~hmac=26da8187a8cba5bd66401ceed059594eb5cec85e455c073d0a8f300660f6c050"
+            src="\assets\6263-removebg-preview.png"
             alt="A group of People"
           />
         </div>
