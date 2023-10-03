@@ -50,7 +50,7 @@ function Home() {
         <div className="flex flex-col lg:flex-row justify-between lg:items-center">
           <div className="flex flex-col items-center lg:w-7/12 pt-5 md:pb-10 pb-5 lg:pb-0 w-full">
             <h2 className="lg:text-4xl text-2xl mt-4 lg:mt-0 mb-4 lg:mb-8 text-center font-[Quicksand] font-bold md:w-6/12">
-              Expertos a tu alcance, Facilidad a tu medida
+              Expertos a tu alcance, facilidad a tu medida
             </h2>
             <h3 className="text-xs lg:pb-2 lg:text-lg text-center font-[Poppins] pb-5">
               Comienza a explorar servicios en línea ahora

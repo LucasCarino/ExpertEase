@@ -8,7 +8,7 @@ const PreguntasFrecuentes = () => {
 
     return (
         <section>
-            <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
+            <div className="container px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
             <div className = "bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] w-full relative object-center object-fit z-0">
                 <div className="relative flex flex-col items-center justify-center sm:px-0 z-20 pb-20">
                     <div className="md:py-36 py-20">
