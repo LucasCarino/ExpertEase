@@ -10,8 +10,8 @@ const Dropdown = (props) => {
 
     let Links = [
         { name: "Profesores", link: "/Catalogo", icon: faUser },
-        { name: "Tutorías", link: "/", icon: faChalkboardTeacher },
-        { name: "Estudiantes", link: "/", icon: faUserGraduate },
+        { name: "Tutorías", link: "/Catalogo", icon: faChalkboardTeacher },
+        { name: "Estudiantes", link: "/Catalogo", icon: faUserGraduate },
     ];
 
     const [open, setOpen] = useState(false);

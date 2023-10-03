@@ -21,7 +21,10 @@ function Navbar() {
                 <div className='lg:flex items-center justify-between bg-white py-4 lg:px-10 px-7'>
                     <div className='font-bold text-2xl cursor-pointer flex items-center justify-center font-[Poppins] text-gray-800'>
                         <NavLink className="text-indigo-600 pt-1 lg:pt-0" to="/" exact>
-                            ExpertEase
+                            <span className='flex h-[34px]'>
+                                ExpertEase
+                                <img src="https://i.ibb.co/dWgRyw1/imagen.png" alt="logo" className='ml-1'/>
+                            </span>
                         </NavLink>
                     </div>
                     <div onClick={() => setOpen(!open)} className="absolute left-8 top-5 cursor-pointer lg:hidden pt-1">

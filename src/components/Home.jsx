@@ -1,12 +1,35 @@
 import { faAngleDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink } from "react-router-dom";
 
 function Home() {
   let Cards = [
-    { name: "Card 1", img: "https://drvoip.com/wp-content/uploads/2019/02/icon-call-center-1-1.png", title: "Expertos confiables", caption: "Obtén la ayuda que necesitas de profesionales altamente calificados"},
-    { name: "Card 2", img: "https://d1.awsstatic.com/product-marketing/migrations-logo.002bf622287dd87feba717cdd5d3b201570cfcce.png", title: "Solución personalizada", caption: "Para cada necesidad, una solución personalizada" },
-    { name: "Card 3", img: "https://png.pngtree.com/png-clipart/20230119/ourmid/pngtree-review-five-star-transparent-vector-png-image_6567113.png", title: "Calidad es nuestra prioridad", caption: "Comprometidos a brindarte experiencias excepcionales" },
-    { name: "Card 4", img: "https://clipart-library.com/images_k/graduation-hat-silhouette-vector/graduation-hat-silhouette-vector-22.png", title: "Destaca tu talento", caption: "Para expertos, es el lugar perfecto para mostrar tus habilidades y ayudar a otros a crecer" },
+    {
+      name: "Card 1",
+      img: "https://drvoip.com/wp-content/uploads/2019/02/icon-call-center-1-1.png",
+      title: "Expertos confiables",
+      caption:
+        "Obtén la ayuda que necesitas de profesionales altamente calificados",
+    },
+    {
+      name: "Card 2",
+      img: "https://d1.awsstatic.com/product-marketing/migrations-logo.002bf622287dd87feba717cdd5d3b201570cfcce.png",
+      title: "Solución personalizada",
+      caption: "Para cada necesidad, una solución personalizada",
+    },
+    {
+      name: "Card 3",
+      img: "https://png.pngtree.com/png-clipart/20230119/ourmid/pngtree-review-five-star-transparent-vector-png-image_6567113.png",
+      title: "Calidad es nuestra prioridad",
+      caption: "Comprometidos a brindarte experiencias excepcionales",
+    },
+    {
+      name: "Card 4",
+      img: "https://clipart-library.com/images_k/graduation-hat-silhouette-vector/graduation-hat-silhouette-vector-22.png",
+      title: "Destaca tu talento",
+      caption:
+        "Para expertos, es el lugar perfecto para mostrar tus habilidades y ayudar a otros a crecer",
+    },
   ];
 
   const scrollToElement = () => {
@@ -64,8 +87,11 @@ function Home() {
           </button>
         </div>
       </div>
-      <div className="lg:pt-24 lg:pb-20 py-5 flex justify-center" id="scrollTarget">
-        <h2 className="text-xl md:text-4xl font-[Quicksand] font-bold" >
+      <div
+        className="lg:pt-24 lg:pb-20 py-5 flex justify-center"
+        id="scrollTarget"
+      >
+        <h2 className="text-xl md:text-4xl font-[Quicksand] font-bold">
           ¿Por qué ExpertEase?
         </h2>
       </div>
@@ -73,17 +99,28 @@ function Home() {
         {Cards.map((Card, key) => (
           <div className="flex flex-col lg:mx-5 mb-5" key={key}>
             <div>
-              <img src={Card.img} className="w-full h-[120px] object-contain" alt={`Imagen de ${Card.name}`} />
+              <img
+                src={Card.img}
+                className="w-full h-[120px] object-contain"
+                alt={`Imagen de ${Card.name}`}
+              />
             </div>
-            <p className="mt-1 mb-2 text-center font-semibold text-base">{Card.title}</p>
+            <p className="mt-1 mb-2 text-center font-semibold text-base">
+              {Card.title}
+            </p>
             <p className="text-center text-sm">{Card.caption}</p>
           </div>
         ))}
       </div>
       <div className="lg:w-1/4 text-center">
-        <button className="bg-charcoal-600 py-2 px-6 rounded border-2 border-charcoal-600 text-white mb-10 hover:bg-charcoal-400 hover:border-charcoal-400 duration-500">Comenzá ahora</button>
-      </div>
 
+
+        <NavLink to="/Registro" exact>
+          <button className="bg-charcoal-600 py-2 px-6 rounded border-2 border-charcoal-600 text-white mb-10 hover:bg-charcoal-400 hover:border-charcoal-400 duration-500">
+            Comenzá ahora
+          </button>
+        </NavLink>
+      </div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Button from "./Button";
 
 const Ingreso = () => {
@@ -68,12 +69,23 @@ const Ingreso = () => {
                       href="/#"
                       className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                     >
-                     ¿Olvidaste tu contraseña?
+                      ¿Olvidaste tu contraseña?
                     </a>
                   </div>
-                    <Button width="w-full" bgColor="bg-charcoal-600" bgColorHover="hover:bg-charcoal-400" textColor="text-white" borderColor="border-charcoal-600" borderColorHover="hover:border-charcoal-400">
+                  <div className="mt-5">
+                    <NavLink to="/Catalogo" exact>
+                      <Button
+                        width="w-full"
+                        bgColor="bg-charcoal-600"
+                        bgColorHover="hover:bg-charcoal-400"
+                        textColor="text-white"
+                        borderColor="border-charcoal-600"
+                        borderColorHover="hover:border-charcoal-400"
+                      >
                         Ingresar
-                    </Button>
+                      </Button>
+                    </NavLink>
+                  </div>
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                     ¿Aún no tienes una cuenta?{" "}
                     <a
