@@ -22,10 +22,10 @@ function Footer() {
                         <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Síguenos</h2>
                         <ul className="text-gray-500 dark:text-gray-400 font-medium">
                             <li className="mb-4">
-                                <a href="/#" className="hover:underline ">Github</a>
+                                <a href="https://github.com/" className="hover:underline ">Github</a>
                             </li>
                             <li>
-                                <a href="/#" className="hover:underline">Discord</a>
+                                <a href="https://discord.com/" className="hover:underline">Discord</a>
                             </li>
                         </ul>
                     </div>
@@ -33,10 +33,10 @@ function Footer() {
                         <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
                         <ul className="text-gray-500 dark:text-gray-400 font-medium">
                             <li className="mb-4">
-                                <a href="/#" className="hover:underline">Política de privacidad</a>
+                                <a href="https://www.uade.edu.ar" className="hover:underline">Política de privacidad</a>
                             </li>
                             <li>
-                                <a href="/#" className="hover:underline">Términos &amp; Condiciones</a>
+                                <a href="https://www.uade.edu.ar/Admision/Content/docs/Terminos%20y%20Condiciones%20Posgrado.pdf" className="hover:underline">Términos &amp; Condiciones</a>
                             </li>
                         </ul>
                     </div>

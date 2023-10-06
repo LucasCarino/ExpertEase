@@ -38,8 +38,8 @@ const Dropdown = (props) => {
             <div className={`bg-zinc-100 absolute top-8 lg:w-[230px] rounded  w-full ease-in-out duration-300 overflow-hidden shadow-inner ${open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-50'}`}>
                 <ul className="w-full">
                     {Links.map((link, key) => (
-                        <NavLink className="text-gray-500 hover:text-gray-800 duration-500" to={link.link}>
-                            <li className="flex items-center hover:bg-sandy-brown-300 cursor-pointer rounded-r-sm border-l-transparent hover:border-l-sandy-brown-600 border-l-4 py-1.5 px-4 duration-500" key={key}>
+                        <NavLink className="text-gray-700" to={link.link}>
+                            <li className="flex items-center hover:bg-charcoal-200 cursor-pointer rounded-r-sm border-l-transparent hover:border-charcoal-600 border-l-4 py-1.5 px-4 duration-500" key={key}>
                                 <p className="flex-grow lg:text-sm">{link.name}</p>
                                 <FontAwesomeIcon className="mr-2" icon={link.icon} />
                             </li>

@@ -6,26 +6,26 @@ function Home() {
   let Cards = [
     {
       name: "Card 1",
-      img: "https://drvoip.com/wp-content/uploads/2019/02/icon-call-center-1-1.png",
+      img: "https://cdn-icons-png.flaticon.com/256/8712/8712169.png",
       title: "Expertos confiables",
       caption:
         "Obtén la ayuda que necesitas de profesionales altamente calificados",
     },
     {
       name: "Card 2",
-      img: "https://d1.awsstatic.com/product-marketing/migrations-logo.002bf622287dd87feba717cdd5d3b201570cfcce.png",
+      img: "https://cdn-icons-png.flaticon.com/512/2631/2631448.png",
       title: "Solución personalizada",
       caption: "Para cada necesidad, una solución personalizada",
     },
     {
       name: "Card 3",
-      img: "https://png.pngtree.com/png-clipart/20230119/ourmid/pngtree-review-five-star-transparent-vector-png-image_6567113.png",
+      img: "https://cdn-icons-png.flaticon.com/512/4137/4137003.png",
       title: "Calidad es nuestra prioridad",
       caption: "Comprometidos a brindarte experiencias excepcionales",
     },
     {
       name: "Card 4",
-      img: "https://clipart-library.com/images_k/graduation-hat-silhouette-vector/graduation-hat-silhouette-vector-22.png",
+      img: "https://cdn-icons-png.flaticon.com/512/6747/6747103.png",
       title: "Destaca tu talento",
       caption:
         "Para expertos, es el lugar perfecto para mostrar tus habilidades y ayudar a otros a crecer",
@@ -45,8 +45,8 @@ function Home() {
   };
 
   return (
-    <div className="px-8 lg:px-10 bg-rob-roy-100 pt-24 flex flex-col items-center">
-      <div className="bg-gradient-to-tr from-charcoal-400 via-charcoal-300 to-rob-roy-200 rounded  shadow-inner pb-8 ">
+    <div className="px-8 lg:px-10 bg-[#f9f9f9] pt-24 flex flex-col items-center">
+      <div className="bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] rounded-sm shadow-inner pb-8 ">
         <div className="flex flex-col lg:flex-row justify-between lg:items-center">
           <div className="flex flex-col items-center lg:w-7/12 pt-5 md:pb-10 pb-5 lg:pb-0 w-full">
             <h2 className="lg:text-4xl text-2xl mt-4 lg:mt-0 mb-4 lg:mb-8 text-center font-[Quicksand] font-bold md:w-6/12">
