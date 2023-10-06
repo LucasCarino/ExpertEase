@@ -23,7 +23,7 @@ const Nosotros = () => {
         <div className="w-full lg:w-8/12 ">
           <img
             className="w-full h-full"
-            src="\assets\personas.png"
+            src="\assets\3d-rendering-people-avatars-zoom-call-removebg.png"
             alt="A group of People"
           />
         </div>
@@ -47,7 +47,7 @@ const Nosotros = () => {
         <div className="w-full lg:w-8/12 ">
           <img
             className="w-full h-full"
-            src="\assets\6263-removebg-preview.png"
+            src="\assets\wepik-export-20231006142631RJ9q.png"
             alt="A group of People"
           />
         </div>
