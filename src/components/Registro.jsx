@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Stepper,
   Step,
@@ -6,11 +6,34 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGraduationCap, faUserTie } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "./Button";
 
 const Registro = () => {
   const [activeStep, setActiveStep] = React.useState(0);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClick = (event) => {
+    event.target.value === "expert" ? setOpen(true) : setOpen(false);
+  };
+
+  const [inputData, setInputData] = useState({
+    name: '',
+    email: '',
+    confirmEmail: '',
+    phone: '',
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setInputData({
+      ...inputData,
+      [name]: value,
+    });
+  };
 
   return (
     <div className="px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] h-screen pt-16 flex flex-col items-center justify-center">
@@ -88,9 +111,11 @@ const Registro = () => {
                   type="text"
                   name="name"
                   id="name"
+                  value={inputData.name}
+                  onChange={handleInputChange}
                   className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Juan López"
-                ></input>
+                />
               </div>
               <div>
                 <label
@@ -103,9 +128,11 @@ const Registro = () => {
                   type="email"
                   name="email"
                   id="email"
+                  value={inputData.email}
+                  onChange={handleInputChange}
                   className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Juan@correo.com"
-                ></input>
+                />
               </div>
               <div>
                 <label
@@ -116,11 +143,13 @@ const Registro = () => {
                 </label>
                 <input
                   type="email"
-                  name="email"
-                  id="email"
+                  name="confirmEmail"
+                  id="confirmEmail"
+                  value={inputData.confirmEmail}
+                  onChange={handleInputChange}
                   className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Juan@correo.com"
-                ></input>
+                />
               </div>
               <div>
                 <label
@@ -132,10 +161,12 @@ const Registro = () => {
                 <input
                   type="tel"
                   name="phone"
-                  id="tel"
+                  id="phone"
+                  value={inputData.phone}
+                  onChange={handleInputChange}
                   className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="11 1234-5678"
-                ></input>
+                />
               </div>
 
               <Step className="font-normal" onClick={() => setActiveStep(1)}>
@@ -166,62 +197,95 @@ const Registro = () => {
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5">
                 Ahora contanos sobre vos...
               </h1>
+              <label
+                for="email"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Soy...
+              </label>
               <ul class="grid w-full gap-6 md:grid-cols-2">
-    <li>
-        <input type="radio" id="hosting-small" name="hosting" value="hosting-small" class="hidden peer" required />
-        <label for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
-            <div class="block">
-                <div class="w-full text-lg font-semibold">0-50 MB</div>
-                <div class="w-full">Good for small websites</div>
-            </div>
-            <svg class="w-5 h-5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-        </label>
-    </li>
-    <li>
-        <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer" />
-        <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-            <div class="block">
-                <div class="w-full text-lg font-semibold">500-1000 MB</div>
-                <div class="w-full">Good for large websites</div>
-            </div>
-            <svg class="w-5 h-5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-        </label>
-    </li>
-</ul>
-              <div>
-                <label
-                  for="email"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  ¿Cuál es tu email?
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Juan@correo.com"
-                ></input>
+                <li>
+                  <input
+                    type="radio"
+                    id="student"
+                    name="hosting"
+                    value="student"
+                    class="hidden peer"
+                    onChange={handleClick}
+                    required
+                  />
+                  <label
+                    for="student"
+                    class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-md cursor-pointer dark:peer-checked:text-blue-500 peer-checked:border-sandy-brown-600 peer-checked:text-sandy-brown-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 duration-100 ease-in-out"
+                  >
+                    <div class="block">
+                      <div class="w-full text-lg font-semibold">Estudiante</div>
+                    </div>
+                    <div>
+                      <FontAwesomeIcon icon={faGraduationCap} size="xl" />
+                    </div>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="expert"
+                    name="hosting"
+                    value="expert"
+                    class="hidden peer"
+                    onChange={handleClick}
+                  />
+                  <label
+                    for="expert"
+                    class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-sandy-brown-600 peer-checked:border-sandy-brown-600 peer-checked:text-sandy-brown-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  >
+                    <div class="block">
+                      <div class="w-full text-lg font-semibold">Experto</div>
+                    </div>
+                    <FontAwesomeIcon icon={faUserTie} size="xl" />
+                  </label>
+                </li>
+              </ul>
+
+              <div
+                className={`duration-300 mt-4 flex w-full ease-in-out overflow-hidden ${
+                  open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 py-0"
+                }`}
+              >
+                <form className="grid grid-cols-1 w-full">
+                  <div>
+                    <label
+                      for="email"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Cúal es tu título?
+                    </label>
+                    <input
+                      type="text"
+                      name="deegre"
+                      id="email"
+                      className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Lic. en gestión de tecnología de la información"
+                    ></input>
+                  </div>
+                  <div>
+                    <label
+                      for="email"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Completa con tu experiencia y títulos
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="UADE 2023"
+                    ></input>
+                  </div>
+                </form>
               </div>
-              <div>
-                <label
-                  for="email"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Confirma tu email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Juan@correo.com"
-                ></input>
-              </div>
+
               <Step className="font-normal" onClick={() => setActiveStep(2)}>
                 <Button
                   width="w-full"
@@ -248,52 +312,34 @@ const Registro = () => {
               }}
             >
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5">
-                Formulario 3
+                Por último, revisa tu información
               </h1>
               <div>
                 <label
                   for="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  ¿Cuál es tu nombre?
+                  Nombre
                 </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Juan"
-                ></input>
+              <p className="mb-5">{inputData.name}</p>
               </div>
               <div>
                 <label
                   for="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  ¿Cuál es tu email?
+                  Email
                 </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Juan@correo.com"
-                ></input>
+                <p className="mb-5">{inputData.email}</p>
               </div>
               <div>
                 <label
                   for="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Confirma tu email
+                  Teléfono
                 </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Juan@correo.com"
-                ></input>
+                <p className="mb-5">{inputData.phone}</p>
               </div>
               <NavLink to="/Catalogo" exact>
                 <Button
