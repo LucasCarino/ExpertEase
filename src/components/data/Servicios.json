@@ -1,0 +1,194 @@
+{
+  "servicios": [
+    {
+      "id": 0,
+      "tipo": 1,
+      "titulo": "Profesor de Literatura",
+      "imagen": "/assets/0.jpg",
+      "ubicacion": "234 Calle de los Libros, Ciudad de la Literatura",
+      "precio": "35",
+      "frecuencias": [
+        { "dia": "L", "disponible": true },
+        { "dia": "M", "disponible": true },
+        { "dia": "X", "disponible": false },
+        { "dia": "J", "disponible": false },
+        { "dia": "V", "disponible": false }
+      ],
+      "descripcion": "Clases de literatura para explorar grandes obras literarias y mejorar tu comprensión lectora. Disfruta de la literatura de una manera única.",
+      "promocion": "Paquete de 10 clases con un 15% de descuento.",
+      "experiencia": "Licenciado",
+      "nombre": "Juan Lopez"
+    },
+    {
+      "id": 1,
+      "tipo": 0,
+      "titulo": "Tutor de Baile",
+      "imagen": "/assets/1.jpg",
+      "ubicacion": "567 Estudio de Baile, Ciudad del Ritmo",
+      "precio": "40",
+      "frecuencias": [
+        { "dia": "L", "disponible": true },
+        { "dia": "M", "disponible": true },
+        { "dia": "X", "disponible": false },
+        { "dia": "J", "disponible": false },
+        { "dia": "V", "disponible": false }
+      ],
+      "descripcion": "Clases de baile para todos los niveles, desde principiantes hasta avanzados. Aprende diversos estilos de baile y diviértete bailando.",
+      "promocion": "¡La primera clase de baile en grupo es gratis!",
+      "experiencia": "Instructor profesional",
+      "nombre": "Ana Rodriguez"
+    },
+    {
+      "id": 2,
+      "tipo": 1,
+      "titulo": "Coach de Desarrollo Personal",
+      "imagen": "/assets/2.jpg",
+      "ubicacion": "890 Calle de los Libros, Ciudad de la Literatura",
+      "precio": "60",
+      "frecuencias": [
+        { "dia": "L", "disponible": true },
+        { "dia": "M", "disponible": true },
+        { "dia": "X", "disponible": false },
+        { "dia": "J", "disponible": false },
+        { "dia": "V", "disponible": false }
+      ],
+      "descripcion": "Coaching de desarrollo personal para alcanzar tus metas y potenciar tus habilidades. Descubre tu mejor versión y vive una vida plena.",
+      "promocion": null,
+      "experiencia": "Experto en Desarrollo Personal",
+      "nombre": "Carlos Sánchez"
+    },
+    {
+      "id": 3,
+      "tipo": 0,
+      "titulo": "Servicios de Limpieza a Domicilio",
+      "imagen": "/assets/3.jpg",
+      "ubicacion": "1234 Calle de la Limpieza, Ciudad de la Higiene",
+      "precio": "20",
+      "frecuencias": [
+        { "dia": "L", "disponible": true },
+        { "dia": "M", "disponible": true },
+        { "dia": "X", "disponible": false },
+        { "dia": "J", "disponible": false },
+        { "dia": "V", "disponible": false }
+      ],
+      "descripcion": "Limpieza profesional para tu hogar u oficina. Deja que expertos se encarguen de mantener tu espacio limpio y ordenado.",
+      "promocion": "Descuento del 10% en la primera limpieza.",
+      "experiencia": "Especialista en Limpieza",
+      "nombre": "María García"
+    },
+    {
+      "id": 4,
+      "tipo": 2,
+      "titulo": "Entrenador de Ajedrez",
+      "imagen": "/assets/4.jpg",
+      "ubicacion": "999 Plaza del Ajedrez, Ciudad Estratégica",
+      "precio": "25",
+      "frecuencias": [
+        { "dia": "L", "disponible": true },
+        { "dia": "M", "disponible": true },
+        { "dia": "X", "disponible": false },
+        { "dia": "J", "disponible": false },
+        { "dia": "V", "disponible": false }
+      ],
+      "descripcion": "Clases de ajedrez para principiantes y jugadores avanzados. Mejora tus habilidades estratégicas y tácticas en el ajedrez.",
+      "promocion": "¡Lección de ajedrez gratis con la compra de 5 lecciones!",
+      "experiencia": "Maestro de Ajedrez",
+      "nombre": "Pedro González"
+    },
+    {
+      "id": 5,
+      "tipo": 0,
+      "titulo": "Cuidado de Mascotas",
+      "imagen": "/assets/5.jpg",
+      "ubicacion": "456 Parque de las Mascotas, Villa de las Mascotas",
+      "precio": "15",
+      "frecuencias": [
+        { "dia": "L", "disponible": true },
+        { "dia": "M", "disponible": true },
+        { "dia": "X", "disponible": false },
+        { "dia": "J", "disponible": false },
+        { "dia": "V", "disponible": false }
+      ],
+      "descripcion": "Cuidado de mascotas a domicilio, incluyendo paseos, alimentación y atención personalizada para tus amigos peludos.",
+      "promocion": "Descuento del 20% en el tercer paseo de tu mascota.",
+      "experiencia": "Amante de los Animales",
+      "nombre": "Laura Fernández"
+    },
+    {
+      "id": 6,
+      "tipo": 0,
+      "titulo": "Profesor de Canto",
+      "imagen": "/assets/6.jpg",
+      "ubicacion": "123 Calle de la Música, Ciudad Fantasía",
+      "precio": "30",
+      "frecuencias": [
+        { "dia": "L", "disponible": true },
+        { "dia": "M", "disponible": true },
+        { "dia": "X", "disponible": false },
+        { "dia": "J", "disponible": false },
+        { "dia": "V", "disponible": false }
+      ],
+      "descripcion": "Clases de canto personalizadas para todos los niveles y edades. Aprende a mejorar tu técnica vocal y disfruta cantando tus canciones favoritas.",
+      "promocion": "¡Primera clase gratis!",
+      "experiencia": "Cantante Profesional",
+      "nombre": "Alejandro Pérez"
+    },
+    {
+      "id": 7,
+      "tipo": 1,
+      "titulo": "Profesor de Matemáticas",
+      "imagen": "/assets/7.jpg",
+      "ubicacion": "456 Avenida de los Números, Ciudad Imaginaria",
+      "precio": "25",
+      "frecuencias": [
+        { "dia": "L", "disponible": true },
+        { "dia": "M", "disponible": true },
+        { "dia": "X", "disponible": false },
+        { "dia": "J", "disponible": false },
+        { "dia": "V", "disponible": false }
+      ],
+      "descripcion": "Clases de matemáticas para estudiantes de primaria, secundaria y universidad. Resuelve tus dudas y mejora tus habilidades matemáticas.",
+      "promocion": "Descuento del 10% en paquetes de 5 clases.",
+      "experiencia": "Licenciado en Matemáticas",
+      "nombre": "Marcela Rodríguez"
+    },
+    {
+      "id": 8,
+      "tipo": 1,
+      "titulo": "Niñera a Domicilio",
+      "imagen": "/assets/8.jpg",
+      "ubicacion": "789 Calle de los Pequeños, Villa de los Niños",
+      "precio": "15",
+      "frecuencias": [
+        { "dia": "L", "disponible": true },
+        { "dia": "M", "disponible": true },
+        { "dia": "X", "disponible": false },
+        { "dia": "J", "disponible": false },
+        { "dia": "V", "disponible": false }
+      ],
+      "descripcion": "Cuidado de niños en su propio hogar. Ofrezco un ambiente seguro y divertido para los pequeños mientras los padres están ocupados.",
+      "promocion": null,
+      "experiencia": "Cuidadora de Niños",
+      "nombre": "Juan Carlos Martínez"
+    },
+    {
+      "id": 9,
+      "tipo": 2,
+      "titulo": "Coach de Gimnasio Personal",
+      "imagen": "/assets/9.jpg",
+      "ubicacion": "101 Gimnasio Street, Ciudad Fitness",
+      "precio": "50",
+      "frecuencias": [
+        { "dia": "L", "disponible": true },
+        { "dia": "M", "disponible": true },
+        { "dia": "X", "disponible": false },
+        { "dia": "J", "disponible": false },
+        { "dia": "V", "disponible": false }
+      ],
+      "descripcion": "Entrenamiento personalizado para alcanzar tus objetivos de fitness. Planes de ejercicios y nutrición adaptados a tus necesidades.",
+      "promocion": "¡Descuento del 20% en el primer mes!",
+      "experiencia": "Entrenador Certificado",
+      "nombre": "Luisa Fernández"
+    }
+  ]
+}

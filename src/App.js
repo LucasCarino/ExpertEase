@@ -6,6 +6,7 @@ import Nosotros from "./components/Nosotros";
 import Registro from "./components/Registro";
 import Ingreso from "./components/Ingreso";
 import Catalogo from "./components/Catalogo";
+import CatalogoDetalle from "./components/CatalogoDetalle";
 import Footer from "./components/Footer";
 import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
 
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/Registro" element={<Registro/>}/>
         <Route exact path="/Ingreso" element={<Ingreso/>}/>
         <Route exact path="/Catalogo" element={<Catalogo/>}/>
+        <Route exact path="/Catalogo/:id" element={<CatalogoDetalle/>}/>
         <Route exact path="/PreguntasFrecuentes" element={<PreguntasFrecuentes/>}/>
       </Routes>
       <Footer />
