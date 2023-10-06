@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { faUserTie, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 initTE({ Rating });
 
-
 const Catalogo = (props) => {
   const [open, setOpen] = useState(false);
 
@@ -28,10 +27,7 @@ const Catalogo = (props) => {
   const renderTipoServicio = (servicio) => {
     switch (servicio.tipo) {
       case 0:
-        return (
-          <span>
-          </span>
-        );
+        return <span></span>;
       case 1:
         return (
           <span className="absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg bg-sandy-brown-500 px-3 py-2 text-sm font-medium text-white">
@@ -52,7 +48,6 @@ const Catalogo = (props) => {
         return null;
     }
   };
-  
 
   const [servicios, setServicios] = useState([]);
 
@@ -85,8 +80,9 @@ const Catalogo = (props) => {
         </div>
       </div>
       <div
-        className={`duration-300 rounded-lg mb-5 px-5 py-2 flex w-full bg-zinc-100 ease-in-out overflow-hidden shadow-inner ${open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 py-0"
-          }`}
+        className={`duration-300 rounded-lg mb-5 px-5 py-2 flex w-full bg-zinc-100 ease-in-out overflow-hidden shadow-inner ${
+          open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 py-0"
+        }`}
       >
         <form className="grid grid-cols-2 w-full gap-x-6">
           <div>
@@ -271,15 +267,13 @@ const Catalogo = (props) => {
               >
                 <div className="relative flex h-200 justify-center overflow-hidden rounded-lg">
                   <div className="w-full h-48 transform transition-transform duration-500 ease-in-out hover:scale-110">
-                  <img
-  src={process.env.PUBLIC_URL + servicio.imagen}
-  alt=""
-  className="object-cover h-full w-full"
-/>
-
+                    <img
+                      src={process.env.PUBLIC_URL + servicio.imagen}
+                      alt=""
+                      className="object-cover h-full w-full"
+                    />
                   </div>
                   {renderTipoServicio(servicio)}
-
                 </div>
 
                 <div className="mt-4">
@@ -288,9 +282,7 @@ const Catalogo = (props) => {
                       <h2 className="line-clamp-1 text-base font-medium text-gray-800 md:text-lg hover:underline">
                         {servicio.titulo}
                       </h2>
-                      <p
-                        className="mt-2 line-clamp-1 text-sm text-gray-800"
-                      >
+                      <p className="mt-2 line-clamp-1 text-sm text-gray-800">
                         {servicio.ubicacion}
                       </p>
                     </div>
@@ -302,12 +294,22 @@ const Catalogo = (props) => {
               </div>
               <div className="mt-2 grid grid-cols-1 grid-rows-2 border-t border-gray-200 pb-3 pt-3">
                 <p className="flex items-center text-gray-800 xl:flex-row xl:items-center">
-                <FontAwesomeIcon className="mr-2" size='lg' icon={faUserTie} />
+                  <FontAwesomeIcon
+                    className="mr-2"
+                    size="lg"
+                    icon={faUserTie}
+                  />
                   <span className="xl:mt-0 text-md">{servicio.nombre}</span>
                 </p>
                 <p className="flex items-center text-gray-800 xl:flex-row xl:items-center">
-                  <FontAwesomeIcon className="ml-0.5 mr-2" size='lg' icon={faDollarSign} />
-                  <span className="mt-0 text-lg text-black font-semibold ml-0.5">{servicio.precio}</span>
+                  <FontAwesomeIcon
+                    className="ml-0.5 mr-2"
+                    size="lg"
+                    icon={faDollarSign}
+                  />
+                  <span className="mt-0 text-lg text-black font-semibold ml-0.5">
+                    {servicio.precio}
+                  </span>
                 </p>
               </div>
             </div>

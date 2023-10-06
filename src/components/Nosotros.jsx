@@ -23,7 +23,7 @@ const Nosotros = () => {
         <div className="w-full lg:w-8/12 ">
           <img
             className="w-full h-full"
-            src="\assets\3d-rendering-people-avatars-zoom-call-removebg.png"
+            src="/assets/3d-rendering-people-avatars-zoom-call-removebg.png"
             alt="A group of People"
           />
         </div>
