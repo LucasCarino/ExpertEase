@@ -79,17 +79,17 @@ const Registro = () => {
               </h1>
               <div>
                 <label
-                  for="email"
+                  for="name"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  ¿Cuál es tu nombre?
+                  ¿Cuál es tu nombre completo?
                 </label>
                 <input
-                  type="email"
-                  name="email"
-                  id="email"
+                  type="text"
+                  name="name"
+                  id="name"
                   className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Juan"
+                  placeholder="Juan López"
                 ></input>
               </div>
               <div>
@@ -122,6 +122,21 @@ const Registro = () => {
                   placeholder="Juan@correo.com"
                 ></input>
               </div>
+              <div>
+                <label
+                  for="tel"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  ¿Cúal es tu télefono?
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  id="tel"
+                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="11 1234-5678"
+                ></input>
+              </div>
 
               <Step className="font-normal" onClick={() => setActiveStep(1)}>
                 <Button
@@ -149,23 +164,34 @@ const Registro = () => {
               }}
             >
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5">
-                Formulario 2
+                Ahora contanos sobre vos...
               </h1>
-              <div>
-                <label
-                  for="email"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  ¿Cuál es tu nombre?
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Juan"
-                ></input>
-              </div>
+              <ul class="grid w-full gap-6 md:grid-cols-2">
+    <li>
+        <input type="radio" id="hosting-small" name="hosting" value="hosting-small" class="hidden peer" required />
+        <label for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
+            <div class="block">
+                <div class="w-full text-lg font-semibold">0-50 MB</div>
+                <div class="w-full">Good for small websites</div>
+            </div>
+            <svg class="w-5 h-5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+        </label>
+    </li>
+    <li>
+        <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer" />
+        <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div class="block">
+                <div class="w-full text-lg font-semibold">500-1000 MB</div>
+                <div class="w-full">Good for large websites</div>
+            </div>
+            <svg class="w-5 h-5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+        </label>
+    </li>
+</ul>
               <div>
                 <label
                   for="email"

@@ -1,7 +1,7 @@
 const Nosotros = () => {
   return (
     <div className="px-4 md:px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 p-8 gap-4">
-      <div className="bg-white rounded-sm shadow-inner p-4 md:p-8">
+      <div className="bg-white rounded  shadow-inner p-4 md:p-8">
         <div className="flex flex-col lg:flex-row justify-between gap-8">
           <div className="w-full flex-col lg:flex-row items-center flex">
             <div className="flex flex-col w-full lg:w-8/12">
