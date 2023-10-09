@@ -8,6 +8,7 @@ import Registro from "./components/Registro";
 import Ingreso from "./components/Ingreso";
 import Catalogo from "./components/Catalogo";
 import CatalogoDetalle from "./components/CatalogoDetalle";
+import Admin from "./components/Admin";
 import Footer from "./components/Footer";
 import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
 import ScrollToTop from "./ScrollToTop";
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/Nosotros" element={<Nosotros/>}/>
         <Route exact path="/Registro" element={<Registro/>}/>
+        <Route exact path="/Admin" element={<Admin/>}/>
         <Route exact path="/Ingreso" element={<Ingreso/>}/>
         <Route exact path="/Catalogo" element={<Catalogo/>}/>
         <Route exact path="/Catalogo/:id" element={<CatalogoDetalle/>}/>

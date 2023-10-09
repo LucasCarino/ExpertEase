@@ -21,10 +21,10 @@ const Registro = () => {
   };
 
   const [inputData, setInputData] = useState({
-    name: '',
-    email: '',
-    confirmEmail: '',
-    phone: '',
+    name: "",
+    email: "",
+    confirmEmail: "",
+    phone: "",
   });
 
   const handleInputChange = (event) => {
@@ -50,8 +50,8 @@ const Registro = () => {
               activeLineClassName="bg-black"
             >
               <Step
-                className="h-4 w-4 bg-black text-black cursor-pointer"
-                activeClassName="ring-0 !bg-black text-black"
+                className="h-4 w-4 bg-black text-black cursor-pointer z-0"
+                activeClassName="ring-0 bg-black text-black"
                 completedClassName="!bg-black text-black"
                 onClick={() => setActiveStep(0)}
               >
@@ -62,7 +62,7 @@ const Registro = () => {
                 </div>
               </Step>
               <Step
-                className="h-4 w-4 bg-charcoal-300 text-black cursor-pointer"
+                className="h-4 w-4 bg-gray-400 text-black cursor-pointer z-0"
                 activeClassName="ring-0 bg-black text-black"
                 completedClassName="!bg-black text-black"
                 onClick={() => setActiveStep(1)}
@@ -74,7 +74,7 @@ const Registro = () => {
                 </div>
               </Step>
               <Step
-                className="h-4 w-4 bg-charcoal-300 text-black cursor-pointer"
+                className="h-4 w-4 bg-gray-400 text-black cursor-pointer z-0"
                 activeClassName="ring-0 bg-black text-black"
                 completedClassName="!bg-black text-black"
                 onClick={() => setActiveStep(2)}
@@ -169,7 +169,7 @@ const Registro = () => {
                 />
               </div>
 
-              <Step className="font-normal" onClick={() => setActiveStep(1)}>
+              <Step className="font-normal z-0" onClick={() => setActiveStep(1)}>
                 <Button
                   width="w-full"
                   bgColor="bg-charcoal-600"
@@ -203,23 +203,23 @@ const Registro = () => {
               >
                 Soy...
               </label>
-              <ul class="grid w-full gap-6 md:grid-cols-2">
+              <ul className="grid w-full gap-6 md:grid-cols-2">
                 <li>
                   <input
                     type="radio"
                     id="student"
                     name="hosting"
                     value="student"
-                    class="hidden peer"
+                    className="hidden peer"
                     onChange={handleClick}
                     required
                   />
                   <label
                     for="student"
-                    class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-md cursor-pointer dark:peer-checked:text-blue-500 peer-checked:border-sandy-brown-600 peer-checked:text-sandy-brown-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 duration-100 ease-in-out"
+                    className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-md cursor-pointer dark:peer-checked:text-blue-500 peer-checked:border-sandy-brown-600 peer-checked:text-sandy-brown-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 duration-100 ease-in-out"
                   >
-                    <div class="block">
-                      <div class="w-full text-lg font-semibold">Estudiante</div>
+                    <div className="block">
+                      <div className="w-full text-lg font-semibold">Estudiante</div>
                     </div>
                     <div>
                       <FontAwesomeIcon icon={faGraduationCap} size="xl" />
@@ -232,15 +232,15 @@ const Registro = () => {
                     id="expert"
                     name="hosting"
                     value="expert"
-                    class="hidden peer"
+                    className="hidden peer"
                     onChange={handleClick}
                   />
                   <label
                     for="expert"
-                    class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-sandy-brown-600 peer-checked:border-sandy-brown-600 peer-checked:text-sandy-brown-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-sandy-brown-600 peer-checked:border-sandy-brown-600 peer-checked:text-sandy-brown-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                   >
-                    <div class="block">
-                      <div class="w-full text-lg font-semibold">Experto</div>
+                    <div className="block">
+                      <div className="w-full text-lg font-semibold">Experto</div>
                     </div>
                     <FontAwesomeIcon icon={faUserTie} size="xl" />
                   </label>
@@ -286,7 +286,7 @@ const Registro = () => {
                 </form>
               </div>
 
-              <Step className="font-normal" onClick={() => setActiveStep(2)}>
+              <Step className="font-normal z-0" onClick={() => setActiveStep(2)}>
                 <Button
                   width="w-full"
                   bgColor="bg-charcoal-600"
@@ -321,7 +321,7 @@ const Registro = () => {
                 >
                   Nombre
                 </label>
-              <p className="mb-5">{inputData.name}</p>
+                <p className="mb-5">{inputData.name}</p>
               </div>
               <div>
                 <label

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Button from "./Button";
 
 const Ingreso = () => {
@@ -88,12 +88,9 @@ const Ingreso = () => {
                   </div>
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                     ¿Aún no tienes una cuenta?{" "}
-                    <a
-                      href="/#"
-                      className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                    >
+                    <NavLink to="/Registro" className="font-semibold">
                       ¡Regístrate!
-                    </a>
+                    </NavLink>
                   </p>
                 </form>
               </div>
