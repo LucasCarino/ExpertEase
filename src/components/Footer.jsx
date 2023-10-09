@@ -1,7 +1,7 @@
 function Footer() {
     return (
       <footer className="bg-white dark:bg-gray-900">
-          <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+          <div className="mx-auto w-full px-4 md:px-10 py-6 lg:py-8">
               <div className="md:flex md:justify-between">
                 <div className="mb-6 md:mb-0">
                     <a aria-current="page" className="text-indigo-600 pt-1 lg:pt-0 active" href="/">ExpertEase</a>

@@ -260,7 +260,7 @@ const Catalogo = (props) => {
             key={servicio.id}
             className="text-m lg:text-sm lg:mb-5 lg:mt-0 my-7 lg:font-normal list-none"
           >
-            <div className="mx-auto w-full max-w-sm rounded-lg bg-white p-2.5">
+            <div className="mx-auto w-full max-w-sm rounded-lg bg-white p-2.5 shadow-inner">
               <Link
                 to={`/Catalogo/${servicio.id}`}
                 className="inline-block h-64 transform transition-transform duration-300 ease-in-out w-full mb-3"
