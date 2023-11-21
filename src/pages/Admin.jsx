@@ -56,6 +56,9 @@ const Admin = () => {
         <div className="flex justify-end mt-5">
           <DialogCrearClase />
         </div>
+
+
+
       </div>
       <div class="relative overflow-x-auto rounded-md">
         <h2 className='text-2xl pb-5 font-semibold'>Solicitudes de usuario</h2>

@@ -5,16 +5,34 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap, faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
-import Button from "./Button";
+import Button from "../components/Button";
 
 const Registro = () => {
   const [activeStep, setActiveStep] = React.useState(0);
-
   const [open, setOpen] = useState(false);
+
+  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate('');
+
+  const signUp = (e) => {
+    e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      navigate('/Catalogo');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
 
   const handleClick = (event) => {
     event.target.value === "expert" ? setOpen(true) : setOpen(false);
@@ -90,9 +108,7 @@ const Registro = () => {
           {activeStep === 0 && (
             <form
               className="p-6 w-full sm:p-8"
-              action="#"
-              id="secondForm"
-              method="post"
+              id="firstForm"
               onSubmit={(e) => {
                 e.preventDefault();
               }}
@@ -128,27 +144,27 @@ const Registro = () => {
                   type="email"
                   name="email"
                   id="email"
-                  value={inputData.email}
-                  onChange={handleInputChange}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Juan@correo.com"
                 />
               </div>
               <div>
                 <label
-                  for="email"
+                  for="password"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Confirma tu email
+                  Contraseña
                 </label>
                 <input
-                  type="email"
-                  name="confirmEmail"
-                  id="confirmEmail"
-                  value={inputData.confirmEmail}
-                  onChange={handleInputChange}
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Juan@correo.com"
                 />
               </div>
               <div>
@@ -187,9 +203,7 @@ const Registro = () => {
           {activeStep === 1 && (
             <form
               className="p-6 w-full sm:p-8"
-              action="#"
               id="secondForm"
-              method="post"
               onSubmit={(e) => {
                 e.preventDefault();
               }}
@@ -198,7 +212,7 @@ const Registro = () => {
                 Ahora contanos sobre vos...
               </h1>
               <label
-                for="email"
+                for="type"
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Soy...
@@ -255,7 +269,7 @@ const Registro = () => {
                 <form className="grid grid-cols-1 w-full">
                   <div>
                     <label
-                      for="email"
+                      for="deegre"
                       className="block mb-2 text-sm font-medium text-gray-900"
                     >
                       Cúal es tu título?
@@ -263,22 +277,22 @@ const Registro = () => {
                     <input
                       type="text"
                       name="deegre"
-                      id="email"
+                      id="deegre"
                       className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Lic. en gestión de tecnología de la información"
                     ></input>
                   </div>
                   <div>
                     <label
-                      for="email"
+                      for="experience"
                       className="block mb-2 text-sm font-medium text-gray-900"
                     >
                       Completa con tu experiencia y títulos
                     </label>
                     <input
-                      type="email"
-                      name="email"
-                      id="email"
+                      type="text"
+                      name="text"
+                      id="experience"
                       className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="UADE 2023"
                     ></input>
@@ -304,19 +318,15 @@ const Registro = () => {
           {activeStep === 2 && (
             <form
               className="p-6 w-full sm:p-8"
-              action="#"
-              id="secondForm"
-              method="post"
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
+              id="thirdForm"
+              onSubmit={signUp}
             >
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5">
                 Por último, revisa tu información
               </h1>
               <div>
                 <label
-                  for="email"
+                  for="name"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Nombre
@@ -334,26 +344,26 @@ const Registro = () => {
               </div>
               <div>
                 <label
-                  for="email"
+                  for="phone"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Teléfono
                 </label>
                 <p className="mb-5">{inputData.phone}</p>
               </div>
-              <NavLink to="/Catalogo" exact>
-                <Button
-                  width="w-full"
-                  bgColor="bg-charcoal-600"
-                  bgColorHover="hover:bg-charcoal-400"
-                  textColor="text-white"
-                  borderColor="border-charcoal-600"
-                  borderColorHover="hover:border-charcoal-400"
-                >
-                  Registrate Ahora
-                </Button>
-              </NavLink>
-            </form>
+              <Button
+                type="submit"
+                name="submit"
+                width="w-full"
+                bgColor="bg-charcoal-600"
+                bgColorHover="hover:bg-charcoal-400"
+                textColor="text-white"
+                borderColor="border-charcoal-600"
+                borderColorHover="hover:border-charcoal-400"
+              >
+                Registrate Ahora
+              </Button>
+          </form>
           )}
         </CardHeader>
       </div>

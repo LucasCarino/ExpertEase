@@ -12,7 +12,7 @@ const PreguntasFrecuentes = () => {
             <div className = "w-full relative object-center object-fit z-0">
                 <div className="relative flex flex-col items-center justify-center sm:px-0 z-20 pb-20">
                     <div className="md:py-20 py-10">
-                        <h1 role="heading" className="xl:text-6xl md:text-5xl text-xl font-bold leading-10 text-white">
+                        <h1 className="xl:text-6xl md:text-5xl text-xl font-bold leading-10 text-white">
                             Preguntas Frecuentes
                         </h1>
                     </div>

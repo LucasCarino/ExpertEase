@@ -1,7 +1,29 @@
-import { Link, NavLink } from "react-router-dom";
-import Button from "./Button";
+import { NavLink, useNavigate } from "react-router-dom";
+import Button from "../components/Button";
+import { useState } from "react";
+import {auth, app } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 
 const Ingreso = () => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigate = useNavigate('');
+
+  const signIn = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        navigate('/Catalogo');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] h-screen pt-8">
@@ -12,7 +34,7 @@ const Ingreso = () => {
                 <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Ingresa a tu cuenta
                 </h1>
-                <form className="space-y-4" action="#">
+                <form className="space-y-4" action="#" onSubmit={signIn}>
                   <div>
                     <label
                       for="email"
@@ -24,6 +46,8 @@ const Ingreso = () => {
                       type="email"
                       name="email"
                       id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="name@company.com"
                       required=""
@@ -41,6 +65,8 @@ const Ingreso = () => {
                       name="password"
                       id="password"
                       placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       required=""
                     ></input>
@@ -73,18 +99,21 @@ const Ingreso = () => {
                     </a>
                   </div>
                   <div className="mt-5">
-                    <NavLink to="/Catalogo" exact>
+                    {/* <NavLink to="/Catalogo" exact> */}
                       <Button
+                        type="submit"
+                        name="submit"
                         width="w-full"
                         bgColor="bg-charcoal-600"
                         bgColorHover="hover:bg-charcoal-400"
                         textColor="text-white"
+                        value="Ingresar"
                         borderColor="border-charcoal-600"
                         borderColorHover="hover:border-charcoal-400"
                       >
                         Ingresar
                       </Button>
-                    </NavLink>
+                    {/* </NavLink> */}
                   </div>
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                     ¿Aún no tienes una cuenta?{" "}

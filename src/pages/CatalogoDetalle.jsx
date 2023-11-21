@@ -6,7 +6,7 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Servicios from "./data/Servicios.json";
+import Servicios from "../components/data/Servicios.json";
 
 function CatalogoServicio() {
   const { id } = useParams();

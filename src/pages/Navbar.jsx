@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import Dropdown from './Dropdown';
-import Button from './Button';
+// import Button from '../components/Button';
+import AutenticacionIngreso from '../components/AutenticacionIngreso';
+
 
 function Navbar() {
 
@@ -16,7 +18,7 @@ function Navbar() {
 
 
     return (
-        <div>
+        <div>3
             <nav className="shadow-md w-full fixed top-0 left-0 z-[1]">
                 <div className='lg:flex items-center justify-between bg-white py-4 lg:px-10 px-7'>
                     <div className='font-bold text-2xl cursor-pointer flex items-center justify-center font-[Poppins] text-gray-800'>
@@ -43,7 +45,8 @@ function Navbar() {
                             )}
                         <div className='flex justify-between items-center pr-8 lg:pr-0'>
                             <div className="flex gap-4 flex-grow lg:gap-0">
-                                <NavLink to="/Registro" className="w-1/2 lg:w-full lg:mx-5">
+                                <AutenticacionIngreso />
+                                {/* <NavLink to="/Registro" className="w-1/2 lg:w-full lg:mx-5">
                                     <Button width="w-full" bgColor="bg-white" bgColorHover="hover:bg-zinc-100" textColor="text-sandy-brown-600" borderColor="border-sandy-brown-500" borderColorHover="hover:border-sandy-brown-500">
                                         Crear Cuenta
                                     </Button>
@@ -52,7 +55,7 @@ function Navbar() {
                                     <Button width="w-full" bgColor="bg-charcoal-600" bgColorHover="hover:bg-charcoal-400" textColor="text-white" borderColor="border-charcoal-600" borderColorHover="hover:border-charcoal-400">
                                         Ingresar
                                     </Button>
-                                </NavLink>
+                                </NavLink> */}
                             </div>
                         </div>
                     </ul>

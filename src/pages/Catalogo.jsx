@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import Servicios from "./data/Servicios.json";
+import Servicios from "../components/data/Servicios.json";
 import { Rating, initTE } from "tw-elements";
 import { Link } from "react-router-dom";
 import { faUserTie, faDollarSign } from "@fortawesome/free-solid-svg-icons";
