@@ -17,22 +17,38 @@ const Registro = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [open, setOpen] = useState(false);
 
-  
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate("");
 
   const signUp = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      navigate('/Catalogo');
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+      .then((userCredential) => {
+        navigate("/Catalogo");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  const [experiencias, setExperiencias] = useState([""]); // Inicializamos con un input vacío
+
+  const agregarExperiencia = () => {
+    setExperiencias([...experiencias, ""]);
+  };
+
+  const eliminarExperiencia = (index) => {
+    const nuevasExperiencias = [...experiencias];
+    nuevasExperiencias.splice(index, 1);
+    setExperiencias(nuevasExperiencias);
+  };
+
+  const handleChange = (index, value) => {
+    const nuevasExperiencias = [...experiencias];
+    nuevasExperiencias[index] = value;
+    setExperiencias(nuevasExperiencias);
+  };
 
   const handleClick = (event) => {
     event.target.value === "expert" ? setOpen(true) : setOpen(false);
@@ -185,7 +201,10 @@ const Registro = () => {
                 />
               </div>
 
-              <Step className="font-normal z-0" onClick={() => setActiveStep(1)}>
+              <Step
+                className="font-normal z-0"
+                onClick={() => setActiveStep(1)}
+              >
                 <Button
                   width="w-full"
                   bgColor="bg-charcoal-600"
@@ -202,7 +221,7 @@ const Registro = () => {
           )}
           {activeStep === 1 && (
             <form
-              className="p-6 w-full sm:p-8"
+              className="p-6 w-full sm:p-8 max-h-[400px] overflow-y-auto"
               id="secondForm"
               onSubmit={(e) => {
                 e.preventDefault();
@@ -211,61 +230,8 @@ const Registro = () => {
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5">
                 Ahora contanos sobre vos...
               </h1>
-              <label
-                for="type"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                Soy...
-              </label>
-              <ul className="grid w-full gap-6 md:grid-cols-2">
-                <li>
-                  <input
-                    type="radio"
-                    id="student"
-                    name="hosting"
-                    value="student"
-                    className="hidden peer"
-                    onChange={handleClick}
-                    required
-                  />
-                  <label
-                    for="student"
-                    className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-md cursor-pointer dark:peer-checked:text-blue-500 peer-checked:border-sandy-brown-600 peer-checked:text-sandy-brown-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 duration-100 ease-in-out"
-                  >
-                    <div className="block">
-                      <div className="w-full text-lg font-semibold">Estudiante</div>
-                    </div>
-                    <div>
-                      <FontAwesomeIcon icon={faGraduationCap} size="xl" />
-                    </div>
-                  </label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    id="expert"
-                    name="hosting"
-                    value="expert"
-                    className="hidden peer"
-                    onChange={handleClick}
-                  />
-                  <label
-                    for="expert"
-                    className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-sandy-brown-600 peer-checked:border-sandy-brown-600 peer-checked:text-sandy-brown-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
-                  >
-                    <div className="block">
-                      <div className="w-full text-lg font-semibold">Experto</div>
-                    </div>
-                    <FontAwesomeIcon icon={faUserTie} size="xl" />
-                  </label>
-                </li>
-              </ul>
 
-              <div
-                className={`duration-300 mt-4 flex w-full ease-in-out overflow-hidden ${
-                  open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 py-0"
-                }`}
-              >
+              <div className="duration-300 mt-4 flex w-full ease-in-out overflow-hidden  opacity-100">
                 <form className="grid grid-cols-1 w-full">
                   <div>
                     <label
@@ -282,25 +248,50 @@ const Registro = () => {
                       placeholder="Lic. en gestión de tecnología de la información"
                     ></input>
                   </div>
+
                   <div>
                     <label
-                      for="experience"
-                      className="block mb-2 text-sm font-medium text-gray-900"
+                      htmlFor={`experience-0`}
+                      className="mb-2 text-sm font-medium text-gray-900 flex items-center"
                     >
                       Completa con tu experiencia y títulos
+                      <button
+                        type="button"
+                        className="ml-2 bg-blue-500 text-white px-2 py-1 rounded-md"
+                        onClick={agregarExperiencia}
+                      >
+                        +
+                      </button>
                     </label>
-                    <input
-                      type="text"
-                      name="text"
-                      id="experience"
-                      className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="UADE 2023"
-                    ></input>
+                    {experiencias.map((experiencia, index) => (
+                      <div key={index} className="mb-2 flex">
+                        <input
+                          type="text"
+                          id={`experience-${index}`}
+                          className="bg-gray-50 border mb-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="UADE 2023"
+                          value={experiencia}
+                          onChange={(e) => handleChange(index, e.target.value)}
+                        />
+                        {index !== 0 && (
+                          <button
+                            type="button"
+                            className="ml-2 bg-red-500 text-white px-3.5 py-1 rounded-md mb-2"
+                            onClick={() => eliminarExperiencia(index)}
+                          >
+                            -
+                          </button>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </form>
               </div>
 
-              <Step className="font-normal z-0" onClick={() => setActiveStep(2)}>
+              <Step
+                className="font-normal z-0"
+                onClick={() => setActiveStep(2)}
+              >
                 <Button
                   width="w-full"
                   bgColor="bg-charcoal-600"
@@ -363,7 +354,7 @@ const Registro = () => {
               >
                 Registrate Ahora
               </Button>
-          </form>
+            </form>
           )}
         </CardHeader>
       </div>

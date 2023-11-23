@@ -22,15 +22,7 @@ const Autenticacion = () => {
     return () => listenAuth();
   }, []);
 
-  const userSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Sign out");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+
 
   return (
     <>
@@ -63,9 +55,9 @@ const Autenticacion = () => {
         </>
       ) : (
         <>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center w-full lg:w-auto">
             <ProfileDropdown>
-              <button className="rounded-full py-1.5 px-2.5  overflow-hidden transition duration-300 hover:bg-blue-600 bg-blue-500">
+              <button className="rounded-full py-1.5 px-2.5 w-full overflow-hidden transition duration-300 hover:bg-blue-600 bg-blue-500">
                 <FontAwesomeIcon icon={faUser} />
               </button>
             </ProfileDropdown>
