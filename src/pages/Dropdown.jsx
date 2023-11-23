@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleUp, faUser, faChalkboardTeacher, faUserGraduate } from '@fortawesome/free-solid-svg-icons';
+import { faAngleUp, faUser, faChalkboardTeacher, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 
 import { NavLink } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const Dropdown = (props) => {
     let Links = [
         { name: "Profesores", link: "/Catalogo", icon: faUser },
         { name: "Tutorías", link: "/Catalogo", icon: faChalkboardTeacher },
-        { name: "Estudiantes", link: "/Catalogo", icon: faUserGraduate },
+        { name: "Otros", link: "/Catalogo", icon: faBriefcase },
     ];
 
     const [open, setOpen] = useState(false);
