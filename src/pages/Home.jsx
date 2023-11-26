@@ -113,8 +113,6 @@ function Home() {
         ))}
       </div>
       <div className="lg:w-1/4 text-center">
-
-
         <NavLink to="/Registro" exact>
           <button className="bg-charcoal-600 py-2 px-6 rounded border-2 border-charcoal-600 text-white mb-10 hover:bg-charcoal-400 hover:border-charcoal-400 duration-500">
             Comenzá ahora

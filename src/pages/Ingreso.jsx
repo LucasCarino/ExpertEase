@@ -1,28 +1,28 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { useState } from "react";
-import {auth, app } from "../firebase";
+import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-
 const Ingreso = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
-  const navigate = useNavigate('');
+  const navigate = useNavigate("");
 
   const signIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        navigate('/Catalogo');
+        navigate("/Catalogo");
       })
       .catch((error) => {
+        setError("Credenciales incorrectas");
         console.log(error);
       });
-  }
-
+  };
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -71,6 +71,9 @@ const Ingreso = () => {
                       required=""
                     ></input>
                   </div>
+                  {error && (
+                    <p className="text-sm font-light text-red-500">{error}</p>
+                  )}
                   <div className="flex items-start justify-between flex-col md:flex-row md:items-center">
                     <div className="flex items-start">
                       <div className="flex items-center h-5 mb-2 md:mb-0">
@@ -91,30 +94,30 @@ const Ingreso = () => {
                         </label>
                       </div>
                     </div>
-                    <a
-                      href="/#"
+                    <Link
+                      to="/RecuperarPassword"
                       className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                     >
                       ¿Olvidaste tu contraseña?
-                    </a>
+                    </Link>
                   </div>
                   <div className="mt-5">
                     {/* <NavLink to="/Catalogo" exact> */}
-                      <Button
-                        type="submit"
-                        name="submit"
-                        width="w-full"
-                        bgColor="bg-charcoal-600"
-                        bgColorHover="hover:bg-charcoal-400"
-                        textColor="text-white"
-                        value="Ingresar"
-                        borderColor="border-charcoal-600"
-                        borderColorHover="hover:border-charcoal-400"
-                      >
-                        Ingresar
-                      </Button>
-                    {/* </NavLink> */}
+                    <Button
+                      type="submit"
+                      name="submit"
+                      width="w-full"
+                      bgColor="bg-charcoal-600"
+                      bgColorHover="hover:bg-charcoal-400"
+                      textColor="text-white"
+                      value="Ingresar"
+                      borderColor="border-charcoal-600"
+                      borderColorHover="hover:border-charcoal-400"
+                    >
+                      Ingresar
+                    </Button>
                   </div>
+
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                     ¿Aún no tienes una cuenta?{" "}
                     <NavLink to="/Registro" className="font-semibold">

@@ -10,12 +10,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { Link } from "react-router-dom";
 
 import Button from "../components/Button";
 
 const Registro = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [open, setOpen] = useState(false);
+
+  const [error, setError] = useState(null);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +31,14 @@ const Registro = () => {
         navigate("/Catalogo");
       })
       .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+          setError("El correo electrónico ya está en uso. ");
+        } else if (error.code === "auth/weak-password" ) {
+          setError("La contraseña debe tener al menos 6 caracteres");
+        } 
+        else {
+          setError("Error al registrarse. Por favor, inténtalo de nuevo");
+        }
         console.log(error);
       });
   };
@@ -354,6 +365,18 @@ const Registro = () => {
               >
                 Registrate Ahora
               </Button>
+              {error && (
+                <div className="mt-2">
+                  <p className="text-sm font-light text-red-500">{error}
+                    <Link
+                      to="/Ingreso"
+                      className="text-sm font-medium text-black hover:underline dark:text-primary-500"
+                    >
+                      Iniciar sesión
+                    </Link>
+                    </p>
+                </div>
+              )}
             </form>
           )}
         </CardHeader>
