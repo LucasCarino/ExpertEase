@@ -3,6 +3,7 @@
     {
       "id": 0,
       "tipo": 1,
+      "categoria": "Educación",
       "titulo": "Profesor de Literatura",
       "imagen": "/assets/0.jpg",
       "ubicacion": "234 Calle de los Libros, Ciudad de la Literatura",
@@ -23,6 +24,7 @@
     {
       "id": 1,
       "tipo": 0,
+      "categoria": "Tutoría",
       "titulo": "Tutor de Baile",
       "imagen": "/assets/1.jpg",
       "ubicacion": "567 Estudio de Baile, Ciudad del Ritmo",
@@ -43,6 +45,7 @@
     {
       "id": 2,
       "tipo": 1,
+      "categoria": "Coaching",
       "titulo": "Coach de Desarrollo Personal",
       "imagen": "/assets/2.jpg",
       "ubicacion": "890 Calle de los Libros, Ciudad de la Literatura",
@@ -63,6 +66,7 @@
     {
       "id": 3,
       "tipo": 0,
+      "categoria": "Hogar",
       "titulo": "Servicios de Limpieza a Domicilio",
       "imagen": "/assets/3.jpg",
       "ubicacion": "1234 Calle de la Limpieza, Ciudad de la Higiene",
@@ -83,6 +87,7 @@
     {
       "id": 4,
       "tipo": 2,
+      "categoria": "Deportes",
       "titulo": "Entrenador de Ajedrez",
       "imagen": "/assets/4.jpg",
       "ubicacion": "999 Plaza del Ajedrez, Ciudad Estratégica",
@@ -103,6 +108,7 @@
     {
       "id": 5,
       "tipo": 0,
+      "categoria": "Mascotas",
       "titulo": "Cuidado de Mascotas",
       "imagen": "/assets/5.jpg",
       "ubicacion": "456 Parque de las Mascotas, Villa de las Mascotas",
@@ -123,6 +129,7 @@
     {
       "id": 6,
       "tipo": 0,
+      "categoria": "Música",
       "titulo": "Profesor de Canto",
       "imagen": "/assets/6.jpg",
       "ubicacion": "123 Calle de la Música, Ciudad Fantasía",
@@ -143,6 +150,7 @@
     {
       "id": 7,
       "tipo": 1,
+      "categoria": "Educación",
       "titulo": "Profesor de Matemáticas",
       "imagen": "/assets/7.jpg",
       "ubicacion": "456 Avenida de los Números, Ciudad Imaginaria",
@@ -163,6 +171,7 @@
     {
       "id": 8,
       "tipo": 1,
+      "categoria": "Hogar",
       "titulo": "Niñera a Domicilio",
       "imagen": "/assets/8.jpg",
       "ubicacion": "789 Calle de los Pequeños, Villa de los Niños",
@@ -183,6 +192,7 @@
     {
       "id": 9,
       "tipo": 2,
+      "categoria": "Deportes",
       "titulo": "Coach de Gimnasio Personal",
       "imagen": "/assets/9.jpg",
       "ubicacion": "101 Gimnasio Street, Ciudad Fitness",

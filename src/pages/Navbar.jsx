@@ -2,20 +2,17 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
-import Dropdown from './Dropdown';
-// import Button from '../components/Button';
 import AutenticacionIngreso from '../components/AutenticacionIngreso';
-
 
 function Navbar() {
 
     let Links = [
+        { name: "Servicios", link: "/Catalogo" },
         { name: "Nosotros", link: "/Nosotros" },
         { name: "Preguntas frecuentes", link: "/PreguntasFrecuentes" },
     ]
 
     let [open, setOpen] = useState(false);
-
 
     return (
         <div>3
@@ -33,7 +30,7 @@ function Navbar() {
                         <FontAwesomeIcon size='xl' icon={open ? faXmark : faBars} />
                     </div>
                     <ul className={`lg:flex lg:items-center lg:pb-0 pb-7 absolute lg:static bg-white lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-8 transition-all duration-500 ease-in ${open ? 'top-16 opacity-100' : 'top-[-490px]'} lg:opacity-100 opacity-0`}>
-                        <Dropdown>Buscar servicio</Dropdown>
+                        {/* <Dropdown>Buscar servicio</Dropdown> */}
                         {
                             Links.map((Link, key) => (
                                 <li key={key} className='lg:ml-8 text-m lg:text-sm lg:my-0 my-7 lg:font-normal'>
