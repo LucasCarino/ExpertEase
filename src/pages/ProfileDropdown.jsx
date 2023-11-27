@@ -39,14 +39,14 @@ const ProfileDropdown = (props) => {
 
     return ( 
         <div 
-            className="relative rounded-lg lg:mr-0 mr-8 my-7 lg:ml-8 lg:my-0"
+            className="relative rounded-lg lg:ml-8 my-0 w-full"
             onMouseEnter={handleHover}
             onMouseLeave={handleClose}
         >
-            <button className="flex items-center justify-between text-m lg:text-sm rounded-lg tracking-wider text-black hover:text-gray-800 duration-500">
+            <button className="w-full flex items-center justify-between text-m lg:text-sm rounded-lg tracking-wider text-black hover:text-gray-800 duration-500">
                 {children}
             </button>
-            <div className={`bg-zinc-100 absolute lg:right-0 top-8 lg:w-[200px] rounded  w-full ease-in-out duration-300 overflow-hidden shadow-inner ${open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-50'}`}>
+            <div className={`bg-zinc-100 absolute lg:right-0 top-8 lg:w-[200px] rounded w-full ease-in-out duration-300 overflow-hidden shadow-inner ${open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-50'}`}>
                 <ul className="w-full">
                     {Links.map((link, key) => (
                         <NavLink className="text-gray-700" to={link.link}>

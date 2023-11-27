@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
-
 import Home from "./pages/Home";
 import Nosotros from "./pages/Nosotros";
 import Registro from "./pages/Registro";
@@ -12,9 +11,10 @@ import Footer from "./pages/Footer";
 import PreguntasFrecuentes from "./pages/PreguntasFrecuentes";
 import ScrollToTop from "./ScrollToTop";
 import Navbar from './pages/Navbar';
-
+import RecuperarPassword from './pages/RecuperarPassword';
 
 function App() {
+
   return (
     <Router>
       {/* {auth.auth ? <Header/> : <NotAuthNavbar/>} */}
@@ -26,6 +26,7 @@ function App() {
         <Route exact path="/Registro" element={<Registro/>}/>
         <Route exact path="/Admin" element={<Admin/>}/>
         <Route exact path="/Ingreso" element={<Ingreso/>}/>
+        <Route exact path="/RecuperarPassword" element={<RecuperarPassword/>}/>
         <Route exact path="/Catalogo" element={<Catalogo/>}/>
         <Route exact path="/Catalogo/:id" element={<CatalogoDetalle/>}/>
         <Route exact path="/PreguntasFrecuentes" element={<PreguntasFrecuentes/>}/>

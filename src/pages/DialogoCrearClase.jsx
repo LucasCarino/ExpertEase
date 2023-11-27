@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import DateRangePicker from "../components/DateRangePicker";
 
 function DialogCrearClase(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,14 @@ function DialogCrearClase(props) {
   const closeDialog = () => {
     setIsOpen(false);
   };
+
+  let Categories = [
+    { name: "Profesorado" },
+    { name: "Tutoría" },
+    { name: "Otro servicio" },
+  ];
+
+
 
   return (
     <div>
@@ -32,29 +41,75 @@ function DialogCrearClase(props) {
               }}
             >
               <h1 className="text-center text-lg font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5">
-                Crea una nueva clase/curso
+                Crea un nuevo servicio
               </h1>
               <div>
                 <label
                   for="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Título
+                  Servicio
                 </label>
-                <input
-                  type="text"
-                  name="phone"
-                  id="phone"
-                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Clases de..."
-                ></input>
+                <select
+                  id="categories"
+                  className=" bg-gray-50 border mb-5  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                  <option disabled selected value="">
+                    Selecciona un tipo...
+                  </option>
+                  {Categories.map((category, key) => (
+                    <option key={key} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label
                   for="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Precio
+                  Nombre
+                </label>
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Clases de canto"
+                ></input>
+                <label
+                  for="date"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Duración
+                </label>
+                {/* <DateRangePicker /> */}
+                <div class="relative w-full mb-5">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                    <svg
+                      class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                    </svg>
+                  </div>
+                  <input
+                    datepicker
+                    type="text"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Selecciona la fecha de inicio y fin"
+                  />
+              </div>
+              <div>
+                <label
+                  for="email"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Costo
                 </label>
                 <input
                   type="number"
@@ -78,30 +133,6 @@ function DialogCrearClase(props) {
                   className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Me gustaría que me llames de lunes a viernes de 8 a 10 hs"
                 ></textarea>
-                <label
-                  for="date"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Duración
-                </label>
-                <div class="relative w-full mb-5">
-                  <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                    <svg
-                      class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                    </svg>
-                  </div>
-                  <input
-                    datepicker
-                    type="text"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Selecciona la fecha de inicio y fin"
-                  />
                 </div>
               </div>
             </form>
