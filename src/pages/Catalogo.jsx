@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useCallback } from "react";
 import Servicios from "../components/data/Servicios.json";
 import { Rating, initTE } from "tw-elements";
@@ -8,6 +7,9 @@ import {
   faUserTie,
   faDollarSign,
   faFilterCircleXmark,
+  faFilter,
+  faStar,
+  faClock
 } from "@fortawesome/free-solid-svg-icons";
 import StarsRating from "../components/StarsRating";
 initTE({ Rating });
@@ -267,7 +269,7 @@ const Catalogo = (props) => {
               key={servicio.id}
               className="text-m lg:text-sm lg:mb-5 lg:mt-0 my-7 lg:font-normal list-none"
             >
-              <div className="mx-auto w-full max-w-sm rounded-lg bg-white p-2.5 shadow-inner">
+              <div className="flex flex-col h-full mx-auto w-full max-w-sm rounded-lg bg-white p-2.5 shadow-inner">
                 <Link
                   to={`/Catalogo/${servicio.id}`}
                   className="inline-block h-64 transform transition-transform duration-300 ease-in-out w-full mb-3"
@@ -296,10 +298,10 @@ const Catalogo = (props) => {
                     </div>
                   </div>
                 </Link>
-                <div className="mt-2 border-t border-gray-200 pt-3 h-28">
+                <div className="mt-2 border-t border-gray-200 pt-3">
                   {servicio.descripcion}
                 </div>
-                <div className="mt-2 grid grid-cols-1 grid-rows-2 border-t border-gray-200 pb-3 pt-3">
+                <div className="mt-2 grid grid-cols-2 grid-rows-2 border-t border-gray-200 pb-3 pt-3 gap-x-10">
                   <p className="flex items-center text-gray-800 xl:flex-row xl:items-center">
                     <FontAwesomeIcon
                       className="mr-2"
@@ -307,6 +309,27 @@ const Catalogo = (props) => {
                       icon={faUserTie}
                     />
                     <span className="xl:mt-0 text-md">{servicio.nombre}</span>
+                  </p>
+
+                  <p className="flex items-center text-gray-800 xl:flex-row xl:items-center">
+                    <FontAwesomeIcon
+                      className="mr-2"
+                      size="lg"
+                      icon={faClock}
+                    />
+                    <span className="xl:mt-0 text-md">
+                      {servicio.frecuencia}
+                    </span>
+                  </p>
+                  <p className="flex items-center text-gray-800 xl:flex-row xl:items-center">
+                    <FontAwesomeIcon
+                      className=" mr-2"
+                      size="lg"
+                      icon={faStar}
+                    />
+                    <span className="mt-0 text-lg text-black">
+                      {servicio.calificacion}
+                    </span>
                   </p>
                   <p className="flex items-center text-gray-800 xl:flex-row xl:items-center">
                     <FontAwesomeIcon
