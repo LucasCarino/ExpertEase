@@ -9,6 +9,7 @@ import {
   faDollarSign,
   faFilterCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import StarsRating from "../components/StarsRating";
 initTE({ Rating });
 
 const Catalogo = (props) => {
@@ -18,14 +19,29 @@ const Catalogo = (props) => {
     open ? setOpen(false) : setOpen(true);
   };
 
-  const allCategories = new Set(
-    Servicios.servicios.map((servicio) => servicio.categoria)
+  const allCategorias = new Set(
+    Servicios.servicios.map((servicio) => servicio.categoria),
   );
-  const Categories = [...allCategories];
 
+  const allClases = new Set(
+    Servicios.servicios.map((servicio) => servicio.clase),
+  );
+
+  const allFrecuencias = new Set(
+    Servicios.servicios.map((servicio) => servicio.frecuencia),
+  );
+
+  
+  const Categorias = [...allCategorias];
+  const Clases = [...allClases];
+  const Frencuencias = [...allFrecuencias];
+  const [calificacionFilter, setCalificacionFilter] = useState(null);
+  
   const [servicios, setServicios] = useState([]);
   const [busqueda, setBusqueda] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategoria, setSelectedCategoria] = useState("");
+  const [selectedClases, setSelectedClases] = useState("");
+  const [selectedFrencuencia, setSelectedFrecuencia] = useState("");
 
   useEffect(() => {
     setServicios(Servicios.servicios);
@@ -35,6 +51,11 @@ const Catalogo = (props) => {
     setBusqueda(event.target.value);
   };
 
+  const handleRatingChange = (rating) => {
+    setCalificacionFilter(rating);
+  };
+  
+
   const filteredServices = servicios.filter((servicio) => {
     const tituloMatches = servicio.titulo
       .toLowerCase()
@@ -43,9 +64,13 @@ const Catalogo = (props) => {
       .toLowerCase()
       .includes(busqueda.toLowerCase());
     const categoriaMatches =
-      selectedCategory === "" || servicio.categoria === selectedCategory;
+      selectedCategoria === "" || servicio.categoria === selectedCategoria;
+    const claseMatches =
+      selectedClases === "" || servicio.clase === selectedClases;
+    const frecuenciaMatches =
+      selectedFrencuencia === "" || servicio.frecuencia === selectedFrencuencia;
 
-    return (tituloMatches || nombreMatches) && categoriaMatches;
+    return (tituloMatches || nombreMatches) && categoriaMatches && claseMatches && frecuenciaMatches;
   });
 
   const updateServicios = useCallback(() => {
@@ -57,21 +82,37 @@ const Catalogo = (props) => {
         .toLowerCase()
         .includes(busqueda.toLowerCase());
       const categoriaMatches =
-        selectedCategory === "" || servicio.categoria === selectedCategory;
-
-      return (tituloMatches || nombreMatches) && categoriaMatches;
+        selectedCategoria === "" || servicio.categoria === selectedCategoria;
+      const claseMatches =
+        selectedClases === "" || servicio.clase === selectedClases;
+      const frecuenciaMatches =
+        selectedFrencuencia === "" || servicio.frecuencia === selectedFrencuencia;
+      const calificacionMatches =
+        calificacionFilter === null ||
+        servicio.calificacion >= calificacionFilter;
+  
+      return (
+        (tituloMatches || nombreMatches) &&
+        categoriaMatches &&
+        claseMatches &&
+        frecuenciaMatches &&
+        calificacionMatches
+      );
     });
 
     setServicios(filtered);
-  }, [busqueda, selectedCategory]);
+  }, [busqueda, selectedCategoria, selectedClases, selectedFrencuencia, calificacionFilter]);
 
   useEffect(() => {
     updateServicios();
   }, [updateServicios]);
 
   const handleReset = () => {
-    setSelectedCategory('');
-    setBusqueda('');
+    setSelectedCategoria("");
+    setSelectedClases("");
+    setSelectedFrecuencia("");
+    setBusqueda("");
+    setCalificacionFilter(null);
   };
 
   const renderTipoServicio = (servicio) => {
@@ -134,19 +175,19 @@ const Catalogo = (props) => {
               Categoria
             </label>
             <select
-              id="categories"
-              value={selectedCategory}
+              id="Categorias"
+              value={selectedCategoria}
               onChange={(e) => {
-                setSelectedCategory(e.target.value);
+                setSelectedCategoria(e.target.value);
               }}
               className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               <option disabled selected value="">
                 Selecciona una categoría...
               </option>
-              {Categories.map((category, key) => (
-                <option key={key} value={category}>
-                  {category}
+              {Categorias.map((Categoria, key) => (
+                <option key={key} value={Categoria}>
+                  {Categoria}
                 </option>
               ))}
             </select>
@@ -158,13 +199,23 @@ const Catalogo = (props) => {
             >
               Tipo de clase
             </label>
-            <input
-              type="text"
-              name="type"
-              id="type"
-              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Música"
-            ></input>
+            <select
+              id="clases"
+              value={selectedClases}
+              onChange={(e) => {
+                setSelectedClases(e.target.value);
+              }}
+              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option disabled selected value="">
+                Selecciona un tipo de clase...
+              </option>
+              {Clases.map((clase, key) => (
+                <option key={key} value={clase}>
+                  {clase}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="flex-1">
             <label
@@ -173,13 +224,23 @@ const Catalogo = (props) => {
             >
               Frecuencia
             </label>
-            <input
-              type="text"
-              name="frequency"
-              id="frequency"
-              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Frecuencia"
-            ></input>
+            <select
+              id="Frecuencia"
+              value={selectedFrencuencia}
+              onChange={(e) => {
+                setSelectedFrecuencia(e.target.value);
+              }}
+              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option disabled selected value="">
+                Selecciona una frecuencia...
+              </option>
+              {Frencuencias.map((frecuencia, key) => (
+                <option key={key} value={frecuencia}>
+                  {frecuencia}
+                </option>
+              ))}
+            </select>
           </div>
           <fieldset className="flex-1">
             <label
@@ -189,113 +250,7 @@ const Catalogo = (props) => {
               Calificación
             </label>
             <div className="flex justify-between">
-              <ul
-                className="my-1 flex list-none gap-1 p-0"
-                data-te-rating-init
-                data-te-readonly="true"
-                data-te-value="3"
-              >
-                <li>
-                  <span
-                    className="text-primary [&>svg]:h-5 [&>svg]:w-5"
-                    data-te-rating-icon-ref
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
-                      />
-                    </svg>
-                  </span>
-                </li>
-                <li>
-                  <span
-                    className="text-primary [&>svg]:h-5 [&>svg]:w-5"
-                    data-te-rating-icon-ref
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
-                      />
-                    </svg>
-                  </span>
-                </li>
-                <li>
-                  <span
-                    className="text-primary [&>svg]:h-5 [&>svg]:w-5"
-                    data-te-rating-icon-ref
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
-                      />
-                    </svg>
-                  </span>
-                </li>
-                <li>
-                  <span
-                    className="text-primary [&>svg]:h-5 [&>svg]:w-5"
-                    data-te-rating-icon-ref
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
-                      />
-                    </svg>
-                  </span>
-                </li>
-                <li>
-                  <span
-                    className="text-primary [&>svg]:h-5 [&>svg]:w-5"
-                    data-te-rating-icon-ref
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
-                      />
-                    </svg>
-                  </span>
-                </li>
-              </ul>
+            <StarsRating onRatingChange={handleRatingChange} reset={calificacionFilter === null} />
               <button onClick={handleReset} className="py-2 px-2.5 bg-sandy-brown-500 text-white rounded-lg hover:bg-sandy-brown-600 duration-500" type="button">
                 <FontAwesomeIcon icon={faFilterCircleXmark} />
               </button>
