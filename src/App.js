@@ -13,6 +13,7 @@ import ScrollToTop from "./ScrollToTop";
 import Navbar from './pages/Navbar';
 import RecuperarPassword from './pages/RecuperarPassword';
 import { AuthProvider, useAuth } from './components/AutenticacionContext';
+import Perfil from './pages/Perfil';
 
 const ProtectedRoute = ({ element, ...props }) => {
   const { currentUser } = useAuth();
@@ -40,6 +41,7 @@ function App() {
           <Route exact path="/Catalogo/:id" element={<CatalogoDetalle/>}/>
           <Route exact path="/PreguntasFrecuentes" element={<PreguntasFrecuentes/>}/>
           <Route path="/Admin" element={<ProtectedRoute element={<Admin />} />} />
+          <Route path="/Perfil" element={<ProtectedRoute element={<Perfil />} />} />
         </Routes>
         <Footer />
       </AuthProvider>
