@@ -1,121 +1,223 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faX } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPenToSquare,
+  faXmark,
+  faCheck,
+} from "@fortawesome/free-solid-svg-icons";
 
-import DialogCrearClase from './DialogoCrearClase';
+import DialogCrearClase from "./DialogoCrearClase";
+import StarsRating from "../components/StarsRating";
 
 const Admin = () => {
   return (
     <div className=" px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
-      <div class="relative overflow-x-auto rounded-md">
-        <h2 className='text-2xl pb-5 font-semibold'>Mis clases</h2>
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 rounded-lg">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+
+
+      <div className="relative overflow-x-auto">
+        <h2 className="text-2xl pb-5 font-semibold">Mis clases</h2>
+        <table className="bg-white text-left rounded-md w-full">
+          <thead>
             <tr>
-              <th scope="col" class="px-6 py-3">
-                Titulo
+              <th className="w-5/12 py-2">
+                <p className="text-semibold opacity-70 text-sm font-semibold pl-2">
+                  Titulo
+                </p>
               </th>
-              <th scope="col" class="px-6 py-3">
-                Cantidad de alumnos
+              <th className="w-4/12">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Personas aceptadas
+                </p>
               </th>
-              <th scope="col" class="px-6 py-3">
-                Días
+              <th className="w-2/12">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Precio
+                </p>
               </th>
-              <th scope="col" class="px-2 py-3 w-[10px]">
-              </th>
-              <th scope="col" class="px-2 py-3 w-[10px]">
+              <th className="w-1/12 pl-5">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Acciones
+                </p>
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Clase de piano
-              </th>
-              <td class="px-6 py-4">2</td>
-              <td class="px-6 py-4">Literatura</td>
-              <td class="px-6 py-4"><FontAwesomeIcon icon={faPenToSquare} /></td>
-              <td class="px-6 py-4"><FontAwesomeIcon icon={faX} /></td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Clase de música
-              </th>
-              <td class="px-6 py-4">4</td>
-              <td class="px-6 py-4">Literatura</td>
-              <td class="px-6 py-4"><FontAwesomeIcon icon={faPenToSquare} /></td>
-              <td class="px-6 py-4"><FontAwesomeIcon icon={faX} /></td>
+            <tr className="border-b border-gray-200">
+              <td className="pl-2.5 py-5">
+                <p className="text-sm">Clases de piano</p>
+              </td>
+              <td>
+                <p className="text-sm">3</p>
+              </td>
+              <td>
+                <p className="text-sm">$30</p>
+              </td>
+              <td className="pl-2">
+                <button
+                  className="mx-2 bg-charcoal-400 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-charcoal-300 duration-100"
+                  type="button"
+                >
+                  <FontAwesomeIcon icon={faPenToSquare} size="lg" />
+                </button>
+                <button
+                  className="mx-2 bg-red-500 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-red-600 duration-100"
+                  type="button"
+                >
+                  <FontAwesomeIcon icon={faXmark} size="lg" />
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
         <div className="flex justify-end mt-5">
           <DialogCrearClase />
         </div>
-
-
-
       </div>
-      <div class="relative overflow-x-auto rounded-md">
-        <h2 className='text-2xl pb-5 font-semibold'>Solicitudes de usuario</h2>
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 rounded-lg">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+
+      <div className="mb-6 overflow-x-auto">
+        <h2 className="text-2xl pb-5 font-semibold">Solicitudes de Usuarios</h2>
+        <table className="bg-white text-left rounded-md  w-full">
+          <thead>
             <tr>
-              <th scope="col" class="px-6 py-3">
-                Nombre
+              <th className="w-5/12 py-2">
+                <p className="text-semibold opacity-70 text-sm font-semibold pl-2">
+                  Nombre
+                </p>
               </th>
-              <th scope="col" class="px-6 py-3">
-                Clase solicitada
+              <th className="w-4/12">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Clase Solicitada
+                </p>
               </th>
-              <th scope="col" class="px-6 py-3">
-                Contacto
+              <th className="w-2/12">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Contacto
+                </p>
               </th>
-              <th scope="col" class="px-2 py-3 w-[10px]">
-              </th>
-              <th scope="col" class="px-2 py-3 w-[10px]">
+              <th className="w-1/12">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Acciones
+                </p>
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Lucas Carino
-              </th>
-              <td class="px-6 py-4">Clase de piano</td>
-              <td class="px-6 py-4">11 1234 5678</td>
-              <td class="px-6 py-4"><button className='py-1 px-2 bg-charcoal-600 hover:bg-charcoal-300 text-white rounded-md duration-200 ease-in-out'>Aprobar</button></td>
-              <td class="px-6 py-4"><button className='py-1 px-2 bg-red-500 hover:bg-red-300 text-white rounded-md duration-200 ease-in-out'>Rechazar</button></td>
+            <tr className="border-b border-gray-200">
+              <td className="pl-2.5">
+                <p className="text-sm">Lucas Carino</p>
+              </td>
+              <td className="">
+                <p className="text-sm py-3">Clase de piano</p>
+              </td>
+              <td className=" text-sm">11 1234 5678</td>
+              <td className="">
+                <select className="border rounded-md px-2 py-1 text-sm">
+                  <option value="aceptar">Aceptar</option>
+                  <option value="finalizar">Finalizar</option>
+                  <option value="cancelar">Cancelar</option>
+                </select>
+              </td>
             </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                María Fernanda Bohorquez
+            <tr className="border-b border-gray-200"></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="relative overflow-x-auto">
+        <h2 className="text-2xl pb-5 font-semibold">
+          Solicitudes de comentarios
+        </h2>
+        <table className="bg-white text-left rounded-md">
+          <thead>
+            <tr>
+              <th className="w-1/12 text-center py-2">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Calificación
+                </p>
               </th>
-              <td class="px-6 py-4">Clase de música</td>
-              <td class="px-6 py-4">11 1234 5678</td>
-              <td class="px-6 py-4"><button className='py-1 px-2 bg-charcoal-600 hover:bg-charcoal-300 text-white rounded-md duration-200 ease-in-out'>Aprobar</button></td>
-              <td class="px-6 py-4"><button className='py-1 px-2 bg-red-500 hover:bg-red-300 text-white rounded-md duration-200 ease-in-out'>Rechazar</button></td>
+              <th className="w-10/12 p-2">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Comentario
+                </p>
+              </th>
+              <th className="w-1/12 pl-5">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Acciones
+                </p>
+              </th>
             </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Juan Lopez
-              </th>
-              <td class="px-6 py-4">Clase de música</td>
-              <td class="px-6 py-4">11 1234 5678</td>
-              <td class="px-6 py-4"><button className='py-1 px-2 bg-charcoal-600 hover:bg-charcoal-300 text-white rounded-md duration-200 ease-in-out'>Aprobar</button></td>
-              <td class="px-6 py-4"><button className='py-1 px-2 bg-red-500 hover:bg-red-300 text-white rounded-md duration-200 ease-in-out'>Rechazar</button></td>
+          </thead>
+          <tbody>
+            <tr className="border-b border-gray-200">
+              <td className="pl-2.5">
+                <StarsRating
+                  initialValue={4}
+                  editable={false}
+                  starSize={"sm"}
+                  starMargin="mx-0.5"
+                />
+              </td>
+              <td className="">
+                <p className="text-xs px-2 py-3">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </p>
+              </td>
+              <td className="pl-2">
+                <button
+                  className="mx-2 bg-green-500 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-green-600 duration-100"
+                  type="button"
+                >
+                  <FontAwesomeIcon icon={faCheck} size="lg" />
+                </button>
+                <button
+                  className="mx-2 bg-red-500 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-red-600 duration-100"
+                  type="button"
+                >
+                  <FontAwesomeIcon icon={faXmark} size="lg" />
+                </button>
+              </td>
+            </tr>
+            <tr className="border-b border-gray-200">
+              <td className="pl-2.5">
+                <StarsRating
+                  initialValue={4}
+                  editable={false}
+                  starSize={"sm"}
+                  starMargin="mx-0.5"
+                />
+              </td>
+              <td className="">
+                <p className="text-xs px-2 py-3">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </p>
+              </td>
+              <td className="pl-2">
+                <button
+                  className="mx-2 bg-green-500 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-green-600 duration-100"
+                  type="button"
+                >
+                  <FontAwesomeIcon icon={faCheck} size="lg" />
+                </button>
+                <button
+                  className="mx-2 bg-red-500 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-red-600 duration-100"
+                  type="button"
+                >
+                  <FontAwesomeIcon icon={faXmark} size="lg" />
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>

@@ -1,10 +1,16 @@
-// En el componente StarsRating.js
 import { useState, useEffect } from "react";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const StarsRating = ({ onRatingChange, reset }) => {
-  const [rating, setRating] = useState(null);
+const StarsRating = ({
+  onRatingChange,
+  reset,
+  initialValue,
+  editable = true,
+  starSize = "lg",
+  starMargin = "mx-1",
+}) => {
+  const [rating, setRating] = useState(initialValue);
   const [hover, setHover] = useState(null);
 
   useEffect(() => {
@@ -20,8 +26,10 @@ const StarsRating = ({ onRatingChange, reset }) => {
     }
   }, [reset]);
 
-  const handleRatingClick = (currentRating) => {
-    setRating(currentRating);
+  const handleRatingChange = (currentRating) => {
+    if (editable) {
+      setRating(currentRating);
+    }
   };
 
   return (
@@ -35,14 +43,17 @@ const StarsRating = ({ onRatingChange, reset }) => {
               name="rating"
               className="hidden"
               value={currentRating}
-              onClick={() => handleRatingClick(currentRating)}
+              onChange={() => handleRatingChange(currentRating)}
             />
             <FontAwesomeIcon
               icon={faStar}
-              size="lg"
-              className="mx-1"
+              size={starSize}
+              className={starMargin}
               color={
-                currentRating <= (hover || rating) ? "#ffc107" : "#a4e5e9"
+                (editable && currentRating <= (hover || rating)) ||
+                (!editable && currentRating <= initialValue)
+                  ? "#ffc107"
+                  : "#a4e5e9"
               }
               onMouseEnter={() => setHover(currentRating)}
               onMouseLeave={() => setHover(null)}

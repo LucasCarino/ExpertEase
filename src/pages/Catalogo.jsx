@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect, useCallback } from "react";
 import Servicios from "../components/data/Servicios.json";
 import { Rating, initTE } from "tw-elements";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   faUserTie,
   faDollarSign,
@@ -33,11 +33,21 @@ const Catalogo = (props) => {
     Servicios.servicios.map((servicio) => servicio.frecuencia),
   );
 
-  
   const Categorias = [...allCategorias];
   const Clases = [...allClases];
   const Frencuencias = [...allFrecuencias];
   const [calificacionFilter, setCalificacionFilter] = useState(null);
+
+  debugger;
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const searchValue = params.get('search') || '';
+    setBusqueda(searchValue);
+  }, [location.search]);
+
   
   const [servicios, setServicios] = useState([]);
   const [busqueda, setBusqueda] = useState("");
@@ -252,7 +262,7 @@ const Catalogo = (props) => {
               Calificación
             </label>
             <div className="flex justify-between">
-            <StarsRating onRatingChange={handleRatingChange} reset={calificacionFilter === null} />
+            <StarsRating onRatingChange={handleRatingChange} reset={calificacionFilter === null} editable={true} />
               <button onClick={handleReset} className="py-2 px-2.5 bg-sandy-brown-500 text-white rounded-lg hover:bg-sandy-brown-600 duration-500" type="button">
                 <FontAwesomeIcon icon={faFilterCircleXmark} />
               </button>

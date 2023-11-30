@@ -141,7 +141,7 @@ function CatalogoServicio() {
                                   for="degrees"
                                   className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                  Título
+                                  Experiencia
                                 </label>
                                 <p className="pt-2 pb-4 px-2">
                                   {servicio.experiencia}
@@ -149,58 +149,12 @@ function CatalogoServicio() {
                               </div>
                               <div>
                                 <label
-                                  for="reputation"
+                                  for="degrees"
                                   className="block mb-2 text-sm font-medium text-gray-900"
                                 >
-                                  Reputación
+                                  Titulos
                                 </label>
-                                <div class="flex items-center space-x-1 pl-2 mb-4 pt-2">
-                                  <svg
-                                    class="w-4 h-4 text-yellow-300"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 22 20"
-                                  >
-                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                  </svg>
-                                  <svg
-                                    class="w-4 h-4 text-yellow-300"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 22 20"
-                                  >
-                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                  </svg>
-                                  <svg
-                                    class="w-4 h-4 text-yellow-300"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 22 20"
-                                  >
-                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                  </svg>
-                                  <svg
-                                    class="w-4 h-4 text-yellow-300"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 22 20"
-                                  >
-                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                  </svg>
-                                  <svg
-                                    class="w-4 h-4 text-gray-300 dark:text-gray-500"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 22 20"
-                                  >
-                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                  </svg>
-                                </div>
+                                <p className="pt-2 pb-4 px-2">- Falta -</p>
                               </div>
                               <div className="border-t border-gray-200 pt-4">
                                 <label
@@ -379,48 +333,47 @@ function CatalogoServicio() {
                         {servicio.descripcion}
                       </p>
                     </div>
-                    <p className="inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400 ">
-                      <span>
-                        {" "}
-                        <FontAwesomeIcon
-                          className="ml-0.5 mr-0.5"
-                          size="md"
-                          icon={faDollarSign}
-                        />
-                        {servicio.precio}
-                      </span>
-                    </p>
                     {servicio.tipo === 2 && (
                       <span className="text-base font-normal text-gray-500 line-through dark:text-gray-400">
                         $1500.00
                       </span>
                     )}
                   </div>
-                  <div className="pb-0 md:pb-6 mb-8 border-none md:border-b border-gray-300 dark:border-gray-700 ">
+                  <div className="pb-0 mb-2 border-b border-gray-300 dark:border-gray-700 ">
                     <h2 className="mb-2 text-xl font-bold dark:text-gray-400">
                       Duración
                     </h2>
                     <p className="max-w-md mb-4 md:mb-8 text-gray-700 dark:text-gray-400">
-                      <span>{servicio.duracion}</span>
+                      <span>
+                        {servicio.duracion}
+                      </span>
                     </p>
-                    <div className="grid grid-cols-5 md:flex md:flex-wrap -mb-2 gap-1">
-                      {servicio.frecuencias.map((frecuencia, index) => (
-                        <button
-                          type="button"
-                          disabled={!frecuencia.disponible}
-                          className={`py-1 mb-2 mr-0 md:mr-1 border w-auto md:w-11  rounded  text-white ${
-                            frecuencia.disponible
-                              ? "bg-slate-600 hover:bg-charcoal-300 ease-in-out duration-150"
-                              : "bg-gray-300"
-                          }`}
-                        >
-                          {frecuencia.dia}
-                        </button>
-                      ))}
-                    </div>
                   </div>
-                  <div className="flex flex-nowrap items-center ">
-                    <div className="mb-4 mr-2 lg:mb-0 w-full md:w-auto">
+                  <div className="pb-0 mb-2 pt-2 border-b border-gray-300 dark:border-gray-700 ">
+                    <h2 className="mb-2 text-xl font-bold dark:text-gray-400">
+                      Frecuencia
+                    </h2>
+                    <p className="max-w-md mb-4 md:mb-8 text-gray-700 dark:text-gray-400">
+                      <span>
+                        {servicio.frecuencia}
+                      </span>
+                    </p>
+                  </div>
+                  <div className="flex flex-nowrap items-center pt-2">
+                    <div className="mb-4 mr-2 lg:mb-0 w-full md:w-auto lg:flex" >
+                      <div className="mt-1 mr-2">
+                        <p className="text-2xl font-semibold text-gray-700">
+                          <span>
+                            {" "}
+                            <FontAwesomeIcon
+                              className="ml-0.5 mr-0.5"
+                              size="md"
+                              icon={faDollarSign}
+                            />
+                            {servicio.precio}
+                          </span>
+                        </p>
+                      </div>
                       <button
                         onClick={openContratarDialog}
                         className={`bg-sandy-brown-600 hover:bg-sandy-brown-700 w-full py-2 md:w-auto flex-grow md:text-xs text-md lg:text-sm text-white px-6 rounded duration-500`}
@@ -516,13 +469,6 @@ function CatalogoServicio() {
                           </div>
                         </div>
                       )}
-                    </div>
-                    <div className="mb-4 lg:mb-0">
-                      <button
-                        className={`bg-sandy-brown-600 hover:bg-sandy-brown-700 flex-grow text-xs lg:text-sm text-white md:py-2 py-3 px-3 rounded  duration-500`}
-                      >
-                        <FontAwesomeIcon icon={faHeart} size="md" />
-                      </button>
                     </div>
                   </div>
                 </div>
