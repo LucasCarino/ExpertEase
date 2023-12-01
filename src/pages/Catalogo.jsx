@@ -62,12 +62,10 @@ const Catalogo = (props) => {
   };
 
   const filteredServices = services.filter((servicio) => {
-    const tituloMatches = servicio.titulo
-      .toLowerCase()
+    const tituloMatches = servicio.titulo?.toLowerCase()
       .includes(busqueda.toLowerCase());
-    const nombreMatches = servicio.nombre
-      .toLowerCase()
-      .includes(busqueda.toLowerCase());
+    const nombreMatches = servicio.nombre?.toLowerCase()
+      .includes(busqueda?.toLowerCase());
     const categoriaMatches =
       selectedCategoria === "" || servicio.categoria === selectedCategoria;
     const claseMatches =
@@ -87,10 +85,10 @@ const Catalogo = (props) => {
     const filtered = services.filter((servicio) => {
       const tituloMatches = servicio.titulo
         .toLowerCase()
-        .includes(busqueda.toLowerCase());
+        .includes(busqueda?.toLowerCase());
       const nombreMatches = servicio.nombre
         .toLowerCase()
-        .includes(busqueda.toLowerCase());
+        .includes(busqueda?.toLowerCase());
       const categoriaMatches =
         selectedCategoria === "" || servicio.categoria === selectedCategoria;
       const claseMatches =

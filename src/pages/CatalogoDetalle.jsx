@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {
-  faDollarSign,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faDollarSign, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import StarsRating from "../components/StarsRating";
 import { getServices } from "../helpers/getServices";
+import ReviewForm from "../components/ReviewForm";
 
 function CatalogoServicio() {
-
   const [services, setServices] = useState([]);
 
   useEffect(() => {
@@ -44,11 +40,6 @@ function CatalogoServicio() {
     setIsContratarOpen(false);
     document.body.style.overflow = "unset";
   };
-
-  const onCommentConfirm = () => {
-    alert("Comentario guardado!")
-  }
-
 
   if (!servicio) {
     return (
@@ -94,244 +85,205 @@ function CatalogoServicio() {
                       {isOpen && (
                         <div className="fixed top-0 left-0 w-full h-full bg-[#00000080] flex justify-center items-center z-[100]">
                           <div className="bg-white px-6 mx-4 lg:mx-0 p-4 rounded h-[600px] shadow-md lg:w-5/12 overflow-y-auto">
-                            <form
-                              className="w-full"
-                              action="#"
-                              id="secondForm"
-                              method="post"
-                              onSubmit={(e) => {
-                                e.preventDefault();
-                              }}
-                            >
-                              <div className="relative">
-                                <h1 className="text-center text-lg font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5 border-b border-gray-200 pb-2">
-                                  Información del experto
-                                </h1>
-                                <button
-                                  className="hover:text-red-600 ease-in-out duration-200 absolute top-0 right-0"
-                                  onClick={closeDialog}
-                                >
-                                  <FontAwesomeIcon
-                                    className="ml-0.5 mr-0.5 mt-1"
-                                    size="xl"
-                                    icon={faXmark}
-                                  />
-                                </button>
-                              </div>
-                              <div>
-                                <label
-                                  for="name"
-                                  className="block mb-2 text-sm font-medium text-gray-900"
-                                >
-                                  Nombre
-                                </label>
-                                <p className="pt-2 pb-4 px-2">
-                                  {servicio.nombre}
-                                </p>
-                              </div>
-                              <div>
-                                <label
-                                  for="degrees"
-                                  className="block mb-2 text-sm font-medium text-gray-900"
-                                >
-                                  Experiencia
-                                </label>
-                                <p className="pt-2 pb-4 px-2">
-                                  {servicio.experiencia}
-                                </p>
-                              </div>
-                              <div>
-                                <label
-                                  for="degrees"
-                                  className="block mb-2 text-sm font-medium text-gray-900"
-                                >
-                                  Titulos
-                                </label>
-                                <p className="pt-2 pb-4 px-2">- Falta -</p>
-                              </div>
-                              <div className="border-t border-gray-200 pt-4">
-                                <label
-                                  for="comments"
-                                  className="block text-sm font-medium text-gray-900 mb-4"
-                                >
-                                  Opiniones (2)
-                                </label>
-                                <div className="mb-2">
-                                <div className="px-0">
-                                  <div className="flex justify-between">
-                                    <input
-                                      type="text"
-                                      name="price"
-                                      id="price"
-                                      className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2  mt-1 w-1/2"
-                                      placeholder="Nombre"
-                                    ></input>
-                                    <StarsRating
-                                        editable={true}
-                                        starSize={"md"}
-                                      />
+                            <div className="relative">
+                              <h1 className="text-center text-lg font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5 border-b border-gray-200 pb-2">
+                                Información del experto
+                              </h1>
+                              <button
+                                className="hover:text-red-600 ease-in-out duration-200 absolute top-0 right-0"
+                                onClick={closeDialog}
+                              >
+                                <FontAwesomeIcon
+                                  className="ml-0.5 mr-0.5 mt-1"
+                                  size="xl"
+                                  icon={faXmark}
+                                />
+                              </button>
+                            </div>
+                            <div>
+                              <label
+                                for="name"
+                                className="block mb-2 text-sm font-medium text-gray-900"
+                              >
+                                Nombre
+                              </label>
+                              <p className="pt-2 pb-4 px-2">
+                                {servicio.nombre}
+                              </p>
+                            </div>
+                            <div>
+                              <label
+                                for="degrees"
+                                className="block mb-2 text-sm font-medium text-gray-900"
+                              >
+                                Experiencia
+                              </label>
+                              <p className="pt-2 pb-4 px-2">
+                                {servicio.experiencia}
+                              </p>
+                            </div>
+                            <div>
+                              <label
+                                for="degrees"
+                                className="block mb-2 text-sm font-medium text-gray-900"
+                              >
+                                Titulos
+                              </label>
+                              <p className="pt-2 pb-4 px-2">- Falta -</p>
+                            </div>
+                            <div className="border-t border-gray-200 pt-4">
+                              <label
+                                for="comments"
+                                className="block text-sm font-medium text-gray-900 mb-4"
+                              >
+                                Opiniones (2)
+                              </label>
+                              <ReviewForm serviceId={servicio.serviceId} />
+                              <article class="py-4 border-gray-200 border-b text-base bg-white rounded-lg">
+                                <footer class="flex justify-between items-center mb-2">
+                                  <div class="flex items-center">
+                                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
+                                      Lucas Carino
+                                    </p>
+                                    <p class="text-sm text-gray-600">
+                                      <time
+                                        pubdate
+                                        datetime="2022-02-08"
+                                        title="February 8th, 2022"
+                                      >
+                                        Feb. 8, 2022
+                                      </time>
+                                    </p>
                                   </div>
-                                  <textarea
-                                    placeholder="Este experto me parece..."
-                                    className="w-full mb-2 bg-gray-100 text-sm rounded border border-gray-400 leading-normal resize-none h-20 py-2 px-3 font-base focus:outline-none focus:bg-white"
-                                  ></textarea>
-                                </div>
-                                  <div className="flex justify-end">
-                                    <button className="px-6 py-2 rounded  text-white text-sm bg-charcoal-500 hover:bg-charcoal-700 duration-200 ease-in-out"
-                                      onClick={onCommentConfirm}>
-                                      Comentar
-                                    </button>
+                                  <div class="flex items-center space-x-1 pl-2 mb-4 pt-2">
+                                    <svg
+                                      class="w-4 h-4 text-yellow-300"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="currentColor"
+                                      viewBox="0 0 22 20"
+                                    >
+                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
+                                    <svg
+                                      class="w-4 h-4 text-yellow-300"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="currentColor"
+                                      viewBox="0 0 22 20"
+                                    >
+                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
+                                    <svg
+                                      class="w-4 h-4 text-yellow-300"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="currentColor"
+                                      viewBox="0 0 22 20"
+                                    >
+                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
+                                    <svg
+                                      class="w-4 h-4 text-yellow-300"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="currentColor"
+                                      viewBox="0 0 22 20"
+                                    >
+                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
+                                    <svg
+                                      class="w-4 h-4 text-gray-300"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="currentColor"
+                                      viewBox="0 0 22 20"
+                                    >
+                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
                                   </div>
-                                </div>
+                                </footer>
+                                <p class="text-gray-500 ">
+                                  ¡El servicio de este experto fue excepcional!
+                                  Me ayudó a resolver un problema complejo en mi
+                                  negocio en tiempo récord. Su conocimiento y
+                                  experiencia son impresionantes.
+                                </p>
+                              </article>
 
-                                <article class="py-4 border-gray-200 border-b text-base bg-white rounded-lg">
-                                  <footer class="flex justify-between items-center mb-2">
-                                    <div class="flex items-center">
-                                      <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
-                                        Lucas Carino
-                                      </p>
-                                      <p class="text-sm text-gray-600">
-                                        <time
-                                          pubdate
-                                          datetime="2022-02-08"
-                                          title="February 8th, 2022"
-                                        >
-                                          Feb. 8, 2022
-                                        </time>
-                                      </p>
-                                    </div>
-                                    <div class="flex items-center space-x-1 pl-2 mb-4 pt-2">
-                                      <svg
-                                        class="w-4 h-4 text-yellow-300"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 22 20"
+                              <article class="py-4 text-base bg-white rounded-lg 0">
+                                <footer class="flex justify-between items-center mb-2">
+                                  <div class="flex items-center">
+                                    <p class="inline-flex items-center mr-3 text-sm text-gray-900  font-semibold">
+                                      Laura Perez
+                                    </p>
+                                    <p class="text-sm text-gray-600 ">
+                                      <time
+                                        pubdate
+                                        datetime="2022-02-08"
+                                        title="February 8th, 2022"
                                       >
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                      </svg>
-                                      <svg
-                                        class="w-4 h-4 text-yellow-300"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 22 20"
-                                      >
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                      </svg>
-                                      <svg
-                                        class="w-4 h-4 text-yellow-300"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 22 20"
-                                      >
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                      </svg>
-                                      <svg
-                                        class="w-4 h-4 text-yellow-300"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 22 20"
-                                      >
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                      </svg>
-                                      <svg
-                                        class="w-4 h-4 text-gray-300"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 22 20"
-                                      >
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                      </svg>
-                                    </div>
-                                  </footer>
-                                  <p class="text-gray-500 ">
-                                    ¡El servicio de este experto fue
-                                    excepcional! Me ayudó a resolver un problema
-                                    complejo en mi negocio en tiempo récord. Su
-                                    conocimiento y experiencia son
-                                    impresionantes.
-                                  </p>
-                                </article>
-
-                                <article class="py-4 text-base bg-white rounded-lg 0">
-                                  <footer class="flex justify-between items-center mb-2">
-                                    <div class="flex items-center">
-                                      <p class="inline-flex items-center mr-3 text-sm text-gray-900  font-semibold">
-                                        Laura Perez
-                                      </p>
-                                      <p class="text-sm text-gray-600 ">
-                                        <time
-                                          pubdate
-                                          datetime="2022-02-08"
-                                          title="February 8th, 2022"
-                                        >
-                                          Feb. 8, 2022
-                                        </time>
-                                      </p>
-                                    </div>
-                                    <div class="flex items-center space-x-1 pl-2 mb-4 pt-2">
-                                      <svg
-                                        class="w-4 h-4 text-yellow-300"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 22 20"
-                                      >
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                      </svg>
-                                      <svg
-                                        class="w-4 h-4 text-yellow-300"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 22 20"
-                                      >
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                      </svg>
-                                      <svg
-                                        class="w-4 h-4 text-yellow-300"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 22 20"
-                                      >
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                      </svg>
-                                      <svg
-                                        class="w-4 h-4 text-yellow-300"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 22 20"
-                                      >
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                      </svg>
-                                      <svg
-                                        class="w-4 h-4 text-yellow-300"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 22 20"
-                                      >
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                      </svg>
-                                    </div>
-                                  </footer>
-                                  <p class="text-gray-500">
-                                    El experto no solo tiene un profundo
-                                    conocimiento en su campo, sino que también
-                                    sabe cómo comunicar y explicar las
-                                    soluciones de manera clara y comprensible.
-                                    ¡Una experiencia de servicio de alta
-                                    calidad!
-                                  </p>
-                                </article>
-                              </div>
-                            </form>
+                                        Feb. 8, 2022
+                                      </time>
+                                    </p>
+                                  </div>
+                                  <div class="flex items-center space-x-1 pl-2 mb-4 pt-2">
+                                    <svg
+                                      class="w-4 h-4 text-yellow-300"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="currentColor"
+                                      viewBox="0 0 22 20"
+                                    >
+                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
+                                    <svg
+                                      class="w-4 h-4 text-yellow-300"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="currentColor"
+                                      viewBox="0 0 22 20"
+                                    >
+                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
+                                    <svg
+                                      class="w-4 h-4 text-yellow-300"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="currentColor"
+                                      viewBox="0 0 22 20"
+                                    >
+                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
+                                    <svg
+                                      class="w-4 h-4 text-yellow-300"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="currentColor"
+                                      viewBox="0 0 22 20"
+                                    >
+                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
+                                    <svg
+                                      class="w-4 h-4 text-yellow-300"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="currentColor"
+                                      viewBox="0 0 22 20"
+                                    >
+                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
+                                  </div>
+                                </footer>
+                                <p class="text-gray-500">
+                                  El experto no solo tiene un profundo
+                                  conocimiento en su campo, sino que también
+                                  sabe cómo comunicar y explicar las soluciones
+                                  de manera clara y comprensible. ¡Una
+                                  experiencia de servicio de alta calidad!
+                                </p>
+                              </article>
+                            </div>
                           </div>
                         </div>
                       )}
@@ -342,20 +294,15 @@ function CatalogoServicio() {
                         {servicio.descripcion}
                       </p>
                     </div>
-
                   </div>
                   <div className="pb-0 mb-2 border-b border-gray-300  ">
-                    <h2 className="mb-2 text-xl font-bold">
-                      Duración
-                    </h2>
-                    <p className="max-w-md mb-4 md:mb-8 text-gray-700" >
+                    <h2 className="mb-2 text-xl font-bold">Duración</h2>
+                    <p className="max-w-md mb-4 md:mb-8 text-gray-700">
                       <span>{servicio.duracion}</span>
                     </p>
                   </div>
                   <div className="pb-0 mb-2 pt-2 border-b border-gray-300 ">
-                    <h2 className="mb-2 text-xl font-bold ">
-                      Frecuencia
-                    </h2>
+                    <h2 className="mb-2 text-xl font-bold ">Frecuencia</h2>
                     <p className="max-w-md mb-4 md:mb-8 text-gray-700 ">
                       <span>{servicio.frecuencia}</span>
                     </p>
