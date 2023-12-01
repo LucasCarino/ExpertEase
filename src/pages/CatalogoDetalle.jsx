@@ -5,16 +5,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServices } from "../helpers/getServices";
 import ReviewForm from "../components/ReviewForm";
 import { HiringForm } from "../components/HiringForm";
+import { getReviews } from "../helpers/getReviews";
+import StarsRating from "../components/StarsRating";
 
 function CatalogoServicio() {
   const [services, setServices] = useState([]);
+  const [reviewsData, setReviewsData] = useState([]);
 
   useEffect(() => {
     (async () => {
       const services = await getServices();
       if (services) setServices(services);
-      debugger;
     })();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const reviewsData = await getReviews(
+        localStorage.getItem("usuarioCorreo")
+      );
+      if (reviewsData) {
+        setReviewsData(reviewsData);
+      }
+      debugger;
+    };
+  
+    fetchData();
   }, []);
 
   const { id } = useParams();
@@ -50,6 +66,8 @@ function CatalogoServicio() {
       </div>
     );
   }
+
+
 
   return (
     <div className="px-4 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
@@ -138,153 +156,35 @@ function CatalogoServicio() {
                                 for="comments"
                                 className="block text-sm font-medium text-gray-900 mb-4"
                               >
-                                Opiniones (2)
+                                Opiniones ({reviewsData.length})
                               </label>
                               <ReviewForm serviceId={servicio.serviceId} />
-                              <article class="py-4 border-gray-200 border-b text-base bg-white rounded-lg">
-                                <footer class="flex justify-between items-center mb-2">
-                                  <div class="flex items-center">
-                                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
-                                      Lucas Carino
-                                    </p>
-                                    <p class="text-sm text-gray-600">
-                                      <time
-                                        pubdate
-                                        datetime="2022-02-08"
-                                        title="February 8th, 2022"
-                                      >
-                                        Feb. 8, 2022
-                                      </time>
-                                    </p>
-                                  </div>
-                                  <div class="flex items-center space-x-1 pl-2 mb-4 pt-2">
-                                    <svg
-                                      class="w-4 h-4 text-yellow-300"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="currentColor"
-                                      viewBox="0 0 22 20"
-                                    >
-                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                    </svg>
-                                    <svg
-                                      class="w-4 h-4 text-yellow-300"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="currentColor"
-                                      viewBox="0 0 22 20"
-                                    >
-                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                    </svg>
-                                    <svg
-                                      class="w-4 h-4 text-yellow-300"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="currentColor"
-                                      viewBox="0 0 22 20"
-                                    >
-                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                    </svg>
-                                    <svg
-                                      class="w-4 h-4 text-yellow-300"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="currentColor"
-                                      viewBox="0 0 22 20"
-                                    >
-                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                    </svg>
-                                    <svg
-                                      class="w-4 h-4 text-gray-300"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="currentColor"
-                                      viewBox="0 0 22 20"
-                                    >
-                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                    </svg>
-                                  </div>
-                                </footer>
-                                <p class="text-gray-500 ">
-                                  ¡El servicio de este experto fue excepcional!
-                                  Me ayudó a resolver un problema complejo en mi
-                                  negocio en tiempo récord. Su conocimiento y
-                                  experiencia son impresionantes.
-                                </p>
-                              </article>
-
-                              <article class="py-4 text-base bg-white rounded-lg 0">
-                                <footer class="flex justify-between items-center mb-2">
-                                  <div class="flex items-center">
-                                    <p class="inline-flex items-center mr-3 text-sm text-gray-900  font-semibold">
-                                      Laura Perez
-                                    </p>
-                                    <p class="text-sm text-gray-600 ">
-                                      <time
-                                        pubdate
-                                        datetime="2022-02-08"
-                                        title="February 8th, 2022"
-                                      >
-                                        Feb. 8, 2022
-                                      </time>
-                                    </p>
-                                  </div>
-                                  <div class="flex items-center space-x-1 pl-2 mb-4 pt-2">
-                                    <svg
-                                      class="w-4 h-4 text-yellow-300"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="currentColor"
-                                      viewBox="0 0 22 20"
-                                    >
-                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                    </svg>
-                                    <svg
-                                      class="w-4 h-4 text-yellow-300"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="currentColor"
-                                      viewBox="0 0 22 20"
-                                    >
-                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                    </svg>
-                                    <svg
-                                      class="w-4 h-4 text-yellow-300"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="currentColor"
-                                      viewBox="0 0 22 20"
-                                    >
-                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                    </svg>
-                                    <svg
-                                      class="w-4 h-4 text-yellow-300"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="currentColor"
-                                      viewBox="0 0 22 20"
-                                    >
-                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                    </svg>
-                                    <svg
-                                      class="w-4 h-4 text-yellow-300"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="currentColor"
-                                      viewBox="0 0 22 20"
-                                    >
-                                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                    </svg>
-                                  </div>
-                                </footer>
-                                <p class="text-gray-500">
-                                  El experto no solo tiene un profundo
-                                  conocimiento en su campo, sino que también
-                                  sabe cómo comunicar y explicar las soluciones
-                                  de manera clara y comprensible. ¡Una
-                                  experiencia de servicio de alta calidad!
-                                </p>
-                              </article>
+                              {reviewsData.map((review, key) => (
+                                <article class="py-4 border-gray-200 border-b text-base bg-white rounded-lg">
+                                  <footer class="flex justify-between items-center mb-2">
+                                    <div class="flex items-center">
+                                      <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
+                                        {review.name}
+                                      </p>
+                                      <p class="text-sm text-gray-600">
+                                        <time
+                                          pubdate
+                                          datetime="2022-02-08"
+                                          title="February 8th, 2022"
+                                        >
+                                          {review.postedAt}
+                                        </time>
+                                      </p>
+                                    </div>
+                                    <div class="flex items-center space-x-1 pl-2 mb-4 pt-2">
+                                      <StarsRating editable={false} initialValue={review.rating}/> 
+                                    </div>
+                                  </footer>
+                                  <p class="text-gray-500 ">
+                                    {review.text}
+                                  </p>
+                                </article>
+                              ))}
                             </div>
                           </div>
                         </div>
