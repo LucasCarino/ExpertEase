@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { faDollarSign, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDollarSign,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import StarsRating from "../components/StarsRating";
 import { getServices } from "../helpers/getServices";
 
 function CatalogoServicio() {
+
   const [services, setServices] = useState([]);
 
   useEffect(() => {
@@ -14,12 +19,7 @@ function CatalogoServicio() {
     })();
   }, []);
 
-  useEffect(() => {
-    console.log(services, "servicess");
-  }, [services]);
-
   const { id } = useParams();
-
   const servicio = services[parseInt(id)];
 
   const [isOpen, setIsOpen] = useState(false);
@@ -45,26 +45,10 @@ function CatalogoServicio() {
     document.body.style.overflow = "unset";
   };
 
-  const renderTipoServicio = (item) => {
-    switch (item.tipo) {
-      case 1:
-        return (
-          <div>
-            <p className="font-semibold text-sandy-brown-500">Nuevo!</p>
-          </div>
-        );
-      case 2:
-        return (
-          <div>
-            <p className="font-semibold text-jungle-green-500">
-              Descuento exclusivo!
-            </p>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
+  const onCommentConfirm = () => {
+    alert("Comentario guardado!")
+  }
+
 
   if (!servicio) {
     return (
@@ -94,7 +78,6 @@ function CatalogoServicio() {
               <div className="w-full px-4 md:w-1/2 ">
                 <div className="lg:pl-5">
                   <div className="pb-6 mb-4 border-b border-gray-200 dark:border-gray-700">
-                    {renderTipoServicio(servicio)}
                     <h2 className="max-w-xl mt-2 text-xl font-bold dark:text-gray-300 md:text-4xl">
                       {servicio.titulo}
                     </h2>
@@ -174,15 +157,31 @@ function CatalogoServicio() {
                                   Opiniones (2)
                                 </label>
                                 <div className="mb-2">
+                                <div className="px-0">
+                                  <div className="flex justify-between">
+                                    <input
+                                      type="text"
+                                      name="price"
+                                      id="price"
+                                      className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2  mt-1 w-1/2"
+                                      placeholder="Nombre"
+                                    ></input>
+                                    <StarsRating
+                                        editable={true}
+                                        starSize={"md"}
+                                      />
+                                  </div>
                                   <textarea
                                     placeholder="Este experto me parece..."
-                                    className="w-full bg-gray-100 text-sm rounded border border-gray-400 leading-normal resize-none h-20 py-2 px-3 font-base focus:outline-none focus:bg-white"
+                                    className="w-full mb-2 bg-gray-100 text-sm rounded border border-gray-400 leading-normal resize-none h-20 py-2 px-3 font-base focus:outline-none focus:bg-white"
                                   ></textarea>
                                 </div>
-                                <div className="flex px-0">
-                                  <button className="px-6 py-2 rounded  text-white text-sm bg-charcoal-500 hover:bg-charcoal-700 duration-200 ease-in-out">
-                                    Comentar
-                                  </button>
+                                  <div className="flex justify-end">
+                                    <button className="px-6 py-2 rounded  text-white text-sm bg-charcoal-500 hover:bg-charcoal-700 duration-200 ease-in-out"
+                                      onClick={onCommentConfirm}>
+                                      Comentar
+                                    </button>
+                                  </div>
                                 </div>
 
                                 <article class="py-4 border-gray-200 border-b text-base bg-white rounded-lg dark:bg-gray-900">
@@ -343,11 +342,7 @@ function CatalogoServicio() {
                         {servicio.descripcion}
                       </p>
                     </div>
-                    {servicio.tipo === 2 && (
-                      <span className="text-base font-normal text-gray-500 line-through dark:text-gray-400">
-                        $1500.00
-                      </span>
-                    )}
+
                   </div>
                   <div className="pb-0 mb-2 border-b border-gray-300 dark:border-gray-700 ">
                     <h2 className="mb-2 text-xl font-bold dark:text-gray-400">

@@ -1,9 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPenToSquare,
-  faXmark,
-  faCheck,
-} from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faCheck } from "@fortawesome/free-solid-svg-icons";
+import DialogEditarClase from "./DialogoEditarClase";
 
 import DialogCrearClase from "./DialogoCrearClase";
 import StarsRating from "../components/StarsRating";
@@ -11,8 +8,6 @@ import StarsRating from "../components/StarsRating";
 const Admin = () => {
   return (
     <div className=" px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
-
-
       <div className="relative overflow-x-auto">
         <h2 className="text-2xl pb-5 font-semibold">Mis clases</h2>
         <table className="bg-white text-left rounded-md w-full">
@@ -52,18 +47,15 @@ const Admin = () => {
                 <p className="text-sm">$30</p>
               </td>
               <td className="pl-2">
+                <div className="flex justify-end mr-5">
+                  <DialogEditarClase />
                 <button
-                  className="mx-2 bg-charcoal-400 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-charcoal-300 duration-100"
+                  className="mx-2 bg-red-400 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-red-300 duration-100"
                   type="button"
-                >
-                  <FontAwesomeIcon icon={faPenToSquare} size="lg" />
-                </button>
-                <button
-                  className="mx-2 bg-red-500 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-red-600 duration-100"
-                  type="button"
-                >
+                  >
                   <FontAwesomeIcon icon={faXmark} size="lg" />
                 </button>
+                  </div>
               </td>
             </tr>
           </tbody>
