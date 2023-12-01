@@ -127,30 +127,6 @@ const Catalogo = (props) => {
     setCalificacionFilter(null);
   };
 
-  const renderTipoServicio = (servicio) => {
-    switch (servicio.tipo) {
-      case 0:
-        return <span></span>;
-      case 1:
-        return (
-          <span className="absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg bg-sandy-brown-500 px-3 py-2 text-sm font-medium text-white">
-            <div>
-              <h2>Nuevo!</h2>
-            </div>
-          </span>
-        );
-      case 2:
-        return (
-          <span className="absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg bg-jungle-green-500 px-3 py-2 text-sm font-medium text-white">
-            <div>
-              <h2>Descuento!</h2>
-            </div>
-          </span>
-        );
-      default:
-        return null;
-    }
-  };
 
   return (
     <div className=" px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
@@ -292,7 +268,6 @@ const Catalogo = (props) => {
                         className="object-cover h-full w-full"
                       />
                     </div>
-                    {renderTipoServicio(servicio)}
                   </div>
 
                   <div className="mt-4">

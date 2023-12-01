@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 // import DateRangePicker from "../components/DateRangePicker";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function DialogCrearClase(props) {
+function DialogEditarClase(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const openDialog = () => {
@@ -41,16 +43,17 @@ function DialogCrearClase(props) {
   ];
 
   const createService = () => {
-    alert("clase creada!")
+    alert("clase modificada!")
   }
 
   return (
     <div>
       <button
         onClick={openDialog}
-        className={`bg-charcoal-600 hover:bg-charcoal-700 w-full py-2 md:w-auto flex-grow md:text-xs text-md lg:text-sm text-white px-6 rounded duration-500`}
+        className="mx-2 bg-charcoal-400 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-charcoal-300 duration-100"
+        type="button"
       >
-        Crear Clase
+        <FontAwesomeIcon icon={faPencil} />
       </button>
       {isOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-[#00000080] flex justify-center items-center z-[100] overflow-y-auto">
@@ -65,7 +68,7 @@ function DialogCrearClase(props) {
               }}
             >
               <h1 className="text-center text-lg font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5">
-                Crea un nuevo servicio
+                Editar servicio
               </h1>
               <div>
                 <label
@@ -202,7 +205,6 @@ function DialogCrearClase(props) {
                     id="description"
                     className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta possimus exercitationem, eligendi qui reiciendis omnis cump"
-                    
                   ></textarea>
                 </div>
               </div>
@@ -211,7 +213,7 @@ function DialogCrearClase(props) {
               className="float-right hover:bg-charcoal-500 bg-charcoal-400 ease-in-out duration-200 p-1 px-2 rounded"
               onClick={createService}
             >
-              Crear
+              Guardar
             </button>
             <button
               className="float-right hover:text-gray-400 ease-in-out duration-200 py-1 px-2"
@@ -227,4 +229,4 @@ function DialogCrearClase(props) {
   );
 }
 
-export default DialogCrearClase;
+export default DialogEditarClase;

@@ -134,7 +134,7 @@ const Perfil = () => {
 
   return (
     <div className="px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row justify-between">
         <div className="flex">
           <div className="bg-white overflow-hidden shadow rounded-lg border w-full ">
             <div className="px-4 py-5 sm:px-6 flex">

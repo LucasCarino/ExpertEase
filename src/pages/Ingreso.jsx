@@ -76,7 +76,7 @@ const Ingreso = () => {
                   )}
                   <div className="flex items-start justify-between flex-col md:flex-row md:items-center">
                     <div className="flex items-start">
-                      <div className="flex items-center h-5 mb-2 md:mb-0">
+                      {/* <div className="flex items-center h-5 mb-2 md:mb-0">
                         <input
                           id="remember"
                           aria-describedby="remember"
@@ -92,7 +92,7 @@ const Ingreso = () => {
                         >
                           Recuérdame
                         </label>
-                      </div>
+                      </div> */}
                     </div>
                     <Link
                       to="/RecuperarPassword"

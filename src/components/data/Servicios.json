@@ -2,7 +2,6 @@
   "servicios": [
     {
       "id": 0,
-      "tipo": 1,
       "categoria": "Educación",
       "clase": "Individual",
       "titulo": "Profesor de Literatura",
@@ -19,7 +18,6 @@
     },
     {
       "id": 1,
-      "tipo": 0,
       "categoria": "Tutoría",
       "clase": "Grupal",
       "titulo": "Tutor de Baile",
@@ -36,7 +34,6 @@
     },
     {
       "id": 2,
-      "tipo": 1,
       "categoria": "Coaching",
       "clase": "Individual",
       "titulo": "Coach de Desarrollo Personal",
@@ -53,7 +50,6 @@
     },
     {
       "id": 3,
-      "tipo": 0,
       "categoria": "Hogar",
       "clase": "No corresponde",
       "titulo": "Servicios de Limpieza a Domicilio",
@@ -70,7 +66,6 @@
     },
     {
       "id": 4,
-      "tipo": 2,
       "categoria": "Deportes",
       "clase": "Individual",
       "titulo": "Entrenador de Ajedrez",
@@ -87,7 +82,6 @@
     },
     {
       "id": 5,
-      "tipo": 0,
       "categoria": "Mascotas",
       "clase": "No corresponde",
       "titulo": "Cuidado de Mascotas",
@@ -104,7 +98,6 @@
     },
     {
       "id": 6,
-      "tipo": 0,
       "categoria": "Música",
       "titulo": "Profesor de Canto",
       "duracion": "Indefinido",
@@ -121,7 +114,6 @@
     },
     {
       "id": 7,
-      "tipo": 1,
       "categoria": "Educación",
       "clase": "Individual",
       "titulo": "Profesor de Matemáticas",
@@ -138,7 +130,6 @@
     },
     {
       "id": 8,
-      "tipo": 1,
       "categoria": "Hogar",
       "clase": "No corresponde",
       "titulo": "Niñera a Domicilio",
@@ -155,7 +146,6 @@
     },
     {
       "id": 9,
-      "tipo": 2,
       "categoria": "Deportes",
       "clase": "Individual",
       "titulo": "Coach de Gimnasio Personal",
