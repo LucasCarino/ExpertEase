@@ -13,8 +13,8 @@ export const ReviewForm = ({ serviceId }) => {
       if (response) {
         alert('Comentario enviado! Para poder ver tu mensaje el creador del servicio debe aprobarlo primero.')
       }
-    e.target.reset()
     })();
+    e.target.reset()
   };
   return (
     <form

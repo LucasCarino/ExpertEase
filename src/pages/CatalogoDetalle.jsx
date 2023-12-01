@@ -4,6 +4,7 @@ import { faDollarSign, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServices } from "../helpers/getServices";
 import ReviewForm from "../components/ReviewForm";
+import { HiringForm } from "../components/HiringForm";
 
 function CatalogoServicio() {
   const [services, setServices] = useState([]);
@@ -331,89 +332,22 @@ function CatalogoServicio() {
                       {isContratarOpen && (
                         <div className="fixed top-0 left-0 w-full h-full bg-[#00000080] flex justify-center items-center z-[100]">
                           <div className="bg-white px-6 p-4 py-4 rounded  shadow-md lg:w-4/12">
-                            <form
-                              className="w-full"
-                              action="#"
-                              id="secondForm"
-                              method="post"
-                              onSubmit={(e) => {
-                                e.preventDefault();
-                              }}
-                            >
-                              <div className="relative">
-                                <h1 className="text-center text-lg font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5 border-b border-gray-200 pb-2">
-                                  Ingresa tus datos
-                                </h1>
-                                <button
-                                  className="hover:text-red-600 ease-in-out duration-200 absolute top-0 right-0"
-                                  onClick={closeContratarDialog}
-                                >
-                                  <FontAwesomeIcon
-                                    className="ml-0.5 mr-0.5 mt-1"
-                                    size="xl"
-                                    icon={faXmark}
-                                  />
-                                </button>
-                              </div>
-                              <div>
-                                <label
-                                  for="email"
-                                  className="block mb-2 text-sm font-medium text-gray-900"
-                                >
-                                  Teléfono
-                                </label>
-                                <input
-                                  type="tel"
-                                  name="phone"
-                                  id="phone"
-                                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                  placeholder="11 1234-5678"
-                                ></input>
-                              </div>
-                              <div>
-                                <label
-                                  for="email"
-                                  className="block mb-2 text-sm font-medium text-gray-900"
-                                >
-                                  Mail
-                                </label>
-                                <input
-                                  type="email"
-                                  name="email"
-                                  id="email"
-                                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                  placeholder="Juan@correo.com"
-                                ></input>
-                              </div>
-                              <div>
-                                <label
-                                  for="email"
-                                  className="block mb-2 text-sm font-medium text-gray-900"
-                                >
-                                  Horario para que te contacte el experto
-                                </label>
-                                <textarea
-                                  type="email"
-                                  name="email"
-                                  id="email"
-                                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                  placeholder="Me gustaría que me llames de lunes a viernes de 8 a 10 hs"
-                                ></textarea>
-                                <label
-                                  for="email"
-                                  className="block mb-2 text-sm font-medium text-gray-900"
-                                >
-                                  ¿Por qué te interesa este servicio?
-                                </label>
-                                <textarea
-                                  type="email"
-                                  name="email"
-                                  id="email"
-                                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                  placeholder="Me interesa porque..."
-                                ></textarea>
-                              </div>
-                            </form>
+                            <div className="relative">
+                              <h1 className="text-center text-lg font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-5 border-b border-gray-200 pb-2">
+                                Ingresa tus datos
+                              </h1>
+                              <button
+                                className="hover:text-red-600 ease-in-out duration-200 absolute top-0 right-0"
+                                onClick={closeContratarDialog}
+                              >
+                                <FontAwesomeIcon
+                                  className="ml-0.5 mr-0.5 mt-1"
+                                  size="xl"
+                                  icon={faXmark}
+                                />
+                              </button>
+                            </div>
+                            <HiringForm serviceId={servicio.serviceId} />
                           </div>
                         </div>
                       )}
