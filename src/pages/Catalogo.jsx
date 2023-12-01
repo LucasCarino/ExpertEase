@@ -31,8 +31,9 @@ const Catalogo = (props) => {
     "Idiomas",
     "Cocina",
     "Tecnología",
-    "Belleza",
     "Salud",
+    "Belleza",
+    "Hogar",
     "Otros",
   ];
 
