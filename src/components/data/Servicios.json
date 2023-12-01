@@ -1,16 +1,16 @@
 {
-  "servicios": [
+"servicios": [
     {
       "id": 0,
       "tipo": 1,
       "categoria": "Educación",
-      "clase": "Individual",
+      "clase": "Individual", 
       "titulo": "Profesor de Literatura",
       "imagen": "/assets/0.jpg",
       "ubicacion": "234 Calle de los Libros, Ciudad de la Literatura",
       "precio": "35",
-      "frecuencia": "Semanal",
-      "duracion": "4 meses",
+      "frecuencia": "Semanal", 
+      "duracion": "4 meses", 
       "descripcion": "Clases de literatura para explorar grandes obras literarias y mejorar tu comprensión lectora. Disfruta de la literatura de una manera única.",
       "promocion": "Paquete de 10 clases con un 15% de descuento.",
       "experiencia": "Licenciado en Literatura con más de 10 años de experiencia enseñando a estudiantes de todas las edades.",

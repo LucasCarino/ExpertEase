@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect, useCallback } from "react";
-import Servicios from "../components/data/Servicios.json";
 import { Rating, initTE } from "tw-elements";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -9,28 +8,31 @@ import {
   faFilterCircleXmark,
   faFilter,
   faStar,
-  faClock
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
 import StarsRating from "../components/StarsRating";
+import { getServices } from "../helpers/getServices";
 initTE({ Rating });
 
 const Catalogo = (props) => {
   const [open, setOpen] = useState(false);
+  const [services, setServices] = useState([]);
+  const [initialServices, setInitialServices] = useState();
 
   const handleClick = () => {
     open ? setOpen(false) : setOpen(true);
   };
 
   const allCategorias = new Set(
-    Servicios.servicios.map((servicio) => servicio.categoria),
+    services.map((servicio) => servicio.categoria)
   );
 
   const allClases = new Set(
-    Servicios.servicios.map((servicio) => servicio.clase),
+    services.map((servicio) => servicio.clase)
   );
 
   const allFrecuencias = new Set(
-    Servicios.servicios.map((servicio) => servicio.frecuencia),
+    services.map((servicio) => servicio.frecuencia)
   );
 
   const Categorias = [...allCategorias];
@@ -38,26 +40,18 @@ const Catalogo = (props) => {
   const Frencuencias = [...allFrecuencias];
   const [calificacionFilter, setCalificacionFilter] = useState(null);
 
-  debugger;
-
   const location = useLocation();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const searchValue = params.get('search') || '';
+    const searchValue = params.get("search") || "";
     setBusqueda(searchValue);
   }, [location.search]);
 
-  
-  const [servicios, setServicios] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [selectedCategoria, setSelectedCategoria] = useState("");
   const [selectedClases, setSelectedClases] = useState("");
   const [selectedFrencuencia, setSelectedFrecuencia] = useState("");
-
-  useEffect(() => {
-    setServicios(Servicios.servicios);
-  }, []);
 
   const handleSearchChange = (event) => {
     setBusqueda(event.target.value);
@@ -66,15 +60,12 @@ const Catalogo = (props) => {
   const handleRatingChange = (rating) => {
     setCalificacionFilter(rating);
   };
-  
 
-  const filteredServices = servicios.filter((servicio) => {
-    const tituloMatches = servicio.titulo
-      .toLowerCase()
+  const filteredServices = services.filter((servicio) => {
+    const tituloMatches = servicio.titulo?.toLowerCase()
       .includes(busqueda.toLowerCase());
-    const nombreMatches = servicio.nombre
-      .toLowerCase()
-      .includes(busqueda.toLowerCase());
+    const nombreMatches = servicio.nombre?.toLowerCase()
+      .includes(busqueda?.toLowerCase());
     const categoriaMatches =
       selectedCategoria === "" || servicio.categoria === selectedCategoria;
     const claseMatches =
@@ -82,27 +73,33 @@ const Catalogo = (props) => {
     const frecuenciaMatches =
       selectedFrencuencia === "" || servicio.frecuencia === selectedFrencuencia;
 
-    return (tituloMatches || nombreMatches) && categoriaMatches && claseMatches && frecuenciaMatches;
+    return (
+      (tituloMatches || nombreMatches) &&
+      categoriaMatches &&
+      claseMatches &&
+      frecuenciaMatches
+    );
   });
 
   const updateServicios = useCallback(() => {
-    const filtered = Servicios.servicios.filter((servicio) => {
+    const filtered = services.filter((servicio) => {
       const tituloMatches = servicio.titulo
         .toLowerCase()
-        .includes(busqueda.toLowerCase());
+        .includes(busqueda?.toLowerCase());
       const nombreMatches = servicio.nombre
         .toLowerCase()
-        .includes(busqueda.toLowerCase());
+        .includes(busqueda?.toLowerCase());
       const categoriaMatches =
         selectedCategoria === "" || servicio.categoria === selectedCategoria;
       const claseMatches =
         selectedClases === "" || servicio.clase === selectedClases;
       const frecuenciaMatches =
-        selectedFrencuencia === "" || servicio.frecuencia === selectedFrencuencia;
+        selectedFrencuencia === "" ||
+        servicio.frecuencia === selectedFrencuencia;
       const calificacionMatches =
         calificacionFilter === null ||
         servicio.calificacion >= calificacionFilter;
-  
+
       return (
         (tituloMatches || nombreMatches) &&
         categoriaMatches &&
@@ -112,12 +109,21 @@ const Catalogo = (props) => {
       );
     });
 
-    setServicios(filtered);
+    setServices(filtered);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [busqueda, selectedCategoria, selectedClases, selectedFrencuencia, calificacionFilter]);
 
   useEffect(() => {
     updateServicios();
   }, [updateServicios]);
+
+  useEffect(() => {
+    (async () => {
+      const services = await getServices();
+      if (!initialServices) setInitialServices(services)
+      if (services) setServices(services);
+    })();
+  }, [initialServices]);
 
   const handleReset = () => {
     setSelectedCategoria("");
@@ -125,6 +131,7 @@ const Catalogo = (props) => {
     setSelectedFrecuencia("");
     setBusqueda("");
     setCalificacionFilter(null);
+    setServices(initialServices)
   };
 
   const renderTipoServicio = (servicio) => {
@@ -192,7 +199,7 @@ const Catalogo = (props) => {
               onChange={(e) => {
                 setSelectedCategoria(e.target.value);
               }}
-              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
               <option disabled selected value="">
                 Selecciona una categoría...
@@ -217,7 +224,7 @@ const Catalogo = (props) => {
               onChange={(e) => {
                 setSelectedClases(e.target.value);
               }}
-              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
               <option disabled selected value="">
                 Selecciona un tipo de clase...
@@ -242,7 +249,7 @@ const Catalogo = (props) => {
               onChange={(e) => {
                 setSelectedFrecuencia(e.target.value);
               }}
-              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
               <option disabled selected value="">
                 Selecciona una frecuencia...
@@ -262,8 +269,16 @@ const Catalogo = (props) => {
               Calificación
             </label>
             <div className="flex justify-between">
-            <StarsRating onRatingChange={handleRatingChange} reset={calificacionFilter === null} editable={true} />
-              <button onClick={handleReset} className="py-2 px-2.5 bg-sandy-brown-500 text-white rounded-lg hover:bg-sandy-brown-600 duration-500" type="button">
+              <StarsRating
+                onRatingChange={handleRatingChange}
+                reset={calificacionFilter === null}
+                editable={true}
+              />
+              <button
+                onClick={handleReset}
+                className="py-2 px-2.5 bg-sandy-brown-500 text-white rounded-lg hover:bg-sandy-brown-600 duration-500"
+                type="button"
+              >
                 <FontAwesomeIcon icon={faFilterCircleXmark} />
               </button>
             </div>

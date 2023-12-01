@@ -82,7 +82,7 @@ const Registro = () => {
 
   return (
     <div className="px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] h-screen pt-16 flex flex-col items-center justify-center">
-      <div className="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
+      <div className="w-full rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
         <CardHeader
           floated={false}
           variant="gradient"
@@ -156,7 +156,7 @@ const Registro = () => {
                   id="name"
                   value={inputData.name}
                   onChange={handleInputChange}
-                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="Juan López"
                 />
               </div>
@@ -173,7 +173,7 @@ const Registro = () => {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="Juan@correo.com"
                 />
               </div>
@@ -191,7 +191,7 @@ const Registro = () => {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                 />
               </div>
               <div>
@@ -207,7 +207,7 @@ const Registro = () => {
                   id="phone"
                   value={inputData.phone}
                   onChange={handleInputChange}
-                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="11 1234-5678"
                 />
               </div>
@@ -255,7 +255,7 @@ const Registro = () => {
                       type="text"
                       name="deegre"
                       id="deegre"
-                      className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                       placeholder="Lic. en gestión de tecnología de la información"
                     ></input>
                   </div>
@@ -279,7 +279,7 @@ const Registro = () => {
                         <input
                           type="text"
                           id={`experience-${index}`}
-                          className="bg-gray-50 border mb-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-50 border mb-2 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                           placeholder="UADE 2023"
                           value={experiencia}
                           onChange={(e) => handleChange(index, e.target.value)}
@@ -370,7 +370,7 @@ const Registro = () => {
                   <p className="text-sm font-light text-red-500">{error}
                     <Link
                       to="/Ingreso"
-                      className="text-sm font-medium text-black hover:underline dark:text-primary-500"
+                      className="text-sm font-medium text-black hover:underline"
                     >
                       Iniciar sesión
                     </Link>
