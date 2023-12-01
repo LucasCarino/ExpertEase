@@ -1,11 +1,38 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import DialogEditarClase from "./DialogoEditarClase";
+import React, { useState, useEffect } from "react";
+
+import StarsRating from "../components/StarsRating";
+import {deleteService} from "../helpers/deleteService";
+
+import { getServicesByEmail } from "../helpers/getServicesByEmail";
 import { Comments } from "../components/Comments";
 
 import DialogCrearClase from "./DialogoCrearClase";
 
 const Admin = () => {
+  const [services, setServices] = useState([]);
+  const [initialServices, setInitialServices] = useState();
+
+  
+  useEffect(() => {
+    (async () => {
+      const services = await getServicesByEmail();
+      debugger;
+      if (!initialServices) setInitialServices(services);
+      if (services) setServices(services);
+    })();
+  }, [initialServices]);
+
+  const handleDelete = (id) => {
+    try {
+      deleteService(id);
+    } catch (error) {
+      console.error("Error al manejar la eliminación:", error);
+    }
+  };
+
   return (
     <div className=" px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
       <div className="relative overflow-x-auto">
@@ -20,7 +47,7 @@ const Admin = () => {
               </th>
               <th className="w-4/12">
                 <p className="text-semibold opacity-70 text-sm font-semibold">
-                  Personas aceptadas
+                  Frecuencia
                 </p>
               </th>
               <th className="w-2/12">
@@ -36,28 +63,31 @@ const Admin = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-gray-200">
-              <td className="pl-2.5 py-5">
-                <p className="text-sm">Clases de piano</p>
-              </td>
-              <td>
-                <p className="text-sm">3</p>
-              </td>
-              <td>
-                <p className="text-sm">$30</p>
-              </td>
-              <td className="pl-2">
-                <div className="flex justify-end mr-5">
-                  <DialogEditarClase />
-                <button
-                  className="mx-2 bg-red-400 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-red-300 duration-100"
-                  type="button"
-                  >
-                  <FontAwesomeIcon icon={faXmark} size="lg" />
-                </button>
+            {services.map((service, key) => (
+              <tr className="border-b border-gray-200">
+                <td className="pl-2.5 py-5">
+                  <p className="text-sm">{service.titulo}</p>
+                </td>
+                <td>
+                  <p className="text-sm">{service.frecuencia}</p>
+                </td>
+                <td>
+                  <p className="text-sm">${service.precio}</p>
+                </td>
+                <td className="pl-2">
+                  <div className="flex justify-end mr-5">
+                    <DialogEditarClase initialData={service} />
+                    <button
+                      className="mx-2 bg-red-400 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-red-300 duration-100"
+                      onClick={() => handleDelete(service.id)}
+                      type="button"
+                    >
+                      <FontAwesomeIcon icon={faXmark} size="lg" />
+                    </button>
                   </div>
-              </td>
-            </tr>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <div className="flex justify-end mt-5">

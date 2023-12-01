@@ -1,9 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { updateService } from "../helpers/updateService";
 
-function DialogCrearClase(props) {
+function DialogEditarClase(props) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const [serviceData, setServiceData] = useState({
+    id: "",
+    titulo: "",
+    descripcion: "",
+    duracion: "",
+    frecuencia: "",
+    precio: "",
+    categoria: "",
+    tipoClase: "",
+    rating: "",
+    ubicacion: "",
+    promotion: "",
+    type: "",
+    imagen: "",
+  });
+
+  const [titulo, setTitulo] = useState(serviceData.titulo);
+  const [ubicacion, setUbicacion] = useState(serviceData.ubicacion);
+  const [price, setPrice] = useState(serviceData.precio);
+  const [description, setDescription] = useState(serviceData.descripcion);
+
+  useEffect(() => {
+    setServiceData({
+      id: props.initialData.id,
+      titulo: props.initialData.titulo || "",
+      descripcion: props.initialData.descripcion || "",
+      duracion: props.initialData.duration || "",
+      frecuencia: props.initialData.frecuencia || "",
+      precio: props.initialData.precio || "",
+      categoria: props.initialData.categoria || "",
+      tipoClase: props.initialData.tipo || "",
+      rating: props.initialData.rating || 0,
+      ubicacion: props.initialData.ubicacion || "",
+      promotion: "",
+      type: "",
+      imagen: props.initialData.imagen || "",
+    });
+  }, [props.initialData]);
 
   const openDialog = () => {
     setIsOpen(true);
@@ -13,9 +53,16 @@ function DialogCrearClase(props) {
     setIsOpen(false);
   };
 
-  const createService = () => {
-    alert("creado!")
-  }
+  const saveService = () => {
+    updateService(serviceData);
+  };
+
+  const updateServiceData = (field, value) => {
+    setServiceData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
 
   let Categories = [
     { name: "Educación" },
@@ -46,9 +93,11 @@ function DialogCrearClase(props) {
     { name: "Semanal" },
     { name: "Quincena" },
     { name: "Mensual" },
-    { name: "Otro" }
+    { name: "Otro" },
   ];
 
+  let ClassType = [{ name: "Individual" }, { name: "Grupal" }];
+  
   return (
     <div>
       <button
@@ -74,16 +123,20 @@ function DialogCrearClase(props) {
               </h1>
               <div>
                 <label
-                  for="email"
+                  htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Servicio
                 </label>
                 <select
                   id="categories"
-                  className=" bg-gray-50 border mb-5  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                  value={serviceData.categoria}
+                  onChange={(e) =>
+                    updateServiceData("categoria", e.target.value)
+                  }
+                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 >
-                  <option disabled selected value="">
+                  <option disabled value="">
                     Selecciona un tipo...
                   </option>
                   {Categories.map((category, key) => (
@@ -95,7 +148,7 @@ function DialogCrearClase(props) {
               </div>
               <div className="mb-4">
                 <label
-                  for="attachment"
+                  htmlFor="attachment"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Foto de portada
@@ -108,33 +161,41 @@ function DialogCrearClase(props) {
               </div>
               <div>
                 <label
-                  for="email"
+                  htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Nombre
                 </label>
                 <input
                   type="text"
-                  name="phone"
-                  id="phone"
+                  name="title"
+                  id="title"
                   className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="Clases de canto"
-                ></input>
-
+                  value={serviceData.titulo}
+                  onChange={(e) => {
+                    setTitulo(e.target.value);
+                    updateServiceData("titulo", e.target.value);
+                  }}
+                />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label
-                      for="email"
+                      htmlFor="email"
                       className="block mb-2 text-sm font-medium text-gray-900"
                     >
                       Duración
                     </label>
                     <select
-                      id="categories"
-                      className=" bg-gray-50 border mb-5  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                      value={serviceData.duracion}
+                      id="duration"
+                      onChange={(e) =>
+                        updateServiceData("duracion", e.target.value)
+                      }
+                      className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     >
-                      <option disabled selected value="">
-                        Selecciona un tipo...
+                      <option disabled value="">
+                        Selecciona la duración...
                       </option>
                       {Duration.map((duration, key) => (
                         <option key={key} value={duration.name}>
@@ -145,17 +206,21 @@ function DialogCrearClase(props) {
                   </div>
                   <div>
                     <label
-                      for="email"
+                      htmlFor="email"
                       className="block mb-2 text-sm font-medium text-gray-900"
                     >
                       Frecuencia
                     </label>
                     <select
-                      id="categories"
-                      className=" bg-gray-50 border mb-5  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                      value={serviceData.frecuencia}
+                      id="frequency"
+                      onChange={(e) =>
+                        updateServiceData("frecuencia", e.target.value)
+                      }
+                      className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     >
-                      <option disabled selected value="">
-                        Selecciona la frecuencia...
+                      <option disabled value="">
+                        Selecciona una frecuencia...
                       </option>
                       {Frequency.map((frequency, key) => (
                         <option key={key} value={frequency.name}>
@@ -168,49 +233,89 @@ function DialogCrearClase(props) {
 
                 <div>
                   <label
-                    for="location"
+                    htmlFor="location"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
                     Ubicación
                   </label>
                   <input
-                    type="number"
-                    name="price"
-                    id="price"
+                    type="text"
+                    name="location"
+                    id="location"
                     className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="Calle 123"
-                  ></input>
+                    value={serviceData.ubicacion}
+                    onChange={(e) => {
+                      setUbicacion(e.target.value);
+                      updateServiceData("ubicacion", e.target.value);
+                    }}
+                  />
                 </div>
 
-                <div>
-                  <label
-                    for="email"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Costo
-                  </label>
-                  <input
-                    type="number"
-                    name="price"
-                    id="price"
-                    className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder="$100"
-                  ></input>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      for="type"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Tipo de clase
+                    </label>
+                    <select
+                      onChange={(e) =>
+                        updateServiceData("tipoClase", e.target.value)
+                      }
+                      value={serviceData.tipoClase}
+                      id="categories"
+                      className=" bg-gray-50 border mb-5  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    >
+                      <option disabled selected value="">
+                        Tipo de clase...
+                      </option>
+                      {ClassType.map((classType, key) => (
+                        <option key={key} value={classType.name}>
+                          {classType.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      for="email"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Costo
+                    </label>
+                    <input
+                      onChange={(e) => setPrice(e.target.value)}
+                      value={price}
+                      type="number"
+                      name="price"
+                      id="price"
+                      className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                      placeholder="$100"
+                    ></input>
+                  </div>
                 </div>
                 <div>
                   <label
-                    for="description"
+                    htmlFor="description"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
                     Descripción de la clase/curso
                   </label>
+
                   <textarea
-                    type="text"
+                    type="textarea"
                     name="description"
                     id="description"
                     className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder="Me gustaría que me llames de lunes a viernes de 8 a 10 hs"
-                  ></textarea>
+                    placeholder="Calle 123"
+                    value={serviceData.descripcion}
+                    onChange={(e) => {
+                      setDescription(e.target.value);
+                      updateServiceData("descripcion", e.target.value);
+                    }}
+                  />
                 </div>
               </div>
             </form>
@@ -223,7 +328,7 @@ function DialogCrearClase(props) {
               </button>
               <button
                 className="ml-4 bg-charcoal-400 hover:bg-charcoal-500 ease-in-out duration-200 px-1 rounded-sm"
-                onClick={createService}
+                onClick={saveService}
               >
                 Guardar
               </button>
@@ -236,4 +341,4 @@ function DialogCrearClase(props) {
   );
 }
 
-export default DialogCrearClase;
+export default DialogEditarClase;
