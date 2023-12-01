@@ -15,7 +15,6 @@ const RecuperarPassword = () => {
 
   const handleRecovery = async (e) => {
     e.preventDefault();
-    debugger;
     sendPasswordResetEmail(auth, email).then(() => {
       alert("Se envió un mail a su correo para recuperar su contraseña");
       history("/Ingreso")

@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  faDollarSign,
-  faHeart,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faDollarSign, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Servicios from "../components/data/Servicios.json";
+import { getServices } from "../helpers/getServices";
 
 function CatalogoServicio() {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const services = await getServices();
+      if (services) setServices(services);
+    })();
+  }, []);
+
+  useEffect(() => {
+    console.log(services, "servicess");
+  }, [services]);
+
   const { id } = useParams();
-  const servicio = Servicios.servicios[parseInt(id)];
+
+  const servicio = services[parseInt(id)];
 
   const [isOpen, setIsOpen] = useState(false);
   const [isContratarOpen, setIsContratarOpen] = useState(false);
@@ -344,9 +354,7 @@ function CatalogoServicio() {
                       Duración
                     </h2>
                     <p className="max-w-md mb-4 md:mb-8 text-gray-700 dark:text-gray-400">
-                      <span>
-                        {servicio.duracion}
-                      </span>
+                      <span>{servicio.duracion}</span>
                     </p>
                   </div>
                   <div className="pb-0 mb-2 pt-2 border-b border-gray-300 dark:border-gray-700 ">
@@ -354,13 +362,11 @@ function CatalogoServicio() {
                       Frecuencia
                     </h2>
                     <p className="max-w-md mb-4 md:mb-8 text-gray-700 dark:text-gray-400">
-                      <span>
-                        {servicio.frecuencia}
-                      </span>
+                      <span>{servicio.frecuencia}</span>
                     </p>
                   </div>
                   <div className="flex flex-nowrap items-center pt-2">
-                    <div className="mb-4 mr-2 lg:mb-0 w-full md:w-auto lg:flex" >
+                    <div className="mb-4 mr-2 lg:mb-0 w-full md:w-auto lg:flex">
                       <div className="mt-1 mr-2">
                         <p className="text-2xl font-semibold text-gray-700">
                           <span>
