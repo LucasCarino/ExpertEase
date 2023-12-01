@@ -36,7 +36,7 @@ const Catalogo = (props) => {
     "Otros",
   ];
 
-  const Frecuencia = [
+  let Frecuencia = [
     "Evento único",
     "Diario",
     "Semanal",
@@ -45,7 +45,7 @@ const Catalogo = (props) => {
     "Otro",
   ];
 
-  const Clases = ["Individual", "Grupal", "Evento", "Otro"];
+  let Clases = ["Individual", "Grupal", "Evento", "Otro"];
 
   const [calificacionFilter, setCalificacionFilter] = useState(null);
 
@@ -70,8 +70,8 @@ const Catalogo = (props) => {
     setCalificacionFilter(rating);
   };
 
-  const updateServicios = useCallback((servicesToFilter) => {
-    const filtered = servicesToFilter.filter((servicio) => {
+  const updateServicios = useCallback((serviceToFilter) => {
+    const filtered = services.filter((servicio) => {
       const tituloMatches =
         servicio.titulo &&
         (busqueda
@@ -123,10 +123,23 @@ const Catalogo = (props) => {
       if (!initialServices) setInitialServices(services);
       if (services) {
         setServices(services);
-        updateServicios(services);
+        updateServicios();
       }
     })();
   }, [initialServices, updateServicios]);
+
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const services = await getServices();
+  //     if (!initialServices) setInitialServices(services)
+  //     if (services) {
+  //       setServices(services);
+  //       updateServicios(services); // Llama a updateServicios aquí con los nuevos servicios
+  //     }
+  //   })();
+  // }, [initialServices]);
+
 
   const handleReset = () => {
     setSelectedCategoria("");

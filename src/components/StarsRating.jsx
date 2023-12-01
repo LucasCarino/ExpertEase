@@ -41,6 +41,7 @@ const StarsRating = ({
             <input
               type="radio"
               name="rating"
+              id="rating"
               className="hidden"
               value={currentRating}
               onChange={() => handleRatingChange(currentRating)}

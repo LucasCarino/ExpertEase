@@ -15,6 +15,7 @@ export const servicesFormatter = (services) => {
       experiencia: service.experience,
       nombre: service.userName,
       frecuencia: service.frequency,
+      serviceId: service['_id']
     };
   });
 
