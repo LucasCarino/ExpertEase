@@ -60,7 +60,7 @@ function CatalogoServicio() {
 
   return (
     <div className="px-4 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
-      <section className="py-0 md:py-10 overflow-hidden bg-whit rounded shadow-inner px-2 md:px-0">
+      <section className="py-0 md:py-10 overflow-hidden bg-whit rounded shadow-inner px-2 md:px-0 bg-white">
         <div className="lg:px-8 py-4 mx-auto lg:py-8 md:px-6">
           <div>
             <div className="flex flex-wrap -mx-4">
@@ -349,7 +349,7 @@ function CatalogoServicio() {
                       Duración
                     </h2>
                     <p className="max-w-md mb-4 md:mb-8 text-gray-700" >
-                      <span>{servicio.duracion}</span>
+                      <span>{servicio.duration}</span>
                     </p>
                   </div>
                   <div className="pb-0 mb-2 pt-2 border-b border-gray-300 ">

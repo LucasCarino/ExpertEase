@@ -14,9 +14,12 @@ const Ingreso = () => {
 
   const signIn = (e) => {
     e.preventDefault();
+    debugger;
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         navigate("/Catalogo");
+        localStorage.setItem('usuarioCorreo', userCredential.user.email);
+        localStorage.setItem("usuarioNombre", userCredential.user.displayName);
       })
       .catch((error) => {
         setError("Credenciales incorrectas");

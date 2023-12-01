@@ -6,9 +6,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGraduationCap, faUserTie } from "@fortawesome/free-solid-svg-icons";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { Link } from "react-router-dom";
 
@@ -21,26 +19,34 @@ const Registro = () => {
   const [error, setError] = useState(null);
 
   const [email, setEmail] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate("");
 
   const signUp = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        navigate("/Catalogo");
-      })
-      .catch((error) => {
-        if (error.code === "auth/email-already-in-use") {
-          setError("El correo electrónico ya está en uso. ");
-        } else if (error.code === "auth/weak-password" ) {
-          setError("La contraseña debe tener al menos 6 caracteres");
-        } 
-        else {
-          setError("Error al registrarse. Por favor, inténtalo de nuevo");
-        }
-        console.log(error);
-      });
+    .then((userCredential) => {
+      updateProfile(userCredential.user, { displayName: displayName })
+        .then(() => {
+          navigate("/Catalogo");
+          localStorage.setItem("usuarioCorreo", userCredential.user.email);
+          localStorage.setItem("usuarioNombre", userCredential.user.displayName);
+        })
+        .catch((profileError) => {
+          console.error("Error al actualizar el perfil:", profileError);
+        });
+    })
+    .catch((error) => {
+      if (error.code === "auth/email-already-in-use") {
+        setError("El correo electrónico ya está en uso.");
+      } else if (error.code === "auth/weak-password") {
+        setError("La contraseña debe tener al menos 6 caracteres");
+      } else {
+        setError("Error al registrarse. Por favor, inténtalo de nuevo");
+      }
+      console.error(error);
+    });
   };
 
   const [experiencias, setExperiencias] = useState([""]); // Inicializamos con un input vacío
@@ -59,10 +65,6 @@ const Registro = () => {
     const nuevasExperiencias = [...experiencias];
     nuevasExperiencias[index] = value;
     setExperiencias(nuevasExperiencias);
-  };
-
-  const handleClick = (event) => {
-    event.target.value === "expert" ? setOpen(true) : setOpen(false);
   };
 
   const [inputData, setInputData] = useState({
@@ -152,10 +154,10 @@ const Registro = () => {
                 </label>
                 <input
                   type="text"
-                  name="name"
-                  id="name"
-                  value={inputData.name}
-                  onChange={handleInputChange}
+                  name="displayName"
+                  id="displayName"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
                   className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="Juan López"
                 />
@@ -367,14 +369,15 @@ const Registro = () => {
               </Button>
               {error && (
                 <div className="mt-2">
-                  <p className="text-sm font-light text-red-500">{error}
+                  <p className="text-sm font-light text-red-500">
+                    {error}
                     <Link
                       to="/Ingreso"
                       className="text-sm font-medium text-black hover:underline"
                     >
                       Iniciar sesión
                     </Link>
-                    </p>
+                  </p>
                 </div>
               )}
             </form>

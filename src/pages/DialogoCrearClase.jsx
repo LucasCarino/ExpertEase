@@ -1,8 +1,18 @@
 import React, { useState } from "react";
+import { createService } from "../helpers/createService";
 // import DateRangePicker from "../components/DateRangePicker";
 
 function DialogCrearClase(props) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [name, setName] = useState("");
+  const [duration, setDuration] = useState("");
+  const [frequency, setFrequency] = useState("");
+  const [location, setLocation] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [classType, setClassType] = useState("");
 
   const openDialog = () => {
     setIsOpen(true);
@@ -11,10 +21,6 @@ function DialogCrearClase(props) {
   const closeDialog = () => {
     setIsOpen(false);
   };
-
-  const createService = () => {
-    alert("creado!")
-  }
 
   let Categories = [
     { name: "Educación" },
@@ -45,8 +51,32 @@ function DialogCrearClase(props) {
     { name: "Semanal" },
     { name: "Quincena" },
     { name: "Mensual" },
-    { name: "Otro" }
+    { name: "Otro" },
   ];
+
+  let ClassType = [{ name: "Individual" }, { name: "Grupal" }];
+
+  const onHandleCreate = () => {
+    debugger;
+    let data = {
+      name: name,
+      description: description,
+      duration: duration,
+      frequency: frequency,
+      cost: price,
+      category: selectedCategory,
+      classType: classType,
+      rating: null,
+      image: null,
+      location: location,
+      promotion: "",
+      type: 0,
+      published: true,
+      userEmail: localStorage.getItem("usuarioCorreo"),
+      userName: localStorage.getItem("usuarioNombre"),
+    };
+    createService(data);
+  };
 
   return (
     <div>
@@ -80,6 +110,8 @@ function DialogCrearClase(props) {
                 </label>
                 <select
                   id="categories"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
                   className=" bg-gray-50 border mb-5  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 >
                   <option disabled selected value="">
@@ -113,6 +145,8 @@ function DialogCrearClase(props) {
                   Nombre
                 </label>
                 <input
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
                   type="text"
                   name="phone"
                   id="phone"
@@ -129,6 +163,8 @@ function DialogCrearClase(props) {
                       Duración
                     </label>
                     <select
+                      onChange={(e) => setDuration(e.target.value)}
+                      value={duration}
                       id="categories"
                       className=" bg-gray-50 border mb-5  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     >
@@ -150,6 +186,8 @@ function DialogCrearClase(props) {
                       Frecuencia
                     </label>
                     <select
+                      onChange={(e) => setFrequency(e.target.value)}
+                      value={frequency}
                       id="categories"
                       className=" bg-gray-50 border mb-5  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     >
@@ -173,29 +211,59 @@ function DialogCrearClase(props) {
                     Ubicación
                   </label>
                   <input
-                    type="number"
-                    name="price"
-                    id="price"
+                    onChange={(e) => setLocation(e.target.value)}
+                    value={location}
+                    type="text"
+                    name="location"
+                    id="location"
                     className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="Calle 123"
                   ></input>
                 </div>
 
-                <div>
-                  <label
-                    for="email"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Costo
-                  </label>
-                  <input
-                    type="number"
-                    name="price"
-                    id="price"
-                    className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    placeholder="$100"
-                  ></input>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      for="type"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Tipo de clase
+                    </label>
+                    <select
+                      onChange={(e) => setClassType(e.target.value)}
+                      value={classType}
+                      id="categories"
+                      className=" bg-gray-50 border mb-5  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    >
+                      <option disabled selected value="">
+                        Tipo de clase...
+                      </option>
+                      {ClassType.map((classType, key) => (
+                        <option key={key} value={classType.name}>
+                          {classType.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      for="email"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Costo
+                    </label>
+                    <input
+                      onChange={(e) => setPrice(e.target.value)}
+                      value={price}
+                      type="number"
+                      name="price"
+                      id="price"
+                      className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                      placeholder="$100"
+                    ></input>
+                  </div>
                 </div>
+
                 <div>
                   <label
                     for="description"
@@ -204,6 +272,8 @@ function DialogCrearClase(props) {
                     Descripción de la clase/curso
                   </label>
                   <textarea
+                    onChange={(e) => setDescription(e.target.value)}
+                    value={description}
                     type="text"
                     name="description"
                     id="description"
@@ -222,7 +292,7 @@ function DialogCrearClase(props) {
               </button>
               <button
                 className="ml-4 bg-charcoal-400 hover:bg-charcoal-500 ease-in-out duration-200 px-1 rounded-sm"
-                onClick={createService}
+                onClick={onHandleCreate}
               >
                 Guardar
               </button>

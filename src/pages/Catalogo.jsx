@@ -18,26 +18,35 @@ const Catalogo = (props) => {
   const [open, setOpen] = useState(false);
   const [services, setServices] = useState([]);
   const [initialServices, setInitialServices] = useState();
+  const [filteredServices, setFilteredServices] = useState([]);
 
   const handleClick = () => {
     open ? setOpen(false) : setOpen(true);
   };
 
-  const allCategorias = new Set(
-    services.map((servicio) => servicio.categoria)
-  );
+  const Categorias = [
+    "Deportes",
+    "Arte y Cultura",
+    "Música",
+    "Idiomas",
+    "Cocina",
+    "Tecnología",
+    "Belleza",
+    "Salud",
+    "Otros",
+  ];
 
-  const allClases = new Set(
-    services.map((servicio) => servicio.clase)
-  );
+  const Frecuencia = [
+    "Evento único",
+    "Diario",
+    "Semanal",
+    "Quincena",
+    "Mensual",
+    "Otro",
+  ];
 
-  const allFrecuencias = new Set(
-    services.map((servicio) => servicio.frecuencia)
-  );
+  const Clases = ["Individual", "Grupal", "Evento", "Otro"];
 
-  const Categorias = [...allCategorias];
-  const Clases = [...allClases];
-  const Frencuencias = [...allFrecuencias];
   const [calificacionFilter, setCalificacionFilter] = useState(null);
 
   const location = useLocation();
@@ -61,36 +70,24 @@ const Catalogo = (props) => {
     setCalificacionFilter(rating);
   };
 
-  const filteredServices = services.filter((servicio) => {
-    const tituloMatches = servicio.titulo
-      .toLowerCase()
-      .includes(busqueda.toLowerCase());
-    const nombreMatches = servicio.nombre
-      .toLowerCase()
-      .includes(busqueda.toLowerCase());
-    const categoriaMatches =
-      selectedCategoria === "" || servicio.categoria === selectedCategoria;
-    const claseMatches =
-      selectedClases === "" || servicio.clase === selectedClases;
-    const frecuenciaMatches =
-      selectedFrencuencia === "" || servicio.frecuencia === selectedFrencuencia;
-
-    return (
-      (tituloMatches || nombreMatches) &&
-      categoriaMatches &&
-      claseMatches &&
-      frecuenciaMatches
-    );
-  });
-
-  const updateServicios = useCallback(() => {
-    const filtered = services.filter((servicio) => {
-      const tituloMatches = servicio.titulo
-        .toLowerCase()
-        .includes(busqueda.toLowerCase());
-      const nombreMatches = servicio.nombre
-        .toLowerCase()
-        .includes(busqueda.toLowerCase());
+  const updateServicios = useCallback((servicesToFilter) => {
+    const filtered = servicesToFilter.filter((servicio) => {
+      const tituloMatches =
+        servicio.titulo &&
+        (busqueda
+          ? servicio.titulo
+              .toString()
+              .toLowerCase()
+              .includes(busqueda.toString().toLowerCase())
+          : true);
+      const nombreMatches =
+        servicio.nombre &&
+        (busqueda
+          ? servicio.nombre
+              .toString()
+              .toLowerCase()
+              .includes(busqueda.toString().toLowerCase())
+          : true);
       const categoriaMatches =
         selectedCategoria === "" || servicio.categoria === selectedCategoria;
       const claseMatches =
@@ -101,7 +98,7 @@ const Catalogo = (props) => {
       const calificacionMatches =
         calificacionFilter === null ||
         servicio.calificacion >= calificacionFilter;
-
+      debugger;
       return (
         (tituloMatches || nombreMatches) &&
         categoriaMatches &&
@@ -110,22 +107,26 @@ const Catalogo = (props) => {
         calificacionMatches
       );
     });
-
-    setServices(filtered);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [busqueda, selectedCategoria, selectedClases, selectedFrencuencia, calificacionFilter]);
-
-  useEffect(() => {
-    updateServicios();
-  }, [updateServicios]);
+    setFilteredServices(filtered);
+  }, [
+    busqueda,
+    selectedCategoria,
+    selectedClases,
+    selectedFrencuencia,
+    calificacionFilter,
+  ]);
 
   useEffect(() => {
     (async () => {
       const services = await getServices();
-      if (!initialServices) setInitialServices(services)
-      if (services) setServices(services);
+      console.log(services);
+      if (!initialServices) setInitialServices(services);
+      if (services) {
+        setServices(services);
+        updateServicios(services);
+      }
     })();
-  }, [initialServices]);
+  }, [initialServices, updateServicios]);
 
   const handleReset = () => {
     setSelectedCategoria("");
@@ -133,32 +134,7 @@ const Catalogo = (props) => {
     setSelectedFrecuencia("");
     setBusqueda("");
     setCalificacionFilter(null);
-    setServices(initialServices)
-  };
-
-  const renderTipoServicio = (servicio) => {
-    switch (servicio.tipo) {
-      case 0:
-        return <span></span>;
-      case 1:
-        return (
-          <span className="absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg bg-sandy-brown-500 px-3 py-2 text-sm font-medium text-white">
-            <div>
-              <h2>Nuevo!</h2>
-            </div>
-          </span>
-        );
-      case 2:
-        return (
-          <span className="absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg bg-jungle-green-500 px-3 py-2 text-sm font-medium text-white">
-            <div>
-              <h2>Descuento!</h2>
-            </div>
-          </span>
-        );
-      default:
-        return null;
-    }
+    setServices(initialServices);
   };
 
   return (
@@ -256,7 +232,7 @@ const Catalogo = (props) => {
               <option disabled selected value="">
                 Selecciona una frecuencia...
               </option>
-              {Frencuencias.map((frecuencia, key) => (
+              {Frecuencia.map((frecuencia, key) => (
                 <option key={key} value={frecuencia}>
                   {frecuencia}
                 </option>
@@ -309,7 +285,6 @@ const Catalogo = (props) => {
                         className="object-cover h-full w-full"
                       />
                     </div>
-                    {renderTipoServicio(servicio)}
                   </div>
 
                   <div className="mt-4">
