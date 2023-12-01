@@ -4,7 +4,8 @@ import DialogEditarClase from "./DialogoEditarClase";
 import React, { useState, useEffect } from "react";
 
 import StarsRating from "../components/StarsRating";
-import {deleteService} from "../helpers/deleteService";
+import { deleteService } from "../helpers/deleteService";
+import { getHiringsByEmail } from "../helpers/getHiringsByEmail";
 
 import { getServicesByEmail } from "../helpers/getServicesByEmail";
 import { Comments } from "../components/Comments";
@@ -14,14 +15,18 @@ import DialogCrearClase from "./DialogoCrearClase";
 const Admin = () => {
   const [services, setServices] = useState([]);
   const [initialServices, setInitialServices] = useState();
+  const [hirings, setHirings] = useState([]);
 
-  
   useEffect(() => {
     (async () => {
       const services = await getServicesByEmail();
+      const hirings = await getHiringsByEmail(
+        localStorage.getItem("usuarioCorreo")
+      );
       debugger;
       if (!initialServices) setInitialServices(services);
       if (services) setServices(services);
+      if (hirings) setHirings(hirings);
     })();
   }, [initialServices]);
 
@@ -32,6 +37,12 @@ const Admin = () => {
       console.error("Error al manejar la eliminación:", error);
     }
   };
+
+  const findService = (id) => {
+    const service = services.find((service) => service.serviceId === id);
+    return service ? service.titulo : "";
+  }
+
 
   return (
     <div className=" px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
@@ -102,17 +113,22 @@ const Admin = () => {
             <tr>
               <th className="w-5/12 py-2">
                 <p className="text-semibold opacity-70 text-sm font-semibold pl-2">
-                  Nombre
+                  Clase
+                </p>
+              </th>
+              <th className="w-5/12 py-2">
+                <p className="text-semibold opacity-70 text-sm font-semibold pl-2">
+                  Email de contacto
                 </p>
               </th>
               <th className="w-4/12">
                 <p className="text-semibold opacity-70 text-sm font-semibold">
-                  Clase Solicitada
+                  Teléfono de contacto
                 </p>
               </th>
               <th className="w-2/12">
                 <p className="text-semibold opacity-70 text-sm font-semibold">
-                  Contacto
+                  Mensaje
                 </p>
               </th>
               <th className="w-1/12">
@@ -123,22 +139,27 @@ const Admin = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-gray-200">
-              <td className="pl-2.5">
-                <p className="text-sm">Lucas Carino</p>
-              </td>
-              <td className="">
-                <p className="text-sm py-3">Clase de piano</p>
-              </td>
-              <td className=" text-sm">11 1234 5678</td>
-              <td className="">
-                <select className="border rounded-md px-2 py-1 text-sm">
-                  <option value="aceptar">Aceptar</option>
-                  <option value="finalizar">Finalizar</option>
-                  <option value="cancelar">Cancelar</option>
-                </select>
-              </td>
-            </tr>
+            {hirings.map((hiring, key) => (
+              <tr className="border-b border-gray-200">
+                <td className="pl-2.5">
+                  <p className="text-sm">{findService(hiring.service)}</p>
+                </td>
+                <td className="pl-2.5">
+                  <p className="text-sm">{hiring.contactEmail}</p>
+                </td>
+                <td className="">
+                  <p className="text-sm py-3">{hiring.contactPhone}</p>
+                </td>
+                <td className=" text-sm">{hiring.messageToProvider}</td>
+                <td className="">
+                  <select className="border rounded-md px-2 py-1 text-sm">
+                    <option value="aceptar">Aceptar</option>
+                    <option value="finalizar">Finalizar</option>
+                    <option value="cancelar">Cancelar</option>
+                  </select>
+                </td>
+              </tr>
+            ))}
             <tr className="border-b border-gray-200"></tr>
           </tbody>
         </table>
@@ -148,7 +169,7 @@ const Admin = () => {
         <h2 className="text-2xl pb-5 font-semibold">
           Solicitudes de comentarios
         </h2>
-        <table className="bg-white text-left rounded-md">
+        <table className="bg-white text-left rounded-md w-full">
           <thead>
             <tr>
               <th className="w-1/12 text-center py-2">
@@ -168,7 +189,7 @@ const Admin = () => {
               </th>
             </tr>
           </thead>
-          <Comments/>
+          <Comments />
         </table>
       </div>
     </div>
