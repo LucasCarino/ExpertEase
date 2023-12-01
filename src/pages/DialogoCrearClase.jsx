@@ -22,14 +22,17 @@ function DialogCrearClase(props) {
     setIsOpen(false);
   };
 
-  let Categories = [
-    { name: "Educación" },
-    { name: "Tutoría" },
-    { name: "Hogar" },
-    { name: "Coaching" },
-    { name: "Deportes" },
-    { name: "Música" },
-    { name: "Otro servicio" },
+  const Categories = [
+    {name: "Deportes"}, 
+    {name: "Arte y Cultura"}, 
+    {name: "Música"}, 
+    {name: "Idiomas"}, 
+    {name: "Cocina"}, 
+    {name: "Tecnología"}, 
+    {name: "Salud"}, 
+    {name: "Belleza"}, 
+    {name: "Hogar"}, 
+    {name: "Otros"}
   ];
 
   let Duration = [
