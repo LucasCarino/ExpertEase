@@ -1,6 +1,7 @@
 import { faAngleDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Home() {
   let Cards = [
@@ -44,6 +45,17 @@ function Home() {
     }
   };
 
+  const [busqueda, setBusqueda] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearchChange = (event) => {
+    setBusqueda(event.target.value);
+  };
+
+  const handleSearchClick = () => {
+    navigate(`/Catalogo?search=${encodeURIComponent(busqueda)}`);
+  };
+
   return (
     <div className="px-8 lg:px-10 bg-[#f9f9f9] pt-24 flex flex-col items-center">
       <div className="bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] rounded-sm shadow-inner pb-8 ">
@@ -61,10 +73,12 @@ function Home() {
                   type="search"
                   className="py-2 text-sm bg-jungle-green-800 rounded-l-lg pl-3 pr-3 focus:outline-none focus:bg-white focus:text-gray-900 duration-500 w-full"
                   placeholder="Servicio o experto"
+                  value={busqueda}
+                  onChange={handleSearchChange}
                 />
               </div>
               <div className=" text-gray-600 focus-within:text-gray-400">
-                <button className="py-2 px-3 text-sm text-white bg-jungle-green-800 rounded-r-lg focus:outline-none active:bg-white active:text-gray-900 duration-500">
+                <button onClick={handleSearchClick} className="py-2 px-3 text-sm text-white bg-jungle-green-800 rounded-r-lg focus:outline-none active:bg-white active:text-gray-900 duration-500">
                   <FontAwesomeIcon icon={faSearch} />
                 </button>
               </div>
