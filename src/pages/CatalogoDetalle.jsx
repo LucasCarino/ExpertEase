@@ -13,6 +13,7 @@ function CatalogoServicio() {
     (async () => {
       const services = await getServices();
       if (services) setServices(services);
+      debugger;
     })();
   }, []);
 
@@ -299,7 +300,7 @@ function CatalogoServicio() {
                   <div className="pb-0 mb-2 border-b border-gray-300  ">
                     <h2 className="mb-2 text-xl font-bold">Duración</h2>
                     <p className="max-w-md mb-4 md:mb-8 text-gray-700">
-                      <span>{servicio.duracion}</span>
+                      <span>{servicio.duration}</span>
                     </p>
                   </div>
                   <div className="pb-0 mb-2 pt-2 border-b border-gray-300 ">

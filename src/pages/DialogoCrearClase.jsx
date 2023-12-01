@@ -13,6 +13,7 @@ function DialogCrearClase(props) {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [classType, setClassType] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const openDialog = () => {
     setIsOpen(true);
@@ -20,6 +21,11 @@ function DialogCrearClase(props) {
 
   const closeDialog = () => {
     setIsOpen(false);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
   };
 
   const Categories = [
@@ -59,8 +65,21 @@ function DialogCrearClase(props) {
 
   let ClassType = [{ name: "Individual" }, { name: "Grupal" }];
 
-  const onHandleCreate = () => {
-    debugger;
+  const onHandleCreate = async () => {
+
+    const toBase64 = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+
+    let imageBase64 = "";
+    const fileInput = document.getElementById('file_input');
+    if (fileInput.files[0]) {
+      imageBase64 = await toBase64(fileInput.files[0]);
+    }
+
     let data = {
       name: name,
       description: description,
@@ -70,7 +89,7 @@ function DialogCrearClase(props) {
       category: selectedCategory,
       classType: classType,
       rating: null,
-      image: null,
+      image: imageBase64,
       location: location,
       promotion: "",
       type: 0,
@@ -138,6 +157,8 @@ function DialogCrearClase(props) {
                   class="block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 rounded-none"
                   id="file_input"
                   type="file"
+                  name="file_input"
+                  accept="image/*"
                 />
               </div>
               <div>

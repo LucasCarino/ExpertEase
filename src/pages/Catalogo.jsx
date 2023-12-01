@@ -24,6 +24,7 @@ const Catalogo = (props) => {
     open ? setOpen(false) : setOpen(true);
   };
 
+  console.log(services);
   const Categorias = [
     "Deportes",
     "Arte y Cultura",
@@ -71,7 +72,7 @@ const Catalogo = (props) => {
     setCalificacionFilter(rating);
   };
 
-  const updateServicios = useCallback((serviceToFilter) => {
+  const updateServicios = useCallback(() => {
     const filtered = services.filter((servicio) => {
       const tituloMatches =
         servicio.titulo &&
@@ -99,7 +100,6 @@ const Catalogo = (props) => {
       const calificacionMatches =
         calificacionFilter === null ||
         servicio.calificacion >= calificacionFilter;
-      debugger;
       return (
         (tituloMatches || nombreMatches) &&
         categoriaMatches &&
@@ -115,32 +115,30 @@ const Catalogo = (props) => {
     selectedClases,
     selectedFrencuencia,
     calificacionFilter,
+    services,
   ]);
 
   useEffect(() => {
     (async () => {
-      const services = await getServices();
-      console.log(services);
-      if (!initialServices) setInitialServices(services);
-      if (services) {
-        setServices(services);
-        updateServicios();
+      const servicesData = await getServices();
+      if (!initialServices) setInitialServices(servicesData);
+      if (servicesData) {
+        setServices(servicesData);
       }
     })();
-  }, [initialServices, updateServicios]);
+  }, [initialServices]);
 
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const services = await getServices();
-  //     if (!initialServices) setInitialServices(services)
-  //     if (services) {
-  //       setServices(services);
-  //       updateServicios(services); // Llama a updateServicios aquí con los nuevos servicios
-  //     }
-  //   })();
-  // }, [initialServices]);
-
+  useEffect(() => {
+    updateServicios();
+  }, [
+    updateServicios,
+    busqueda,
+    selectedCategoria,
+    selectedClases,
+    selectedFrencuencia,
+    calificacionFilter,
+    services,
+  ]);
 
   const handleReset = () => {
     setSelectedCategoria("");
@@ -294,7 +292,7 @@ const Catalogo = (props) => {
                   <div className="relative flex h-200 justify-center overflow-hidden rounded-lg">
                     <div className="w-full h-48 transform transition-transform duration-500 ease-in-out hover:scale-110">
                       <img
-                        src={process.env.PUBLIC_URL + servicio.imagen}
+                        src={servicio.imagen}
                         alt=""
                         className="object-cover h-full w-full"
                       />
