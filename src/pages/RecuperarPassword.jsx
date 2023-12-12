@@ -4,8 +4,11 @@ import Button from "../components/Button";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
+import Toast from "../components/Toast";
+
 
 const RecuperarPassword = () => {
+  const [toast, setToast] = useState(null);
   const [email, setEmail] = useState("");
   let history = useNavigate();
 
@@ -16,10 +19,19 @@ const RecuperarPassword = () => {
   const handleRecovery = async (e) => {
     e.preventDefault();
     sendPasswordResetEmail(auth, email).then(() => {
-      alert("Se envió un mail a su correo para recuperar su contraseña");
+      setToast({
+        message:
+          "Se envió un mail a su correo para recuperar su contraseña",
+        success: true,
+        });
       history("/Ingreso")
     }).catch(error => { console.log(error.code) });
   };
+
+  const closeToast = () => {
+    setToast(null);
+  }
+  
 
   return (
     <section className="bg-gray-50 ">
@@ -68,6 +80,13 @@ const RecuperarPassword = () => {
                   >
                     Enviar
                   </Button>
+                  {toast && (
+                    <Toast
+                      message={toast.message}
+                      success={toast.success}
+                      onClose={closeToast}
+                    />
+                  )}
                 </form>
               </div>
             </div>

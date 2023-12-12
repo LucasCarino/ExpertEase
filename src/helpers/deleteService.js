@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const deleteService = async (id) => {
-    debugger;
     let config = {
       method: "delete",
       maxBodyLength: Infinity,

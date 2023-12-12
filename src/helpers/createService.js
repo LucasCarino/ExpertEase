@@ -2,7 +2,6 @@ import axios from "axios";
 
 export const createService = async (data) => {
   console.log(data);
-  debugger;
 
   let config = {
     method: "post",

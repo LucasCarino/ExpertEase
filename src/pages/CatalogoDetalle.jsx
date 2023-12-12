@@ -27,9 +27,8 @@ function CatalogoServicio() {
       if (reviewsData) {
         setReviewsData(reviewsData);
       }
-      debugger;
     };
-  
+
     fetchData();
   }, []);
 
@@ -66,8 +65,6 @@ function CatalogoServicio() {
       </div>
     );
   }
-
-
 
   return (
     <div className="px-4 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
@@ -142,7 +139,7 @@ function CatalogoServicio() {
                                 {servicio.experiencia}
                               </p>
                             </div>
-                            <div>
+                            {/* <div>
                               <label
                                 for="degrees"
                                 className="block mb-2 text-sm font-medium text-gray-900"
@@ -150,7 +147,7 @@ function CatalogoServicio() {
                                 Titulos
                               </label>
                               <p className="pt-2 pb-4 px-2">- Falta -</p>
-                            </div>
+                            </div> */}
                             <div className="border-t border-gray-200 pt-4">
                               <label
                                 for="comments"
@@ -159,32 +156,43 @@ function CatalogoServicio() {
                                 Opiniones ({reviewsData.length})
                               </label>
                               <ReviewForm serviceId={servicio.serviceId} />
-                              {reviewsData.map((review, key) => (
-                                <article class="py-4 border-gray-200 border-b text-base bg-white rounded-lg">
-                                  <footer class="flex justify-between items-center mb-2">
-                                    <div class="flex items-center">
-                                      <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
-                                        {review.name}
-                                      </p>
-                                      <p class="text-sm text-gray-600">
-                                        <time
-                                          pubdate
-                                          datetime="2022-02-08"
-                                          title="February 8th, 2022"
-                                        >
-                                          {review.postedAt}
-                                        </time>
-                                      </p>
-                                    </div>
-                                    <div class="flex items-center space-x-1 pl-2 mb-4 pt-2">
-                                      <StarsRating editable={false} initialValue={review.rating}/> 
-                                    </div>
-                                  </footer>
-                                  <p class="text-gray-500 ">
-                                    {review.text}
-                                  </p>
-                                </article>
-                              ))}
+                              {reviewsData
+                                .filter(
+                                  (review) => review.published === "published"
+                                )
+                                .map((review, key) => (
+                                  <article class="py-4 border-gray-200 border-b text-base bg-white rounded-lg">
+                                    <footer class="flex justify-between items-center mb-2">
+                                      <div class="flex items-center">
+                                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
+                                          {review.name}
+                                        </p>
+                                        <p class="text-sm text-gray-600">
+                                          <time
+                                            pubdate
+                                            datetime="2022-02-08"
+                                            title="February 8th, 2022"
+                                          >
+                                            {new Intl.DateTimeFormat("es-ES", {
+                                              year: "numeric",
+                                              month: "long",
+                                              day: "numeric",
+                                            }).format(
+                                              new Date(review.postedAt)
+                                            )}
+                                          </time>
+                                        </p>
+                                      </div>
+                                      <div class="flex items-center space-x-1 pl-2 mb-4 pt-2">
+                                        <StarsRating
+                                          editable={false}
+                                          initialValue={review.rating}
+                                        />
+                                      </div>
+                                    </footer>
+                                    <p class="text-gray-500 ">{review.text}</p>
+                                  </article>
+                                ))}
                             </div>
                           </div>
                         </div>

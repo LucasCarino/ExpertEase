@@ -3,7 +3,6 @@ import { hiringsFormatter } from "./formatters/hirings-formatter";
 
 export const getHiringsByEmail = async (email) => {
 
-  debugger;
   let config = {
     method: "get",
     maxBodyLength: Infinity,

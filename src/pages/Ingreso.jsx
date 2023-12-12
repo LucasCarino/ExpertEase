@@ -14,7 +14,6 @@ const Ingreso = () => {
 
   const signIn = (e) => {
     e.preventDefault();
-    debugger;
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         navigate("/Catalogo");

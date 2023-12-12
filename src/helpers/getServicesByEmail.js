@@ -1,14 +1,12 @@
 import axios from "axios";
 import { servicesFormatter } from "./formatters/services-formatter";
 
-export const getServicesByEmail = async () => {
-
-  debugger;
+export const getServicesByEmail = async (email) => {
   let config = {
     method: "get",
     maxBodyLength: Infinity,
     // url: `http://localhost:8080/api/services/email/user@gmail.com`,
-    url: `http://localhost:8080/api/services/email/${localStorage.getItem('usuarioCorreo')}`,
+    url: `http://localhost:8080/api/services/email/${email}`,
     headers: {
       "X-API-Key": "{{token}}",
     },

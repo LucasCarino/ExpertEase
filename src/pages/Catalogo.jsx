@@ -26,6 +26,7 @@ const Catalogo = (props) => {
 
   console.log(services);
   const Categorias = [
+    "Educación",
     "Deportes",
     "Arte y Cultura",
     "Música",

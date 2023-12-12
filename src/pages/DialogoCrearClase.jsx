@@ -29,6 +29,7 @@ function DialogCrearClase(props) {
   };
 
   const Categories = [
+    {name: "Educación"}, 
     {name: "Deportes"}, 
     {name: "Arte y Cultura"}, 
     {name: "Música"}, 
@@ -98,6 +99,7 @@ function DialogCrearClase(props) {
       userName: localStorage.getItem("usuarioNombre"),
     };
     createService(data);
+    window.location.reload();
   };
 
   return (

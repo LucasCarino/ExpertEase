@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faEye } from "@fortawesome/free-solid-svg-icons";
 import DialogEditarClase from "./DialogoEditarClase";
 import React, { useState, useEffect } from "react";
 
 import StarsRating from "../components/StarsRating";
 import { deleteService } from "../helpers/deleteService";
 import { getHiringsByEmail } from "../helpers/getHiringsByEmail";
+import { updateHiring } from "../helpers/updateHiring";
 
 import { getServicesByEmail } from "../helpers/getServicesByEmail";
 import { Comments } from "../components/Comments";
@@ -19,26 +20,40 @@ const Admin = () => {
 
   useEffect(() => {
     (async () => {
-      const services = await getServicesByEmail();
+      debugger;
+      const services = await getServicesByEmail(
+        localStorage.getItem("usuarioCorreo")
+      );
       const hirings = await getHiringsByEmail(
         localStorage.getItem("usuarioCorreo")
       );
-      debugger;
       if (!initialServices) setInitialServices(services);
       if (services) setServices(services);
       if (hirings) setHirings(hirings);
     })();
   }, [initialServices]);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     try {
-      deleteService(id);
+      await deleteService(id);
+      window.location.reload();
     } catch (error) {
       console.error("Error al manejar la eliminación:", error);
     }
   };
 
+  const handleStatusChange = async (id, status) => {
+
+    try {
+      await updateHiring(id, status);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error al manejar el cambio de status:", error);
+    }
+  }
+
   const findService = (id) => {
+    debugger;
     const service = services.find((service) => service.serviceId === id);
     return service ? service.titulo : "";
   }
@@ -66,7 +81,7 @@ const Admin = () => {
                   Precio
                 </p>
               </th>
-              <th className="w-1/12 pl-5">
+              <th className="w-1/12 text-center pr-3">
                 <p className="text-semibold opacity-70 text-sm font-semibold">
                   Acciones
                 </p>
@@ -90,7 +105,7 @@ const Admin = () => {
                     <DialogEditarClase initialData={service} />
                     <button
                       className="mx-2 bg-red-400 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-red-300 duration-100"
-                      onClick={() => handleDelete(service.id)}
+                      onClick={() => handleDelete(service.serviceId)}
                       type="button"
                     >
                       <FontAwesomeIcon icon={faXmark} size="lg" />
@@ -111,24 +126,29 @@ const Admin = () => {
         <table className="bg-white text-left rounded-md  w-full">
           <thead>
             <tr>
-              <th className="w-5/12 py-2">
+              <th className="w-2/12 py-2">
                 <p className="text-semibold opacity-70 text-sm font-semibold pl-2">
                   Clase
                 </p>
               </th>
-              <th className="w-5/12 py-2">
+              <th className="w-2/12 py-2">
                 <p className="text-semibold opacity-70 text-sm font-semibold pl-2">
                   Email de contacto
                 </p>
               </th>
-              <th className="w-4/12">
+              <th className="w-2/12">
                 <p className="text-semibold opacity-70 text-sm font-semibold">
                   Teléfono de contacto
                 </p>
               </th>
-              <th className="w-2/12">
+              <th className="w-4/12">
                 <p className="text-semibold opacity-70 text-sm font-semibold">
                   Mensaje
+                </p>
+              </th>
+              <th className="w-1/12">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Status
                 </p>
               </th>
               <th className="w-1/12">
@@ -151,8 +171,9 @@ const Admin = () => {
                   <p className="text-sm py-3">{hiring.contactPhone}</p>
                 </td>
                 <td className=" text-sm">{hiring.messageToProvider}</td>
+                <td className=" text-sm">{hiring.status}</td>
                 <td className="">
-                  <select className="border rounded-md px-2 py-1 text-sm">
+                  <select className="border rounded-md px-2 py-1 text-sm" onClick={() => updateHiring(hiring.service)}>
                     <option value="aceptar">Aceptar</option>
                     <option value="finalizar">Finalizar</option>
                     <option value="cancelar">Cancelar</option>
