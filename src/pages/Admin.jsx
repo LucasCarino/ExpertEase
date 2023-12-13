@@ -17,19 +17,27 @@ const Admin = () => {
   const [services, setServices] = useState([]);
   const [initialServices, setInitialServices] = useState();
   const [hirings, setHirings] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true); // Indicar que la carga está en progreso
     (async () => {
-      debugger;
-      const services = await getServicesByEmail(
-        localStorage.getItem("usuarioCorreo")
-      );
-      const hirings = await getHiringsByEmail(
-        localStorage.getItem("usuarioCorreo")
-      );
-      if (!initialServices) setInitialServices(services);
-      if (services) setServices(services);
-      if (hirings) setHirings(hirings);
+      try {
+        debugger;
+        const services = await getServicesByEmail(
+          localStorage.getItem("usuarioCorreo")
+        );
+        const hirings = await getHiringsByEmail(
+          localStorage.getItem("usuarioCorreo")
+        );
+        if (!initialServices) setInitialServices(services);
+        if (services) setServices(services);
+        if (hirings) setHirings(hirings);
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+      } finally {
+        setLoading(false); // Indicar que la carga ha finalizado
+      }
     })();
   }, [initialServices]);
 
@@ -43,24 +51,28 @@ const Admin = () => {
   };
 
   const handleStatusChange = async (id, status) => {
-
     try {
       await updateHiring(id, status);
       window.location.reload();
     } catch (error) {
       console.error("Error al manejar el cambio de status:", error);
     }
-  }
+  };
 
   const findService = (id) => {
     debugger;
     const service = services.find((service) => service.serviceId === id);
     return service ? service.titulo : "";
-  }
-
+  };
 
   return (
     <div className=" px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-700 bg-opacity-75 z-50">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      )}
+
       <div className="relative overflow-x-auto">
         <h2 className="text-2xl pb-5 font-semibold">Mis clases</h2>
         <table className="bg-white text-left rounded-md w-full">
@@ -173,7 +185,10 @@ const Admin = () => {
                 <td className=" text-sm">{hiring.messageToProvider}</td>
                 <td className=" text-sm">{hiring.status}</td>
                 <td className="">
-                  <select className="border rounded-md px-2 py-1 text-sm" onClick={() => updateHiring(hiring.service)}>
+                  <select
+                    className="border rounded-md px-2 py-1 text-sm"
+                    onClick={() => updateHiring(hiring.service)}
+                  >
                     <option value="aceptar">Aceptar</option>
                     <option value="finalizar">Finalizar</option>
                     <option value="cancelar">Cancelar</option>

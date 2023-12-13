@@ -19,6 +19,7 @@ const Catalogo = (props) => {
   const [services, setServices] = useState([]);
   const [initialServices, setInitialServices] = useState();
   const [filteredServices, setFilteredServices] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
     open ? setOpen(false) : setOpen(true);
@@ -120,11 +121,18 @@ const Catalogo = (props) => {
   ]);
 
   useEffect(() => {
+    setLoading(true); // Indicar que la carga está en progreso
     (async () => {
-      const servicesData = await getServices();
-      if (!initialServices) setInitialServices(servicesData);
-      if (servicesData) {
-        setServices(servicesData);
+      try {
+        const servicesData = await getServices();
+        if (!initialServices) setInitialServices(servicesData);
+        if (servicesData) {
+          setServices(servicesData);
+        }
+      } catch (error) {
+        console.error("Error al obtener servicios:", error);
+      } finally {
+        setLoading(false); // Indicar que la carga ha finalizado
       }
     })();
   }, [initialServices]);
@@ -277,6 +285,13 @@ const Catalogo = (props) => {
         </form>
       </div>
       <div className="md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-x-5">
+
+          {loading && (
+            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-700 bg-opacity-75 z-50">
+              <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+          )}
+
         {filteredServices.length === 0 ? (
           <p>No se encontró ningún servicio con ese nombre.</p>
         ) : (
@@ -362,6 +377,7 @@ const Catalogo = (props) => {
           ))
         )}
       </div>
+      
     </div>
   );
 };
