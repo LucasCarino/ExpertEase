@@ -19,12 +19,15 @@ const Catalogo = (props) => {
   const [services, setServices] = useState([]);
   const [initialServices, setInitialServices] = useState();
   const [filteredServices, setFilteredServices] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
     open ? setOpen(false) : setOpen(true);
   };
 
+  console.log(services);
   const Categorias = [
+    "Educación",
     "Deportes",
     "Arte y Cultura",
     "Música",
@@ -71,7 +74,7 @@ const Catalogo = (props) => {
     setCalificacionFilter(rating);
   };
 
-  const updateServicios = useCallback((serviceToFilter) => {
+  const updateServicios = useCallback(() => {
     const filtered = services.filter((servicio) => {
       const tituloMatches =
         servicio.titulo &&
@@ -99,7 +102,6 @@ const Catalogo = (props) => {
       const calificacionMatches =
         calificacionFilter === null ||
         servicio.calificacion >= calificacionFilter;
-      debugger;
       return (
         (tituloMatches || nombreMatches) &&
         categoriaMatches &&
@@ -115,32 +117,37 @@ const Catalogo = (props) => {
     selectedClases,
     selectedFrencuencia,
     calificacionFilter,
+    services,
   ]);
 
   useEffect(() => {
+    setLoading(true); // Indicar que la carga está en progreso
     (async () => {
-      const services = await getServices();
-      console.log(services);
-      if (!initialServices) setInitialServices(services);
-      if (services) {
-        setServices(services);
-        updateServicios();
+      try {
+        const servicesData = await getServices();
+        if (!initialServices) setInitialServices(servicesData);
+        if (servicesData) {
+          setServices(servicesData);
+        }
+      } catch (error) {
+        console.error("Error al obtener servicios:", error);
+      } finally {
+        setLoading(false); // Indicar que la carga ha finalizado
       }
     })();
-  }, [initialServices, updateServicios]);
+  }, [initialServices]);
 
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const services = await getServices();
-  //     if (!initialServices) setInitialServices(services)
-  //     if (services) {
-  //       setServices(services);
-  //       updateServicios(services); // Llama a updateServicios aquí con los nuevos servicios
-  //     }
-  //   })();
-  // }, [initialServices]);
-
+  useEffect(() => {
+    updateServicios();
+  }, [
+    updateServicios,
+    busqueda,
+    selectedCategoria,
+    selectedClases,
+    selectedFrencuencia,
+    calificacionFilter,
+    services,
+  ]);
 
   const handleReset = () => {
     setSelectedCategoria("");
@@ -278,6 +285,13 @@ const Catalogo = (props) => {
         </form>
       </div>
       <div className="md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-x-5">
+
+          {loading && (
+            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-700 bg-opacity-75 z-50">
+              <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+          )}
+
         {filteredServices.length === 0 ? (
           <p>No se encontró ningún servicio con ese nombre.</p>
         ) : (
@@ -294,7 +308,7 @@ const Catalogo = (props) => {
                   <div className="relative flex h-200 justify-center overflow-hidden rounded-lg">
                     <div className="w-full h-48 transform transition-transform duration-500 ease-in-out hover:scale-110">
                       <img
-                        src={process.env.PUBLIC_URL + servicio.imagen}
+                        src={servicio.imagen}
                         alt=""
                         className="object-cover h-full w-full"
                       />
@@ -363,6 +377,7 @@ const Catalogo = (props) => {
           ))
         )}
       </div>
+      
     </div>
   );
 };

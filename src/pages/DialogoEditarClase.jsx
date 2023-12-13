@@ -26,10 +26,11 @@ function DialogEditarClase(props) {
   const [ubicacion, setUbicacion] = useState(serviceData.ubicacion);
   const [price, setPrice] = useState(serviceData.precio);
   const [description, setDescription] = useState(serviceData.descripcion);
+  const [published, setPublished] = useState(serviceData.published);
 
   useEffect(() => {
     setServiceData({
-      id: props.initialData.id,
+      id: props.initialData.serviceId,
       titulo: props.initialData.titulo || "",
       descripcion: props.initialData.descripcion || "",
       duracion: props.initialData.duration || "",
@@ -40,6 +41,7 @@ function DialogEditarClase(props) {
       rating: props.initialData.rating || 0,
       ubicacion: props.initialData.ubicacion || "",
       promotion: "",
+      published: props.initialData.published || true,
       type: "",
       imagen: props.initialData.imagen || "",
     });
@@ -55,6 +57,7 @@ function DialogEditarClase(props) {
 
   const saveService = () => {
     updateService(serviceData);
+    window.location.reload();
   };
 
   const updateServiceData = (field, value) => {
@@ -96,8 +99,13 @@ function DialogEditarClase(props) {
     { name: "Otro" },
   ];
 
+  let Published = [
+    { value: true, name: "Si" },
+    { value: false, name: "No" },
+  ];
+
   let ClassType = [{ name: "Individual" }, { name: "Grupal" }];
-  
+
   return (
     <div>
       <button
@@ -148,16 +156,29 @@ function DialogEditarClase(props) {
               </div>
               <div className="mb-4">
                 <label
-                  htmlFor="attachment"
+                  htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Foto de portada
+                  Servicio disponible
                 </label>
-                <input
-                  class="block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 rounded-none"
-                  id="file_input"
-                  type="file"
-                />
+
+                <select
+                  id="published"
+                  value={serviceData.published.toString()}
+                  onChange={(e) =>
+                    updateServiceData("published", e.target.value)
+                  }
+                  className="bg-gray-50 border mb-5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                >
+                  <option disabled value="">
+                    Selecciona la disponibilidad...
+                  </option>
+                  {Published.map((published, key) => (
+                    <option key={key} value={published.value.toString()}>
+                      {published.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label

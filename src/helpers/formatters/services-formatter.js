@@ -6,7 +6,7 @@ export const servicesFormatter = (services) => {
       categoria: service.category,
       clase: service.classType,
       titulo: service.name,
-      imagen: service?.image?.url,
+      imagen: service?.image,
       ubicacion: service.location,
       precio: service.cost,
       duration: service.duration,

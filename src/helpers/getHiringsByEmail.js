@@ -1,12 +1,12 @@
 import axios from "axios";
-import { servicesFormatter } from "./formatters/services-formatter";
+import { hiringsFormatter } from "./formatters/hirings-formatter";
 
-export const getServicesByEmail = async (email) => {
+export const getHiringsByEmail = async (email) => {
+
   let config = {
     method: "get",
     maxBodyLength: Infinity,
-    // url: `http://localhost:8080/api/services/email/user@gmail.com`,
-    url: `http://localhost:8080/api/services/email/${email}`,
+    url: `http://localhost:8080/api/hirings/email/${email}`,
     headers: {
       "X-API-Key": "{{token}}",
     },
@@ -15,7 +15,7 @@ export const getServicesByEmail = async (email) => {
   try {
     let response = await axios.request(config);
     response = response.data;
-    const formattedResponse = servicesFormatter(response);
+    const formattedResponse = hiringsFormatter(response);
     if (response) return formattedResponse;
     return [];
   } catch (error) {

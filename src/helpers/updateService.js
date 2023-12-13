@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 export const updateService = async (data) => {
-    debugger;
+  debugger;
     let jsonData = JSON.stringify({
       "name": data.titulo,
       "description": data.descripcion,
@@ -16,7 +16,7 @@ export const updateService = async (data) => {
       "ubication": data.ubicacion,
       "promotion": "",
       "type": 0,
-      "published": true,
+      "published": data.published,
       "userEmail": localStorage.getItem('usuarioCorreo'),
       "userName": localStorage.getItem('usuarioNombre'),
     });

@@ -1,10 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faEye } from "@fortawesome/free-solid-svg-icons";
 import DialogEditarClase from "./DialogoEditarClase";
 import React, { useState, useEffect } from "react";
 
 import StarsRating from "../components/StarsRating";
-import {deleteService} from "../helpers/deleteService";
+import { deleteService } from "../helpers/deleteService";
+import { getHiringsByEmail } from "../helpers/getHiringsByEmail";
+import { updateHiring } from "../helpers/updateHiring";
 
 import { getServicesByEmail } from "../helpers/getServicesByEmail";
 import { Comments } from "../components/Comments";
@@ -14,27 +16,63 @@ import DialogCrearClase from "./DialogoCrearClase";
 const Admin = () => {
   const [services, setServices] = useState([]);
   const [initialServices, setInitialServices] = useState();
+  const [hirings, setHirings] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  
   useEffect(() => {
+    setLoading(true); // Indicar que la carga está en progreso
     (async () => {
-      const services = await getServicesByEmail();
-      debugger;
-      if (!initialServices) setInitialServices(services);
-      if (services) setServices(services);
+      try {
+        debugger;
+        const services = await getServicesByEmail(
+          localStorage.getItem("usuarioCorreo")
+        );
+        const hirings = await getHiringsByEmail(
+          localStorage.getItem("usuarioCorreo")
+        );
+        if (!initialServices) setInitialServices(services);
+        if (services) setServices(services);
+        if (hirings) setHirings(hirings);
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+      } finally {
+        setLoading(false); // Indicar que la carga ha finalizado
+      }
     })();
   }, [initialServices]);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     try {
-      deleteService(id);
+      await deleteService(id);
+      window.location.reload();
     } catch (error) {
       console.error("Error al manejar la eliminación:", error);
     }
   };
 
+  const handleStatusChange = async (id, status) => {
+    try {
+      await updateHiring(id, status);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error al manejar el cambio de status:", error);
+    }
+  };
+
+  const findService = (id) => {
+    debugger;
+    const service = services.find((service) => service.serviceId === id);
+    return service ? service.titulo : "";
+  };
+
   return (
     <div className=" px-8 lg:px-10 bg-gradient-to-t from-[#fbc2eb] to-[#a6c1ee] pt-24 pb-8 gap-4">
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-700 bg-opacity-75 z-50">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      )}
+
       <div className="relative overflow-x-auto">
         <h2 className="text-2xl pb-5 font-semibold">Mis clases</h2>
         <table className="bg-white text-left rounded-md w-full">
@@ -55,7 +93,7 @@ const Admin = () => {
                   Precio
                 </p>
               </th>
-              <th className="w-1/12 pl-5">
+              <th className="w-1/12 text-center pr-3">
                 <p className="text-semibold opacity-70 text-sm font-semibold">
                   Acciones
                 </p>
@@ -79,7 +117,7 @@ const Admin = () => {
                     <DialogEditarClase initialData={service} />
                     <button
                       className="mx-2 bg-red-400 w-5 h-5 lg:w-8 lg:h-8 rounded-md hover:bg-red-300 duration-100"
-                      onClick={() => handleDelete(service.id)}
+                      onClick={() => handleDelete(service.serviceId)}
                       type="button"
                     >
                       <FontAwesomeIcon icon={faXmark} size="lg" />
@@ -100,19 +138,29 @@ const Admin = () => {
         <table className="bg-white text-left rounded-md  w-full">
           <thead>
             <tr>
-              <th className="w-5/12 py-2">
+              <th className="w-2/12 py-2">
                 <p className="text-semibold opacity-70 text-sm font-semibold pl-2">
-                  Nombre
+                  Clase
                 </p>
               </th>
-              <th className="w-4/12">
-                <p className="text-semibold opacity-70 text-sm font-semibold">
-                  Clase Solicitada
+              <th className="w-2/12 py-2">
+                <p className="text-semibold opacity-70 text-sm font-semibold pl-2">
+                  Email de contacto
                 </p>
               </th>
               <th className="w-2/12">
                 <p className="text-semibold opacity-70 text-sm font-semibold">
-                  Contacto
+                  Teléfono de contacto
+                </p>
+              </th>
+              <th className="w-4/12">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Mensaje
+                </p>
+              </th>
+              <th className="w-1/12">
+                <p className="text-semibold opacity-70 text-sm font-semibold">
+                  Status
                 </p>
               </th>
               <th className="w-1/12">
@@ -123,22 +171,31 @@ const Admin = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-gray-200">
-              <td className="pl-2.5">
-                <p className="text-sm">Lucas Carino</p>
-              </td>
-              <td className="">
-                <p className="text-sm py-3">Clase de piano</p>
-              </td>
-              <td className=" text-sm">11 1234 5678</td>
-              <td className="">
-                <select className="border rounded-md px-2 py-1 text-sm">
-                  <option value="aceptar">Aceptar</option>
-                  <option value="finalizar">Finalizar</option>
-                  <option value="cancelar">Cancelar</option>
-                </select>
-              </td>
-            </tr>
+            {hirings.map((hiring, key) => (
+              <tr className="border-b border-gray-200">
+                <td className="pl-2.5">
+                  <p className="text-sm">{findService(hiring.service)}</p>
+                </td>
+                <td className="pl-2.5">
+                  <p className="text-sm">{hiring.contactEmail}</p>
+                </td>
+                <td className="">
+                  <p className="text-sm py-3">{hiring.contactPhone}</p>
+                </td>
+                <td className=" text-sm">{hiring.messageToProvider}</td>
+                <td className=" text-sm">{hiring.status}</td>
+                <td className="">
+                  <select
+                    className="border rounded-md px-2 py-1 text-sm"
+                    onClick={() => updateHiring(hiring.service)}
+                  >
+                    <option value="aceptar">Aceptar</option>
+                    <option value="finalizar">Finalizar</option>
+                    <option value="cancelar">Cancelar</option>
+                  </select>
+                </td>
+              </tr>
+            ))}
             <tr className="border-b border-gray-200"></tr>
           </tbody>
         </table>
@@ -148,7 +205,7 @@ const Admin = () => {
         <h2 className="text-2xl pb-5 font-semibold">
           Solicitudes de comentarios
         </h2>
-        <table className="bg-white text-left rounded-md">
+        <table className="bg-white text-left rounded-md w-full">
           <thead>
             <tr>
               <th className="w-1/12 text-center py-2">
@@ -168,7 +225,7 @@ const Admin = () => {
               </th>
             </tr>
           </thead>
-          <Comments/>
+          <Comments />
         </table>
       </div>
     </div>

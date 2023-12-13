@@ -1,24 +1,50 @@
-import React from "react";
+import React, {useState} from "react";
 import { postHiring } from "../helpers/postHiring";
 
+import Toast from "./Toast";
+
 export const HiringForm = ({ serviceId }) => {
-  const onSubmitReviewForm = (e) => {
+  const [toast, setToast] = useState(null);
+  const onSubmitReviewForm = async (e) => {
     e.preventDefault();
     const phone = e.currentTarget.elements.phone.value;
     const time = e.currentTarget.elements.time.value;
     const email = e.currentTarget.elements.email.value;
     const comment = e.currentTarget.elements.comment.value;
-    (async () => {
-      const response = await postHiring(phone, time, email, comment, serviceId);
-      console.log("🚀 ~ file: HiringForm.jsx:13 ~ response:", response)
-      if (response) {
-        alert(
-          "Formulario de contrato enviado. Debes esperar a que el administrador del servicio lo apruebe."
-        );
+    if(!phone || !time || !email || !comment) {
+      setToast({
+        message:
+          "Debes completar todos los campos.",
+        success: false,
+      });
+      return;
+    } else {
+      try {
+        const response = await postHiring(phone, time, email, comment, serviceId);
+        console.log("🚀 ~ file: HiringForm.jsx:13 ~ response:", response);
+        if (response) {
+          setToast({
+            message:
+              "Formulario de contrato enviado. Debes esperar a que el administrador del servicio lo apruebe.",
+            success: true,
+          });
+        }
+      } catch (error) {
+        setToast({
+          message:
+            "Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.",
+          success: false,
+        });
       }
-    })();
-    e.target.reset();
+  
+      e.target.reset();
+    }
   };
+
+  const closeToast = () => {
+    setToast(null);
+  };
+
   return (
     <form
       className="w-full"
@@ -87,6 +113,7 @@ export const HiringForm = ({ serviceId }) => {
         <button className="px-6 py-2 rounded  text-white text-sm bg-charcoal-500 hover:bg-charcoal-700 duration-200 ease-in-out">
           Enviar
         </button>
+        {toast && <Toast message={toast.message} success={toast.success} onClose={closeToast} />}
       </div>
     </form>
   );
