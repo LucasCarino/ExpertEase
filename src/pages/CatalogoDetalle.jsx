@@ -19,21 +19,22 @@ function CatalogoServicio() {
     })();
   }, []);
 
+  const { id } = useParams(); // Extract the service ID from the URL
+  const servicio = services[parseInt(id)];
+
   useEffect(() => {
     const fetchData = async () => {
-      const reviewsData = await getReviews(
-        localStorage.getItem("usuarioCorreo")
-      );
-      if (reviewsData) {
-        setReviewsData(reviewsData);
+      console.log('Fetching reviews...');
+      if (servicio) {
+        const reviewsData = await getReviews(servicio.serviceId);
+        if (reviewsData) {
+          setReviewsData(reviewsData);
+        }
       }
     };
 
     fetchData();
-  }, []);
-
-  const { id } = useParams();
-  const servicio = services[parseInt(id)];
+  }, [servicio]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isContratarOpen, setIsContratarOpen] = useState(false);
