@@ -23,7 +23,6 @@ const Admin = () => {
     setLoading(true); // Indicar que la carga está en progreso
     (async () => {
       try {
-        debugger;
         const services = await getServicesByEmail(
           localStorage.getItem("usuarioCorreo")
         );
@@ -60,7 +59,6 @@ const Admin = () => {
   };
 
   const findService = (id) => {
-    debugger;
     const service = services.find((service) => service.serviceId === id);
     return service ? service.titulo : "";
   };

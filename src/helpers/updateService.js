@@ -3,7 +3,6 @@ import axios from "axios";
 
 
 export const updateService = async (data) => {
-  debugger;
     let jsonData = JSON.stringify({
       "name": data.titulo,
       "description": data.descripcion,

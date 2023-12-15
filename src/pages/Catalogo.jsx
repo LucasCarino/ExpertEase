@@ -25,7 +25,6 @@ const Catalogo = (props) => {
     open ? setOpen(false) : setOpen(true);
   };
 
-  console.log(services);
   const Categorias = [
     "Educación",
     "Deportes",
