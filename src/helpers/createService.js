@@ -1,8 +1,6 @@
 import axios from "axios";
 
 export const createService = async (data) => {
-  console.log(data);
-
   let config = {
     method: "post",
     maxBodyLength: Infinity,

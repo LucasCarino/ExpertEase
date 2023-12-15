@@ -13,7 +13,6 @@ export const getReviews = async (serviceId) => {
   try {
     let response = await axios.request(config);
     response = response.data;
-    console.log(response);
     if (response) return response;
     return [];
   } catch (error) {
